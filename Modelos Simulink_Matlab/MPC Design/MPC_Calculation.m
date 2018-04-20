@@ -2,24 +2,24 @@
 % calculo del controlador MPC
 
 %se carga el state space model desde linear analysis simulink
-load('statespaceModel_2Inverters_prver.mat');
+%load('statespaceModel_2Inverters_prver.mat');
 
-A = linsys1.A;
-B = linsys1.B;
-C = linsys1.C;
-D = linsys1.D;
+A = sis.A;%linsys1.A;
+B = sis.B;%linsys1.B;
+C = sis.C;%linsys1.C;
+D = sis.D;%linsys1.D;
 
 CSTR = ss(A,B,C,D);
-CSTR.InputName = {'G1', 'G2'};
-CSTR.OutputName = {'VL','I_G2'};
-CSTR.StateName = {'X1', 'X2', 'X3', 'X4', 'X5','X6','X7','X8'};
+CSTR.InputName = {'Pr1','Qr1','Pr2','Qr2'};
+CSTR.OutputName = {'P1','Q1','P2','Q2'};
+CSTR.StateName = {'X1', 'X2', 'X3', 'X4'};
 
 
 % Create the controller object with sampling period, prediction and control horizons:
 plant=CSTR;
-Ts = 1e-3;
-p = 3;
-m = 1;
+Ts = 30e-3;
+p = 100;
+m = 80;
 mpcobj = mpc(plant, Ts, p, m);
 
 
