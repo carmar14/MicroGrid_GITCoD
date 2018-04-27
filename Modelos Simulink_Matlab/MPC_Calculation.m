@@ -28,7 +28,7 @@ mpcobj = mpc(plant, Ts, p, m);
 
 
 % Specify actuator saturation limits as MV constraints.
-%mpcobj.MV = struct('Min',{-20;-20},'Max',{20;20},'RateMin',{-100;-100});
+mpcobj.MV = struct('Min',{0;0;0;0},'Max',{700;5000;700;5000},'RateMin',{ones(4, 1)*-2000}, 'RateMax',{ones(4, 1)*2000});
 % Simulate Using Simulink®
 
 
