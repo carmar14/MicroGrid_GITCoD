@@ -5,15 +5,19 @@ Denz=H1d.Denominator{1};
 U = zeros(length(Numz), 1);
 Y = zeros(length(Denz), 1);
 
+
+
 t  =0:Ts:.2;
 nn = 1;
+
+u = 10*sin(2*pi*60*t);
 
 ym = zeros(length(t), 1);
 
 
 for n=0:Ts:.2
 
-    U(1) = 1;
+    U(1) = u(nn);
     
     Ycu = 0;
     Ycy = 0;
@@ -42,6 +46,3 @@ for n=0:Ts:.2
     nn = nn+1;
 end
 
-plot(t, ym);
-
-roots(Denz)
