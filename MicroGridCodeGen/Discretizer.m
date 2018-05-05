@@ -71,7 +71,7 @@ tfZ_fShift = c2d(tf(Num_ph_shift, Den_ph_shift), Ts_sim);
 
 Num_load = str2num(get_param(sm_load, smp_N));
 Den_load = str2num(get_param(sm_load, smp_D));
-tfZ_load = c2d(tf(Num_load, Den_load), Ts_sim);
+tfZ_load = c2d(tf(Num_load, Den_load), Ts_sim, 'impulse');
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -130,8 +130,8 @@ set_param(sm2_diesel, 'Numerator', [ '[' num2str(tfZ_diesel.Numerator{1}) ']' ])
 
 set_param(sm2_load, 'Denominator', '[]');
 set_param(sm2_load, 'Numerator', '[]');
-set_param(sm2_load, 'Denominator', [ '[' num2str(tfZ_bio.Denominator{1}) ']' ]);
-set_param(sm2_load, 'Numerator', [ '[' num2str(tfZ_bio.Numerator{1}) ']' ]);
+set_param(sm2_load, 'Denominator', [ '[' num2str(tfZ_load.Denominator{1}) ']' ]);
+set_param(sm2_load, 'Numerator', [ '[' num2str(tfZ_load.Numerator{1}) ']' ]);
 
 % se configuran los 3 bloques de desfase.
 set_param(sm2_shift, 'Denominator', '[]');
@@ -146,8 +146,8 @@ set_param(sm2_shift1, 'Numerator', [ '[' num2str(tfZ_fShift.Numerator{1}) ']' ])
 
 set_param(sm2_shift2, 'Denominator', '[]');
 set_param(sm2_shift2, 'Numerator', '[]');
-set_param(sm2_shift2, 'Denominator', [ '[' num2str(tfZ_load.Denominator{1}) ']' ]);
-set_param(sm2_shift2, 'Numerator', [ '[' num2str(tfZ_load.Numerator{1}) ']' ]);
+set_param(sm2_shift2, 'Denominator', [ '[' num2str(tfZ_fShift.Denominator{1}) ']' ]);
+set_param(sm2_shift2, 'Numerator', [ '[' num2str(tfZ_fShift.Numerator{1}) ']' ]);
 
 
 % se establecen los tiempos de muestreo de las m functions relacionadas con
