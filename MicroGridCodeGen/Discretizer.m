@@ -34,7 +34,7 @@
 % El usuario de este script debe definir los tiempos de muestreo 
 % y los pasos de tiempo deseados en segundos.
 
-Ts_sim = 1e-7; % paso de simulacion de la microred.
+Ts_sim = 1e-6; % paso de simulacion de la microred.
 Ts_mpc = .03; % periodo de muestreo de la etapa de control.
 
 
@@ -45,7 +45,7 @@ Ts_mpc = .03; % periodo de muestreo de la etapa de control.
 slx = 'SFlowModel';
 sm_bio = [ slx '/H1-G1' ];
 sm_diesel = [ slx '/H2-G2' ];
-sm_load = [ slx '/Z_load' ];
+% sm_load = [ slx '/Z_load' ];
 sm_ph_shift = [ slx '/PhaseShift' ];
 
 smp_N = 'N'; % numerador de un Fcn block
@@ -69,9 +69,9 @@ Den_ph_shift = str2num(get_param(sm_ph_shift, smp_D));
 tfZ_fShift = c2d(tf(Num_ph_shift, Den_ph_shift), Ts_sim);
 
 
-Num_load = str2num(get_param(sm_load, smp_N));
-Den_load = str2num(get_param(sm_load, smp_D));
-tfZ_load = c2d(tf(Num_load, Den_load), Ts_sim, 'impulse');
+% Num_load = str2num(get_param(sm_load, smp_N));
+% Den_load = str2num(get_param(sm_load, smp_D));
+% tfZ_load = c2d(tf(Num_load, Den_load), Ts_sim, 'impulse');
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -92,7 +92,7 @@ smp2_Tsint = 'SampleTime';
 slx2 = 'SFlowDiscrete'; % modelo discreto signal flow
 sm2_bio = [slx2 '/BIO']; % convertidor biomasa discreto
 sm2_diesel = [slx2 '/DIESEL']; % convertidor diesel discreto
-sm2_load = [ slx2 '/ZL']; % impedancia de la carga
+% sm2_load = [ slx2 '/ZL']; % impedancia de la carga
 
 % bloques de desfase de 90 para las corrientes de los convertidores y la
 % tension en la carga.
@@ -111,10 +111,10 @@ sm2_pq_meas_bio = [slx2 '/pq_meas_bio']; % blk medicion pq bio
 sm2_pq_meas_diesel = [slx2 '/pq_meas_diesel']; % blk medicion pq diesel
 sm2_linprog = [slx2 '/LinearProg']; % bloque de programacion lineal
 sm2_ren_maxP = [slx2 '/RenewableMaxPower']; % calcula la potencia maxima
-sm2_ys = [slx2 '/Ys'];
+% sm2_ys = [slx2 '/Ys'];
 % que puede entregar las renovables.
 
-sm2_vsiint = [ slx2 '/VSI_int' ]; % integrador modelo conductancia de linea VSI
+% sm2_vsiint = [ slx2 '/VSI_int' ]; % integrador modelo conductancia de linea VSI
 
 
 % se configuran las tf z de los convertidores diesel bio y la carga.
@@ -128,10 +128,10 @@ set_param(sm2_diesel, 'Numerator', '[]');
 set_param(sm2_diesel, 'Denominator', [ '[' num2str(tfZ_diesel.Denominator{1}) ']' ]);
 set_param(sm2_diesel, 'Numerator', [ '[' num2str(tfZ_diesel.Numerator{1}) ']' ]);
 
-set_param(sm2_load, 'Denominator', '[]');
-set_param(sm2_load, 'Numerator', '[]');
-set_param(sm2_load, 'Denominator', [ '[' num2str(tfZ_load.Denominator{1}) ']' ]);
-set_param(sm2_load, 'Numerator', [ '[' num2str(tfZ_load.Numerator{1}) ']' ]);
+% set_param(sm2_load, 'Denominator', '[]');
+% set_param(sm2_load, 'Numerator', '[]');
+% set_param(sm2_load, 'Denominator', [ '[' num2str(tfZ_load.Denominator{1}) ']' ]);
+% set_param(sm2_load, 'Numerator', [ '[' num2str(tfZ_load.Numerator{1}) ']' ]);
 
 % se configuran los 3 bloques de desfase.
 set_param(sm2_shift, 'Denominator', '[]');
@@ -162,12 +162,12 @@ set_param(sm2_ren_maxP, smp2_TsMfc, num2str(Ts_mpc));
 % se establecen los Ts de los bloques relacionados con el paso de
 % simulacion.
 set_param(sm2_p2r, smp2_TsMfc, num2str(Ts_sim));
-set_param(sm2_ys, smp2_TsMfc, num2str(Ts_sim));
+% set_param(sm2_ys, smp2_TsMfc, num2str(Ts_sim));
 
 % se configura tiempo de muestreo del integrador
-set_param(sm2_vsiint, smp2_Tsint, num2str(Ts_sim));
+% set_param(sm2_vsiint, smp2_Tsint, num2str(Ts_sim));
 
-% se configura tiempo de muestreo de la señal AC Vs fuente ideal
+% se configura tiempo de muestreo de la señal AC VSI fuente ideal
 set_param(sm2_vs, smp2_Tsint, num2str(Ts_sim));
 
 % se configura el fixed step size del modelo
