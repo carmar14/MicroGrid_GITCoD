@@ -13,7 +13,7 @@
 % continuo.
 
 w0 = 2*pi*60; % frecuencia de la red, que es comun para todos.
-Ts=1e-5; % tiempo de muestreo de los controladores discretos.
+Ts=1e-4; % tiempo de muestreo de los controladores discretos.
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % PR del BIO
