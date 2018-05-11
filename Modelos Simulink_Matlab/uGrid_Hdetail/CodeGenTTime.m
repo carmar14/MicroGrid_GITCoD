@@ -12,8 +12,6 @@
 % par de archivos, los que son generados en este script para cada bloque.
 
 
-
-
 % proporcional y resonante en un mismo cociente
 % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %            Kp s^2 + s (Kp wa + Ki ) + Kp w0         %
@@ -58,7 +56,7 @@ Hd_z = c2d(Hb_s, Ts,'foh'); % control diesel en z.
 %%%%%%%%%%%%%%%%%%%%%%%
 % DESFASE 90 GRADOS TF en Z
 %%%%%%%%
-
+Hsf_z = c2d(tf([2.7e-3 -1], [2.7e-3 1]), Ts);
 
 %
 % %
@@ -68,46 +66,292 @@ Hd_z = c2d(Hb_s, Ts,'foh'); % control diesel en z.
 % %
 %
 
-% se abre o se crea el archivo out.m y se descarta lo que tenga (si es que existe)
-% file = fopen('out.m', 'w+');
 
 % declaracion de variables
 token_fname = '$Fn'; % token para reemplazar nombre de la funcion.
-token_ftarget = '$Fnt';
+token_ftarget = '$Ftar';
+Bio_ifname = 'BIO_init';
 Bio_fname = 'BIO_c'; % nombre de la funcion de control del bio.
+Diesel_ifname = 'DIESEL_init';
 Diesel_fname = 'DIESEL_c'; % nombre de la funcion de control del diesel.
 
 token_st_time = '$STT'; % para reemplazar el tiempo de arranque del control
 token_Ts = '$Ts'; % para reemplazar el tiempo de muestreo del controlador.
 
+% tokens para reemplazar los argumentos de la funcion que calcula la
+% referencia de corriente y la funcion que hace el calculo de la potencia
+% instantanea.
+token_var1 = '$Var1$';
+token_var2 = '$Var2$';
+token_var3 = '$Var3$';
+token_var4 = '$Var4$';
+
 % primero se generan las funciones de init de los true time kernel.
 F_init_base = ...
-    ['function [ output_args ] = $Fn( input_args )\n\n'...
-    '%Funcion de inicializacion del controlador BIO con true time kernel.' ...
-    'ttInitKernel(''prioFP'') % comando necesesario y debe ser llamado primero' ...
-    '% para la inicializacion del true time kernel block' ...
-    '% prioFP significa fixed-Priority scheduling.' ...
-    'data.exectime = 1e-6;   % control task execution time' ...
-    'starttime = $STT;       % control task start time' ...
-    'period = $Ts;          % control task period' ...
-    'ttCreatePeriodicTask(''ctrl_task'', starttime, period, ''$Fnt'', data)' ...
+    ['function [ output_args ] = $Fn( input_args )\n'...
+    'ttInitKernel(''prioFP'') \n' ...
+    'data.exectime = 1e-6; %% se inicializa porque true time lo requiere pero no se usa \n' ...
+    'starttime = $STT; %% tiempo de arranque del controlador \n' ...
+    'period = $Ts; %% periodo de muestreo \n' ...
+    'ttCreatePeriodicTask(''ctrl_task'', starttime, period, ''$Ftar'', data)\n' ...
     'end'];
 
 
-% cabecera comun a las funciones de control del 
+% cabecera comun a las funciones de control de diesel y bio.
 F_header = ...
-['function [ output_args ] = $Fn( input_args )\n' ...
-'% funcion que ejecuta la logica del bloque True Time Kernel.' ... 
-'\nex = 0; % variable auxiliar para poner el tiempo de ejecucion.' ...
-'\nswitch segment \n' ...
-    '\tcase 1 % primer segemento. \n' ...
-        '\t\t% se hacen las lecturas de las entradas del ttkernel \n' ...
-        '\t\tI = ttAnalogIn(1); % corriente medida del convertidor \n'
-        '\t\tV = ttAnalogIn(2); % Tension medida del convertidor \n' ...
-        '\t\t p = ttAnalogIn(3); % set point de potencia actica del mpc \n' ... 
-        '\t\t q = ttAnalogIn(4); % set point de potencia reactiva del mpc \n'];
-        
+    ['function [exectime, data] = $Fn( segment, data )\n' ...
+    '%% funcion que ejecuta la logica del bloque True Time Kernel.' ... 
+    '\nex = 0; %% variable auxiliar para poner el tiempo de ejecucion.' ...
+    '\n switch segment \n' ...
+    '\tcase 1 %% primer segemento. \n' ...
+    '\t\t %% se hacen las lecturas de las entradas del ttkernel \n' ...
+    '\t\tV = ttAnalogIn(1); %% corriente medida del convertidor \n' ...
+    '\t\tI = ttAnalogIn(2); %% Tension medida del convertidor \n' ...
+    '\t\tp_set = ttAnalogIn(3); %% set point de potencia actica del mpc \n' ... 
+    '\t\tq_set = ttAnalogIn(4); %% set point de potencia reactiva del mpc \n'];
 
+% finalizacion de la seccion de la funcion de control
+% despues de esta porcion de codigo sigue la definicion de las
+% funciones locales.
+F_ending = ...
+    ['\t\tex = data.exectime;\n'...
+     '\tcase 2\n' ...
+     '\t\t%% se ponen las salidas en el DAC.\n' ...
+     '\t\tttAnalogOut(1, data.d);\n' ...
+     '\t\tttAnalogOut(2, data.Po);\n' ...
+     '\t\tttAnalogOut(3, data.Qo);\n' ...
+     '\t\tex = -1;\n' ...
+     '\t\tend\n' ...
+     '\t\t%% se pone el tiempo de ejecucion. Es un requisito indispensable\n' ...
+     '\t\t%% del bloque true time.\n' ...
+     '\t\texectime=ex;\n' ...
+     '\tend'];
+
+
+% string para definir la funcion local que calcula la corriente de 
+% referencia.
+I_ref_function = ...
+    ['\n\nfunction [Ia, Ib] = Iref_calculation(Va, Vb, p, q)\n' ...
+    '%%#codegen \n' ...
+    '%% divide by zero protection\n' ...
+    'if(abs((Va^2+Vb^2))<=1000*eps(0))\n' ...
+    '\tdet = 1/eps(0);\n' ...
+    'else\n' ...
+    '\tdet = 1/(Va^2+Vb^2); %% constante auxiliar\n' ...
+    'end\n' ...
+    '%%det = 1/(Va^2+Vb^2);\n' ...
+    'Mat = det*[Va Vb; Vb -Va];\n' ...
+    'Iab = Mat*[2*p;2*q];\n' ...
+    'Iaaux = Iab(1);\n' ...
+    'Ibaux = Iab(2);\n' ...
+    'ilim=1e3;\n' ...
+    'if(Iaaux>ilim)\n' ...
+    '\tIaaux=ilim;\n' ...
+    'end\n' ...
+    'if(Iaaux<-ilim)\n' ...
+    '\tIaaux =-ilim;\n' ...
+    'end\n' ...
+    'if(isnan(Iaaux))\n' ...
+    '\tIaaux=0;\n' ...
+    'end\n' ...
+    '%%-----------------\n' ...
+    'if(Ibaux>ilim)\n' ...
+    '\tIbaux=ilim;\n' ...
+    'end\n' ...
+    'if(Ibaux<-ilim)\n' ...
+    '\tIbaux =-ilim;\n' ...
+    'end\n' ...
+    'if(isnan(Ibaux))\n' ...
+    '\tIbaux=0;\n' ...
+    'end\n' ...
+    '%%-----------------\n' ...
+    'Ia = Iaaux;\n' ...
+    'Ib = Ibaux;\n' ...
+    'end\n'];
+
+% string con la funcion que hace el calculo de la potencia instantanea
+% para el caso monofasico.
+Pq_calculation = ...      % va  vb   ia  ib
+    ['\n\nfunction [p, q] = PQ_calculation(va, vb, ia, ib)\n' ...
+    '%% Esta funcion calcula la potencia activa y reactiva instantanea\n' ...
+    '%% para el caso mnosofasico. En la revision de 2 papers he observado\n' ...
+    '%% que una manera de extender la teoria de potencia al caso monofasico\n' ...
+    '%% es asumiendo la tension o corriente de una fase como la componente\n' ...
+    '%% alpha y hacer un desfase de 90 grados para obtener una version\n' ...
+    '%% artificial de beta.\n' ...
+    'paux=va*ia+vb*ib;\n' ...
+    'if(paux > 20e4)\n' ...
+    '\tpaux = 20e4;\n' ...
+    'end\n' ...
+    'if(paux < -20e4)\n' ...
+    '\tpaux = -20e-4;\n' ...
+    'end\n' ...
+    'p = paux/2; %% potencia activa instantanea\n' ...
+    'qaux = vb*ia-va*ib;\n' ...
+    'if(qaux>20e4)\n' ...
+    '\tqaux=20e4;\n' ...
+    'end\n' ...
+    'if(qaux<-20e4)\n' ...
+    '\tqaux=-20e4;\n' ...
+    'end\n' ...
+    'q = qaux/2; %% potencia reactiva instantanea\n' ...
+    'end\n'];
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% CREACION init bio:
+%%%%%%%%%%
+%
+BIO_initFcn = strrep(F_init_base, token_fname, Bio_ifname);
+BIO_initFcn = strrep(BIO_initFcn, token_st_time, num2str(.15));
+BIO_initFcn = strrep(BIO_initFcn, token_Ts, num2str(Ts));
+BIO_initFcn = strrep(BIO_initFcn, token_ftarget, Bio_fname);
+file_bio_init = fopen([Bio_ifname '.m'], 'w+');
+fprintf(file_bio_init, BIO_initFcn);
+fclose(file_bio_init);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% CREACION control bio:
+%%%%%%%%%%
+%
+F_cBIO = strrep(F_header, token_fname, Bio_fname);
+
+% se calcula el desfase de 90 grados de I y de V.
+F_cBIO = [F_cBIO '\n' write_Equation(Hsf_z, 'I_shift', 2, 'I', 'Ibet')];
+F_cBIO = [F_cBIO '\n' write_Equation(Hsf_z, 'V_shift', 2, 'V', 'Vbet')];
+
+% se calcula la referencia de corriente para cumplir con el set point de
+% potencia del mpc
+F_cBIO = [F_cBIO '\n' '\t\t[iar_x ibet_x] = Iref_calculation(V, Vbet, p_set, q_set);'];
+F_cBIO = [F_cBIO '\n' '\t\te_i = iar_x - I;']; % se calcula el error de corriente
+
+% se calcula la accion de control
+F_cBIO = [F_cBIO '\n' write_Equation(Hb_z, 'bio', 2, 'e_i', 'Dd')];
+
+% se pone la accion de control en la variable de salida.
+F_cBIO = [F_cBIO '\n' '\t\tdata.d = Dd;'];
+
+% se hace el calculo de la potencia instantanea.
+F_cBIO = [F_cBIO '\n' '\t\t[data.Po data.Qo] = PQ_calculation(V, Vbet, I, Ibet);'];
+
+% se escriben las funciones locales de la funcion de control.
+F_cBIO = [F_cBIO '\n\n' F_ending I_ref_function Pq_calculation];
+
+file_BIO_c = fopen([Bio_fname '.m'], 'w+');
+fprintf(file_BIO_c, F_cBIO);
+fclose(file_BIO_c);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% CREACION init diesel:
+%%%%%%%%%%
+%
+DIESEL_initFcn = strrep(F_init_base, token_fname, Diesel_ifname);
+DIESEL_initFcn = strrep(DIESEL_initFcn, token_st_time, num2str(.3));
+DIESEL_initFcn = strrep(DIESEL_initFcn, token_Ts, num2str(Ts));
+DIESEL_initFcn = strrep(DIESEL_initFcn, token_ftarget, Diesel_fname);
+file_diesel_init = fopen([Diesel_ifname '.m'], 'w+');
+fprintf(file_diesel_init, DIESEL_initFcn);
+fclose(file_diesel_init);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% CREACION control diesel:
+%%%%%%%%%%
+%
+F_cDIESEL = strrep(F_header, token_fname, Diesel_fname);
+
+F_cDIESEL = [F_cDIESEL '\n' write_Equation(Hsf_z, 'I_shift', 2, 'I', 'Ibet')];
+F_cDIESEL = [F_cDIESEL '\n' write_Equation(Hsf_z, 'V_shift', 2, 'V', 'Vbet')];
+                                              
+F_cDIESEL = [F_cDIESEL '\n' '\t\t[iar_x ibet_x] = Iref_calculation(V, Vbet, p_set, q_set);'];
+F_cDIESEL = [F_cDIESEL '\n' '\t\te_i = iar_x - I;']; % se calcula el error de corriente
+
+F_cDIESEL = [F_cDIESEL '\n' write_Equation(Hd_z, 'diesel', 2, 'e_i', 'Dd')];
+
+% se pone la accion de control en la variable de salida.
+F_cDIESEL = [F_cDIESEL '\n' '\t\tdata.d = Dd;'];
+
+% se hace el calculo de la potencia instantanea.
+F_cDIESEL = [F_cDIESEL '\n' '\t\t[data.Po data.Qo] = PQ_calculation(V, Vbet, I, Ibet);'];
+
+% se escriben las funciones locales de la funcion de control.
+F_cDIESEL = [F_cDIESEL '\n\n' F_ending I_ref_function Pq_calculation];
+
+file_DIESEL_c = fopen([Diesel_fname '.m'], 'w+');
+fprintf(file_DIESEL_c, F_cDIESEL);
+fclose(file_DIESEL_c);
+
+% se limpian todas las variables creadas en la generacion de codigo.
+clearvars;
+
+
+
+            % % % % % % % % % % % % % % % % % % % %
+            %       CREACION DEL OBJETO MPC       %
+            % % % % % % % % % % % % % % % % % % % %
+
+k1=1.023;
+tao1=0.02;
+
+k2=0.996;
+tao2=0.025;
+
+k3=1.0265;
+tao3=0.022;
+
+k4=0.997;
+tao4=0.02;
+
+ft1=tf(k1,[tao1 1]);
+ft2=tf(k2,[tao2 1]);
+ft3=tf(k3,[tao3 1]);
+ft4=tf(k4,[tao4 1]);
+
+fT=[ft1 zeros(1,3); 0 ft2 zeros(1,2);zeros(1,2) ft3 0;zeros(1,3) ft4];
+
+
+sis=ss(fT);
+
+
+% calculo del controlador MPC
+
+%se carga el state space model desde linear analysis simulink
+%load('statespaceModel_2Inverters_prver.mat');
+
+A = sis.A;%linsys1.A;
+B = sis.B;%linsys1.B;
+C = sis.C;%linsys1.C;
+D = sis.D;%linsys1.D;
+
+CSTR = ss(A,B,C,D);
+CSTR.InputName = {'Pr1','Qr1','Pr2','Qr2'};
+CSTR.OutputName = {'P1','Q1','P2','Q2'};
+CSTR.StateName = {'X1', 'X2', 'X3', 'X4'};
+
+
+% Create the controller object with sampling period, prediction and control horizons:
+plant=CSTR;
+Ts = 30e-3;
+p = 10;
+m = 8;
+mpcobj = mpc(plant, Ts, p, m);
+
+
+% Specify actuator saturation limits as MV constraints.
+mpcobj.MV = struct('Min',{0;0;0;0},'Max',{700;5000;700;5000},'RateMin',{ones(4, 1)*-2000}, 'RateMax',{ones(4, 1)*2000});
+% Simulate Using Simulink®
+
+
+% en caso de que hayan estdos no observables este comando
+% transforma el modelo para evitar este problema
+mpcobj.Model.Plant = minreal(mpcobj.Model.Plant);
+
+% se limpian todas las variables usadas en la creacion mpcobj
+clearvars -except mpcobj; % excepto mpcobj.
+
+
+            % % % % % % % % % % % % % % % % % % % %
+            %   DEFINICION DE FUNCIONES LOCALES   %
+            % % % % % % % % % % % % % % % % % % % %
 
 % funcion local a la cual se le ingresa una transfer function en z
 % y entrega en string el codigo en matlab que la implementa.
@@ -117,11 +361,16 @@ F_header = ...
 % tag es un string que se agrega a las variables del codigo generado
 % para distinguir cada variable de manera unica en caso de que 
 % se use multiples veces esta funcion para un mismo m-file
-function y = write_Equation(Hz, tag)
+% 
+% indentLevel es un entero que indica el nivel de identacion del 
+% codigo que se desea generar con esta funcion. este ultimo parametro
+% solo se usa con motivos de tener maor orden y estetica en el codigo
+% pero no afecta la logica del mismo.
+function y = write_Equation(Hz, tag, indentLevel, in_name, out_name)
+    ind = repmat('\t', 1, indentLevel);
     % nombres de las variables en el codigo a generar.
     U_name = ['U_' tag];
     Y_name = ['Y_' tag];
-    y1_name = ['y1_' tag];
     
     Num = Hz.Numerator{1};
     Den = Hz.Denominator{1};
@@ -130,32 +379,34 @@ function y = write_Equation(Hz, tag)
     nd = length(Den);
     
     % se obtinene la ecuacion en diferencias.
-    syms Y(x) U(x) x;
-    y = getFVector(Y, x+1, nd);
-    u = getFVector(U, x, nn);
+    YsymName = [Y_name '(x)'];
+    UsymName = [U_name '(x)'];
+    syms('x');
+    syms(YsymName);
+    syms(UsymName);
+    
+    y = eval( ['getFVector(' Y_name ', x+1, nd)'] );
+    u = eval( ['getFVector(' U_name ', x, nn)'] );
     eqy = (sum(u.*Num)-sum(y(2:end).*Den(2:end)))/Den(1);
     eqy_char = strrep(char(eqy), 'x - ', '');
     
-    r = ['\n\n %code generation ->' tag '\n'];
-    
+    r = [ind '\n%%code generation ->' tag '\n'];
     % variable persistente vector U (entradas).
-    r = [r 'persistent ' U_name ';\n'];
-    r = [r 'if isempty(' U_name ')\n'];
-    r = [r '\t' U_name ' = zeros(1, ' num2str(nn) ');\n'];
-    r = [r 'end\n'];
+    r = [r ind 'persistent ' U_name ';\n'];
+    r = [r ind 'if isempty(' U_name ')\n'];
+    r = [r ind '\t' U_name ' = zeros(1, ' num2str(nn) ');\n'];
+    r = [r ind 'end\n'];
     % variable persistente vector de salidas Y.
-    r = [r 'persistent ' Y_name ';\n'];
-    r = [r 'if isempty(' Y_name ')\n'];
-    r = [r '\t' Y_name ' = zeros(1, ' num2str(nd-1) ');\n'];
-    r = [r 'end\n'];
-    
-    r = [r 'U = [u ' U_name '(1:end-1)];\n']; % desplazamiento entradas
-    r = [r y1_name ' = ' eqy_char ';\n']; % calcula salida actual.
+    r = [r ind 'persistent ' Y_name ';\n'];
+    r = [r ind 'if isempty(' Y_name ')\n'];
+    r = [r ind '\t' Y_name ' = zeros(1, ' num2str(nd-1) ');\n'];
+    r = [r ind 'end\n'];
+    r = [r ind U_name ' = [' in_name ' ' U_name '(1:end-1)];\n']; % desplazamiento entradas
+    r = [r ind out_name ' = ' eqy_char ';\n']; % calcula salida actual.
     % desplazamiento vector de salidas.
-    r = [r Y_name ' = [' y1_name ' ' Y_name '(1:end-1)];\n'];
-    y=r;
+    r = [r ind Y_name ' = [' out_name ' ' Y_name '(1:end-1)];\n'];
+    y = r;
 end
-
 
 %funcion local que crea un vector simbolico de una funcion dada
 function y = getFVector(v, x, n)
@@ -165,4 +416,14 @@ function y = getFVector(v, x, n)
         r(i) = v(x-i);
     end
     y = r;
+end
+
+% funcion local para hacer identacion de un string.
+% solo cumple fines esteticos y de orden del codigo pero no de
+% funcionalidad.
+function y = Indentation(s, N)
+    indent = repmat('\t', 1, N);
+    r0 = strsplit(s, '\\n');
+    r1 = strcat([indent '\n'], r0);
+    y = strjoin(r1);
 end

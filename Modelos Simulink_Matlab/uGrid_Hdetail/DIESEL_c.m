@@ -1,4 +1,4 @@
-function [exectime, data] = BIO_c( segment, data )
+function [exectime, data] = DIESEL_c( segment, data )
 % funcion que ejecuta la logica del bloque True Time Kernel.
 ex = 0; % variable auxiliar para poner el tiempo de ejecucion.
  switch segment 
@@ -40,18 +40,18 @@ ex = 0; % variable auxiliar para poner el tiempo de ejecucion.
 		[iar_x ibet_x] = Iref_calculation(V, Vbet, p_set, q_set);
 		e_i = iar_x - I;
 		
-%code generation ->bio
-		persistent U_bio;
-		if isempty(U_bio)
-			U_bio = zeros(1, 3);
+%code generation ->diesel
+		persistent U_diesel;
+		if isempty(U_diesel)
+			U_diesel = zeros(1, 3);
 		end
-		persistent Y_bio;
-		if isempty(Y_bio)
-			Y_bio = zeros(1, 2);
+		persistent Y_diesel;
+		if isempty(Y_diesel)
+			Y_diesel = zeros(1, 2);
 		end
-		U_bio = [e_i U_bio(1:end-1)];
-		Dd = (5793407944122229*U_bio(1))/288230376151711744 - (2877383227746769*U_bio(2))/72057594037927936 + (1431077150805859*U_bio(3))/72057594037927936 + (8991807590778559*Y_bio(1))/4503599627370496 - (4494601429313211*Y_bio(2))/4503599627370496;
-		Y_bio = [Dd Y_bio(1:end-1)];
+		U_diesel = [e_i U_diesel(1:end-1)];
+		Dd = (5793407944122229*U_diesel(1))/288230376151711744 - (2877383227746769*U_diesel(2))/72057594037927936 + (1431077150805859*U_diesel(3))/72057594037927936 + (8991807590778559*Y_diesel(1))/4503599627370496 - (4494601429313211*Y_diesel(2))/4503599627370496;
+		Y_diesel = [Dd Y_diesel(1:end-1)];
 
 		data.d = Dd;
 		[data.Po data.Qo] = PQ_calculation(V, Vbet, I, Ibet);
