@@ -19,3 +19,20 @@ permite modelar y validar los algoritmos de control de acuerdo a las
 restricciones de tiempo real.
 
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+                          IMPORTANTISIMO
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+cuando el paso de simlacion esta configurado como fixed step, la funcion
+ttAnalogIn(_) de la true time kernel siempre arroja 0. mientras que con
+variable step funciona normalmente.
+
+tener en cuenta que true time kernel solo funciona bien con paso variable
+de simulacion.
+
+
+
+
+
+
+
