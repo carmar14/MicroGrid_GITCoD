@@ -6,10 +6,52 @@
 % (el DMC emplea la respuesta al impulso)
 
 
+% parametros del MPC
+p = 100; % horizonte de prediccion.
+Nu = 100; % horizonte de control.
+
+
+load('FitData'); % se caga el ws con el modelo lineal del sistema.
+
+% se discretiza el modelo continuo
+mMz = c2d(tf1, 1e-3);
+
+% se obtiene la respuesta al escalon, la cual permite calcular las salidas
+% del sistema al hacer convolucion con las diferencias de las entradas.
+% contiene 4 componentes porque se trata de un sistema de 2 entradas y
+% cuatro salidas.
+n = 2*p; % numero de muestras.
+Yz = step(mMz, n*1e-3);
+
+% al discretizar con tiempo de muestreo de 1ms, el sistema se estabiliza en
+% la muestra 81. para redondear se trabajara con 200 muestras para la
+% prediccion, que es un tiempo mucho mayor al de estabilizacion.
+
+
+% calculo de la matriz dinamica
+Gpp = convmtx(Yz(:, 1, 1), Nu);
+Gqp = convmtx(Yz(:, 1, 2), Nu);
+
+Gpq = convmtx(Yz(:, 2, 1), Nu);
+Gqq = convmtx(Yz(:, 2, 2), Nu);
+
+% matriz dinamica para la respuesta forzada.
+G = [Gpp(1:p, 1:Nu) Gqp(1:p, 1:Nu) ; Gpq(1:p, 1:Nu) Gqq(1:p, 1:Nu)];
+
+% matriz dinamica para la respuesta libre.
+GF = [free(Yz(:, 1, 1), p, Nu) free(Yz(:, 1, 2), p, Nu); ...
+      free(Yz(:, 2, 1), p, Nu) free(Yz(:, 2, 2), p, Nu)];
 
 
 
-
+% funcion local que calcula la matriz de respuesta libre.
+function y = free(Yz, p, n)
+    T = zeros(p, n);
+    for j=1:1:p
+        T(j,:) = Yz(j+1:n+j)-Yz(1:n);
+    end
+    y = T;
+end
 
 
 

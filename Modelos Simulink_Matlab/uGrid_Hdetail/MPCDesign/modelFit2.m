@@ -1,4 +1,4 @@
-% para implementar el controlador mpc es necesario dispone de un modelo
+% para implementar el controlador mpc es necesario disponer de un modelo
 % del sistema que se desea controlar. En este caso el sistema recive un set
 % point de potencia para biogenerador y para diesel. ambos casos un vector
 % de dos componentes [P,Q]. la salida es la potencia real medida que
