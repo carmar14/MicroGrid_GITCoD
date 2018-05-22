@@ -7,14 +7,14 @@
 
 
 % parametros del MPC
-p = 100; % horizonte de prediccion.
-Nu = 100; % horizonte de control.
+p = 20; % horizonte de prediccion.
+Nu = 20; % horizonte de control.
 
 
 load('FitData'); % se caga el ws con el modelo lineal del sistema.
 
 % se discretiza el modelo continuo
-mMz = c2d(tf1, 1e-3);
+mMz = c2d(tf1, 30e-3);
 
 % se obtiene la respuesta al escalon, la cual permite calcular las salidas
 % del sistema al hacer convolucion con las diferencias de las entradas.
