@@ -19,6 +19,33 @@ permite modelar y validar los algoritmos de control de acuerdo a las
 restricciones de tiempo real.
 
 
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+          DESCRIPCION DE CADA UNO DE LOS ARCHIVOS DE LA CARPERTA
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+EXTENCION .m
+    funciones:
+
+    scripts:
+
+    
+EXTENSION SLX:
+
+
+EXTENSION .mat :
+
+
+
+
+
+
+
+
+
+
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
                           IMPORTANTISIMO
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
