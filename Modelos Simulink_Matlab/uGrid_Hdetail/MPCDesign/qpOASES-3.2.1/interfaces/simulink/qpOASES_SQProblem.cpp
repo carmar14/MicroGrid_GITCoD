@@ -45,7 +45,7 @@ extern "C" {
 #endif
 
 
-#define S_FUNCTION_NAME   qpOASES_SQProblem		/**< Name of the S function. */
+#define S_FUNCTION_NAME   qp_linprog		/**< Name of the S function. */
 #define S_FUNCTION_LEVEL  2						/**< S function level. */
 
 #define MDL_START								/**< Activate call to mdlStart. */
@@ -54,8 +54,8 @@ extern "C" {
 
 
 /* SETTINGS */
-#define SAMPLINGTIME   1e-3						/**< Sampling time. */
-#define NCONTROLINPUTS  200						/**< Number of control inputs. */
+#define SAMPLINGTIME   .1						/**< Sampling time. */
+#define NCONTROLINPUTS  4						/**< Number of control inputs. */
 #define MAXITER         1000	    				/**< Maximum number of iterations. */
 #define HESSIANTYPE     HST_UNKNOWN				/**< Hessian type, see documentation of SQProblem class constructor. */
 
