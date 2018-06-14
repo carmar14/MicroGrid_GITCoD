@@ -80,36 +80,36 @@ real_T B_38_405_0 ; real_T B_38_407_0 ; real_T B_38_409_0 ; real_T B_38_410_0
 ; real_T B_38_411_0 ; real_T B_38_412_0 ; real_T B_38_413_0 ; real_T
 B_38_414_0 ; real_T B_38_415_0 ; real_T B_38_416_0 ; real_T B_38_417_0 ;
 real_T B_38_419_0 ; real_T B_38_421_0 ; real_T B_38_422_0 ; real_T B_38_424_0
-; real_T B_38_426_0 ; real_T B_38_428_0 ; real_T B_38_429_0 ; real_T
-B_38_430_0 ; real_T B_38_431_0 ; real_T B_38_433_0 ; real_T B_38_435_0 ;
-real_T B_38_436_0 ; real_T B_38_437_0 ; real_T B_38_438_0 ; real_T B_38_440_0
-; real_T B_38_442_0 ; real_T B_38_443_0 ; real_T B_38_444_0 ; real_T
-B_38_445_0 ; real_T B_38_447_0 ; real_T B_38_451_0 ; real_T B_38_452_0 ;
-real_T B_38_453_0 ; real_T B_38_457_0 ; real_T B_38_461_0 ; real_T B_38_474_0
-; real_T B_38_478_0 ; real_T B_38_482_0 ; real_T B_38_486_0 ; real_T
-B_38_494_0 ; real_T B_38_495_0 ; real_T B_38_509_0 ; real_T B_38_511_0 ;
-real_T B_38_514_0 ; real_T B_38_515_0 ; real_T B_38_516_0 ; real_T B_38_518_0
-; real_T B_38_519_0 ; real_T B_38_520_0 ; real_T B_38_535_0 ; real_T
-B_38_537_0 ; real_T B_38_539_0 ; real_T B_38_541_0 ; real_T B_38_547_0 ;
-real_T B_38_550_0 ; real_T B_38_552_0 ; real_T B_38_553_0 ; real_T B_38_554_0
-; real_T B_38_556_0 ; real_T B_38_558_0 ; real_T B_38_559_0 ; real_T
-B_38_560_0 ; real_T B_38_561_0 ; real_T B_38_572_0 ; real_T B_38_576_0 ;
-real_T B_38_577_0 ; real_T B_38_578_0 ; real_T B_38_579_0 ; real_T B_38_581_0
-; real_T B_38_583_0 ; real_T B_38_584_0 ; real_T B_38_585_0 ; real_T
-B_38_586_0 ; real_T B_38_590_0 ; real_T B_38_592_0 ; real_T B_38_593_0 ;
-real_T B_38_595_0 ; real_T B_38_596_0 ; real_T B_38_597_0 ; real_T B_38_598_0
-; real_T B_38_605_0 ; real_T B_38_606_0 [ 2 ] ; real_T B_38_607_0 [ 2 ] ;
-real_T B_38_609_0 [ 2 ] ; real_T B_38_609_1 ; real_T B_38_609_2 ; real_T
-B_38_609_3 ; real_T B_38_613_0 [ 2 ] ; real_T B_38_614_0 [ 2 ] ; real_T
-B_38_616_0 [ 2 ] ; real_T B_38_616_1 ; real_T B_38_616_2 ; real_T B_38_616_3
-; real_T B_38_618_0 ; real_T B_38_620_0 ; real_T B_38_621_0 ; real_T
-B_38_622_0 ; real_T B_38_623_0 ; real_T B_38_625_0 ; real_T B_38_627_0 ;
-real_T B_38_628_0 ; real_T B_38_629_0 ; real_T B_38_630_0 ; real_T B_38_638_0
-; real_T B_38_639_0 ; real_T B_38_640_0 ; real_T B_38_641_0 ; real_T
-B_38_642_0 ; real_T B_38_643_0 ; real_T B_38_644_0 ; real_T B_38_648_0 ;
-real_T B_38_649_0 ; real_T B_38_650_0 ; real_T B_38_651_0 ; real_T B_38_652_0
-; real_T B_38_653_0 ; real_T B_38_654_0 ; real_T B_38_655_0 ; real_T
-B_38_656_0 ; real_T B_37_0_0 ; real_T B_36_0_0 ; real_T B_35_0_0 ; real_T
+; real_T B_38_428_0 ; real_T B_38_430_0 ; real_T B_38_431_0 ; real_T
+B_38_432_0 ; real_T B_38_433_0 ; real_T B_38_435_0 ; real_T B_38_437_0 ;
+real_T B_38_438_0 ; real_T B_38_439_0 ; real_T B_38_440_0 ; real_T B_38_442_0
+; real_T B_38_444_0 ; real_T B_38_445_0 ; real_T B_38_446_0 ; real_T
+B_38_447_0 ; real_T B_38_449_0 ; real_T B_38_453_0 ; real_T B_38_454_0 ;
+real_T B_38_455_0 ; real_T B_38_459_0 ; real_T B_38_463_0 ; real_T B_38_476_0
+; real_T B_38_480_0 ; real_T B_38_484_0 ; real_T B_38_488_0 ; real_T
+B_38_496_0 ; real_T B_38_497_0 ; real_T B_38_511_0 ; real_T B_38_513_0 ;
+real_T B_38_516_0 ; real_T B_38_517_0 ; real_T B_38_518_0 ; real_T B_38_520_0
+; real_T B_38_521_0 ; real_T B_38_522_0 ; real_T B_38_537_0 ; real_T
+B_38_539_0 ; real_T B_38_541_0 ; real_T B_38_543_0 ; real_T B_38_549_0 ;
+real_T B_38_552_0 ; real_T B_38_554_0 ; real_T B_38_555_0 ; real_T B_38_556_0
+; real_T B_38_558_0 ; real_T B_38_560_0 ; real_T B_38_561_0 ; real_T
+B_38_562_0 ; real_T B_38_563_0 ; real_T B_38_574_0 ; real_T B_38_578_0 ;
+real_T B_38_579_0 ; real_T B_38_580_0 ; real_T B_38_581_0 ; real_T B_38_583_0
+; real_T B_38_585_0 ; real_T B_38_586_0 ; real_T B_38_587_0 ; real_T
+B_38_588_0 ; real_T B_38_592_0 ; real_T B_38_594_0 ; real_T B_38_595_0 ;
+real_T B_38_597_0 ; real_T B_38_598_0 ; real_T B_38_599_0 ; real_T B_38_600_0
+; real_T B_38_607_0 ; real_T B_38_608_0 [ 2 ] ; real_T B_38_609_0 [ 2 ] ;
+real_T B_38_611_0 [ 2 ] ; real_T B_38_611_1 ; real_T B_38_611_2 ; real_T
+B_38_611_3 ; real_T B_38_615_0 [ 2 ] ; real_T B_38_616_0 [ 2 ] ; real_T
+B_38_618_0 [ 2 ] ; real_T B_38_618_1 ; real_T B_38_618_2 ; real_T B_38_618_3
+; real_T B_38_620_0 ; real_T B_38_622_0 ; real_T B_38_623_0 ; real_T
+B_38_624_0 ; real_T B_38_625_0 ; real_T B_38_627_0 ; real_T B_38_629_0 ;
+real_T B_38_630_0 ; real_T B_38_631_0 ; real_T B_38_632_0 ; real_T B_38_640_0
+; real_T B_38_641_0 ; real_T B_38_642_0 ; real_T B_38_643_0 ; real_T
+B_38_644_0 ; real_T B_38_645_0 ; real_T B_38_646_0 ; real_T B_38_650_0 ;
+real_T B_38_651_0 ; real_T B_38_652_0 ; real_T B_38_653_0 ; real_T B_38_654_0
+; real_T B_38_655_0 ; real_T B_38_656_0 ; real_T B_38_657_0 ; real_T
+B_38_658_0 ; real_T B_37_0_0 ; real_T B_36_0_0 ; real_T B_35_0_0 ; real_T
 B_34_0_0 ; real_T B_33_0_0 ; real_T B_32_0_0 ; real_T B_31_0_0 ; real_T
 B_31_0_1 ; real_T B_31_0_2 ; real_T B_31_0_3 ; real_T B_31_0_4 ; real_T
 B_31_0_5 ; real_T B_31_0_6 ; real_T B_30_0_0 [ 2 ] ; real_T B_30_0_1 ; real_T
@@ -169,29 +169,30 @@ TUbufferPtrs [ 2 ] ; } TransportDelay_PWORK ; struct { void * TUbufferPtrs [
 2 ] ; } TransportDelay_PWORK_m ; struct { void * TUbufferPtrs [ 2 ] ; }
 TransportDelay_PWORK_d ; struct { void * TUbufferPtrs [ 2 ] ; }
 TransportDelay_PWORK_i ; void * Scope17_PWORK ; void * Scope18_PWORK ; void *
-Scope6_PWORK ; void * Scope7_PWORK [ 2 ] ; void * Scope7_PWORK_k [ 2 ] ; void
-* Scope8_PWORK [ 2 ] ; void * Scope10_PWORK ; void * Scope11_PWORK ; void *
-Scope8_PWORK_i ; void * qpOASES_linprog1_PWORK [ 8 ] ; void * Scope12_PWORK ;
-void * Scope16_PWORK [ 2 ] ; void * Scope21_PWORK ; void *
-qpOASES_linprog_PWORK [ 8 ] ; void * Scope9_PWORK ; void * Scope_PWORK_k ;
-void * Scope1_PWORK_gi ; void * Scope14_PWORK ; struct { void * TUbufferPtrs
-[ 2 ] ; } MotordeCombustin1_PWORK ; void * Scope5_PWORK_l ; int32_T
-justEnabled ; int32_T currentValue ; int32_T justEnabled_l ; int32_T
-currentValue_d ; int32_T justEnabled_k ; int32_T currentValue_a ; int32_T
-justEnabled_m ; int32_T currentValue_h ; int32_T justEnabled_j ; int32_T
-currentValue_n ; int32_T justEnabled_o ; int32_T currentValue_f ; int_T
-inti_IWORK ; int_T StateSpace_IWORK [ 23 ] ; struct { int_T Tail ; int_T Head
-; int_T Last ; int_T CircularBufSize ; int_T MaxNewBufSize ; }
-TransportDelay_IWORK ; struct { int_T Tail ; int_T Head ; int_T Last ; int_T
-CircularBufSize ; int_T MaxNewBufSize ; } TransportDelay_IWORK_h ; struct {
-int_T Tail ; int_T Head ; int_T Last ; int_T CircularBufSize ; int_T
-MaxNewBufSize ; } TransportDelay_IWORK_j ; struct { int_T Tail ; int_T Head ;
+Scope6_PWORK ; void * Scope7_PWORK [ 2 ] ; void * ToWorkspace_PWORK ; void *
+ToWorkspace1_PWORK ; void * Scope7_PWORK_k [ 2 ] ; void * Scope8_PWORK [ 2 ]
+; void * Scope10_PWORK ; void * Scope11_PWORK ; void * Scope8_PWORK_i ; void
+* qpOASES_linprog1_PWORK [ 8 ] ; void * Scope12_PWORK ; void * Scope16_PWORK
+[ 2 ] ; void * Scope21_PWORK ; void * qpOASES_linprog_PWORK [ 8 ] ; void *
+Scope9_PWORK ; void * Scope_PWORK_k ; void * Scope1_PWORK_gi ; void *
+Scope14_PWORK ; struct { void * TUbufferPtrs [ 2 ] ; }
+MotordeCombustin1_PWORK ; void * Scope5_PWORK_l ; int32_T justEnabled ;
+int32_T currentValue ; int32_T justEnabled_l ; int32_T currentValue_d ;
+int32_T justEnabled_k ; int32_T currentValue_a ; int32_T justEnabled_m ;
+int32_T currentValue_h ; int32_T justEnabled_j ; int32_T currentValue_n ;
+int32_T justEnabled_o ; int32_T currentValue_f ; int_T inti_IWORK ; int_T
+StateSpace_IWORK [ 23 ] ; struct { int_T Tail ; int_T Head ; int_T Last ;
+int_T CircularBufSize ; int_T MaxNewBufSize ; } TransportDelay_IWORK ; struct
+{ int_T Tail ; int_T Head ; int_T Last ; int_T CircularBufSize ; int_T
+MaxNewBufSize ; } TransportDelay_IWORK_h ; struct { int_T Tail ; int_T Head ;
 int_T Last ; int_T CircularBufSize ; int_T MaxNewBufSize ; }
-TransportDelay_IWORK_a ; struct { int_T Tail ; int_T Head ; int_T Last ;
-int_T CircularBufSize ; int_T MaxNewBufSize ; } MotordeCombustin1_IWORK ;
-int_T inti_MODE ; char StateSpace_MODE [ 112 ] ; int_T Step_MODE ; int_T
-Step_MODE_c ; int_T Step_MODE_f ; int_T Saturation_MODE ; int_T Abs_MODE ;
-int_T Abs_MODE_d ; int_T Abs1_MODE ; int8_T Subsystem_SubsysRanBC ; int8_T
+TransportDelay_IWORK_j ; struct { int_T Tail ; int_T Head ; int_T Last ;
+int_T CircularBufSize ; int_T MaxNewBufSize ; } TransportDelay_IWORK_a ;
+struct { int_T Tail ; int_T Head ; int_T Last ; int_T CircularBufSize ; int_T
+MaxNewBufSize ; } MotordeCombustin1_IWORK ; int_T inti_MODE ; char
+StateSpace_MODE [ 112 ] ; int_T Step_MODE ; int_T Step_MODE_c ; int_T
+Step_MODE_f ; int_T Saturation_MODE ; int_T Abs_MODE ; int_T Abs_MODE_d ;
+int_T Abs1_MODE ; int8_T Subsystem_SubsysRanBC ; int8_T
 Subsystem_SubsysRanBC_d ; int8_T Subsystem_SubsysRanBC_e ; int8_T
 Subsystem_SubsysRanBC_j ; int8_T Subsystem_SubsysRanBC_eb ; int8_T
 Subsystem_SubsysRanBC_o ; int8_T Subsystem_SubsysRanBC_p ; int8_T
@@ -308,7 +309,7 @@ Subsystem_Trig_ZCE_in ; ZCSigState Subsystem_Trig_ZCE_d4 ; ZCSigState
 Subsystem_Trig_ZCE_e ; ZCSigState Subsystem_Trig_ZCE_at ; }
 PrevZCX_uGrid_1PH_hd_T ; typedef struct { const real_T B_38_17_0 ; const
 real_T B_38_45_0 ; const real_T B_38_212_0 ; const real_T B_38_292_0 ; const
-real_T B_38_496_0 ; const real_T B_38_573_0 ; const real_T B_38_587_0 ; }
+real_T B_38_498_0 ; const real_T B_38_575_0 ; const real_T B_38_589_0 ; }
 ConstB_uGrid_1PH_hd_T ;
 #define uGrid_1PH_hd_rtC(S) ((ConstB_uGrid_1PH_hd_T *) _ssGetConstBlockIO(S))
 struct P_uGrid_1PH_hd_T_ { real_T P_0 ; real_T P_1 ; real_T P_2 ; real_T P_3
