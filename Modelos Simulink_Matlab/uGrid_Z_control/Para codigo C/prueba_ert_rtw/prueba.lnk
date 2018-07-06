@@ -1,0 +1,7 @@
+rt_matrx.obj
+rt_printf.obj
+prueba.obj
+prueba_data.obj
+rtGetInf.obj
+rtGetNaN.obj
+rt_nonfinite.obj
