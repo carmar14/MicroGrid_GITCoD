@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'BIO_csi'.
  *
- * Model version                  : 1.7
+ * Model version                  : 1.14
  * Simulink Coder version         : 8.12 (R2017a) 16-Feb-2017
- * C/C++ source code generated on : Thu Jul 05 17:36:37 2018
+ * C/C++ source code generated on : Fri Jul 06 10:22:49 2018
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -67,24 +67,36 @@ static void rate_scheduler(void)
 }
 
 /*
- * This function updates continuous states using the ODE4 fixed-step
+ * This function updates continuous states using the ODE3 fixed-step
  * solver algorithm
  */
 static void rt_ertODEUpdateContinuousStates(RTWSolverInfo *si )
 {
+  /* Solver Matrices */
+  static const real_T rt_ODE3_A[3] = {
+    1.0/2.0, 3.0/4.0, 1.0
+  };
+
+  static const real_T rt_ODE3_B[3][3] = {
+    { 1.0/2.0, 0.0, 0.0 },
+
+    { 0.0, 3.0/4.0, 0.0 },
+
+    { 2.0/9.0, 1.0/3.0, 4.0/9.0 }
+  };
+
   time_T t = rtsiGetT(si);
   time_T tnew = rtsiGetSolverStopTime(si);
   time_T h = rtsiGetStepSize(si);
   real_T *x = rtsiGetContStates(si);
-  ODE4_IntgData *id = (ODE4_IntgData *)rtsiGetSolverData(si);
+  ODE3_IntgData *id = (ODE3_IntgData *)rtsiGetSolverData(si);
   real_T *y = id->y;
   real_T *f0 = id->f[0];
   real_T *f1 = id->f[1];
   real_T *f2 = id->f[2];
-  real_T *f3 = id->f[3];
-  real_T temp;
+  real_T hB[3];
   int_T i;
-  int_T nXc = 12;
+  int_T nXc = 10;
   rtsiSetSimTimeStep(si,MINOR_TIME_STEP);
 
   /* Save the state values at time t in y, we'll use x as ynew. */
@@ -96,43 +108,42 @@ static void rt_ertODEUpdateContinuousStates(RTWSolverInfo *si )
   rtsiSetdX(si, f0);
   BIO_csi_derivatives();
 
-  /* f1 = f(t + (h/2), y + (h/2)*f0) */
-  temp = 0.5 * h;
+  /* f(:,2) = feval(odefile, t + hA(1), y + f*hB(:,1), args(:)(*)); */
+  hB[0] = h * rt_ODE3_B[0][0];
   for (i = 0; i < nXc; i++) {
-    x[i] = y[i] + (temp*f0[i]);
+    x[i] = y[i] + (f0[i]*hB[0]);
   }
 
-  rtsiSetT(si, t + temp);
+  rtsiSetT(si, t + h*rt_ODE3_A[0]);
   rtsiSetdX(si, f1);
   BIO_csi_step();
   BIO_csi_derivatives();
 
-  /* f2 = f(t + (h/2), y + (h/2)*f1) */
-  for (i = 0; i < nXc; i++) {
-    x[i] = y[i] + (temp*f1[i]);
+  /* f(:,3) = feval(odefile, t + hA(2), y + f*hB(:,2), args(:)(*)); */
+  for (i = 0; i <= 1; i++) {
+    hB[i] = h * rt_ODE3_B[1][i];
   }
 
+  for (i = 0; i < nXc; i++) {
+    x[i] = y[i] + (f0[i]*hB[0] + f1[i]*hB[1]);
+  }
+
+  rtsiSetT(si, t + h*rt_ODE3_A[1]);
   rtsiSetdX(si, f2);
   BIO_csi_step();
   BIO_csi_derivatives();
 
-  /* f3 = f(t + h, y + h*f2) */
+  /* tnew = t + hA(3);
+     ynew = y + f*hB(:,3); */
+  for (i = 0; i <= 2; i++) {
+    hB[i] = h * rt_ODE3_B[2][i];
+  }
+
   for (i = 0; i < nXc; i++) {
-    x[i] = y[i] + (h*f2[i]);
+    x[i] = y[i] + (f0[i]*hB[0] + f1[i]*hB[1] + f2[i]*hB[2]);
   }
 
   rtsiSetT(si, tnew);
-  rtsiSetdX(si, f3);
-  BIO_csi_step();
-  BIO_csi_derivatives();
-
-  /* tnew = t + h
-     ynew = y + (h/6)*(f0 + 2*f1 + 2*f2 + 2*f3) */
-  temp = h / 6.0;
-  for (i = 0; i < nXc; i++) {
-    x[i] = y[i] + temp*(f0[i] + 2.0*f1[i] + 2.0*f2[i] + f3[i]);
-  }
-
   rtsiSetSimTimeStep(si,MAJOR_TIME_STEP);
 }
 
@@ -1948,7 +1959,7 @@ void BIO_csi_step(void)
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       3000 };
 
-    real_T Hw1;
+    real_T TransferFcn;
     real_T Hw2;
     real_T Hw6;
     int32_T i;
@@ -2217,15 +2228,11 @@ void BIO_csi_step(void)
       }
     }
 
-    /* StateSpace: '<Root>/Hw1' */
-    Hw1 = 1.0000000000000002 * BIO_csi_X.Hw1_CSTATE[1];
-
-    /* Outport: '<Root>/Out1' */
-    BIO_csi_Y.Out1 = Hw1;
-
     /* TransferFcn: '<S1>/Transfer Fcn' */
-    BIO_csi_B.TransferFcn = 0.0;
-    BIO_csi_B.TransferFcn += 1.0E+6 * BIO_csi_X.TransferFcn_CSTATE;
+    TransferFcn = 1.0E+6 * BIO_csi_X.TransferFcn_CSTATE;
+
+    /* Outport: '<Root>/I_bio' */
+    BIO_csi_Y.I_bio = TransferFcn;
     if (rtmIsMajorTimeStep(BIO_csi_M) &&
         BIO_csi_M->Timing.TaskCounters.TID[2] == 0) {
       /* DiscreteTransferFcn: '<S2>/Delay90(z)V' incorporates:
@@ -2468,7 +2475,7 @@ void BIO_csi_step(void)
        *  Product: '<S45>/Product'
        *  Sum: '<S2>/Sum'
        */
-      BIO_csi_DW.PRz_tmp = ((Hw6 - Hw1) * BIO_csi_B.Step - -1.9966 *
+      BIO_csi_DW.PRz_tmp = ((Hw6 - TransferFcn) * BIO_csi_B.Step - -1.9966 *
                             BIO_csi_DW.PRz_states[0]) - 0.998 *
         BIO_csi_DW.PRz_states[1];
 
@@ -2540,7 +2547,8 @@ void BIO_csi_step(void)
     if (rtmIsMajorTimeStep(BIO_csi_M) &&
         BIO_csi_M->Timing.TaskCounters.TID[2] == 0) {
       /* DiscreteTransferFcn: '<S2>/Delay90(z)I' */
-      BIO_csi_DW.Delay90zI_tmp = Hw1 - -0.96364 * BIO_csi_DW.Delay90zI_states;
+      BIO_csi_DW.Delay90zI_tmp = TransferFcn - -0.96364 *
+        BIO_csi_DW.Delay90zI_states;
       BIO_csi_B.Delay90zI = -1.0364 * BIO_csi_DW.Delay90zI_states +
         BIO_csi_DW.Delay90zI_tmp;
     }
@@ -2556,7 +2564,8 @@ void BIO_csi_step(void)
     /*  artificial de beta. */
     /* MATLAB Function 'CSI_Control_BIO/PQ_singlePhase': '<S47>:1' */
     /* '<S47>:1:9' paux=va*ia+vb*ib; */
-    Hw2 = BIO_csi_U.V_bio * Hw1 + BIO_csi_B.Delay90zV * BIO_csi_B.Delay90zI;
+    Hw2 = BIO_csi_U.V_bio * TransferFcn + BIO_csi_B.Delay90zV *
+      BIO_csi_B.Delay90zI;
 
     /* '<S47>:1:10' if(paux > 20e4) */
     if (Hw2 > 200000.0) {
@@ -2575,22 +2584,23 @@ void BIO_csi_step(void)
 
     /*  potencia activa instantanea */
     /* '<S47>:1:19' qaux = vb*ia-va*ib; */
-    Hw1 = BIO_csi_B.Delay90zV * Hw1 - BIO_csi_U.V_bio * BIO_csi_B.Delay90zI;
+    TransferFcn = BIO_csi_B.Delay90zV * TransferFcn - BIO_csi_U.V_bio *
+      BIO_csi_B.Delay90zI;
 
     /* '<S47>:1:21' if(qaux>20e4) */
-    if (Hw1 > 200000.0) {
+    if (TransferFcn > 200000.0) {
       /* '<S47>:1:22' qaux=20e4; */
-      Hw1 = 200000.0;
+      TransferFcn = 200000.0;
     }
 
     /* '<S47>:1:24' if(qaux<-20e4) */
-    if (Hw1 < -200000.0) {
+    if (TransferFcn < -200000.0) {
       /* '<S47>:1:25' qaux=-20e4; */
-      Hw1 = -200000.0;
+      TransferFcn = -200000.0;
     }
 
     /* '<S47>:1:28' q = qaux/2; */
-    BIO_csi_B.q = Hw1 / 2.0;
+    BIO_csi_B.q = TransferFcn / 2.0;
 
     /* End of MATLAB Function: '<S2>/PQ_singlePhase' */
     /*  potencia reactiva instantanea */
@@ -2784,14 +2794,6 @@ void BIO_csi_derivatives(void)
   XDot_BIO_csi_T *_rtXdot;
   _rtXdot = ((XDot_BIO_csi_T *) BIO_csi_M->derivs);
 
-  /* Derivatives for StateSpace: '<Root>/Hw1' */
-  _rtXdot->Hw1_CSTATE[0] = 0.0;
-  _rtXdot->Hw1_CSTATE[1] = 0.0;
-  _rtXdot->Hw1_CSTATE[0] += -76179.573297837138 * BIO_csi_X.Hw1_CSTATE[0];
-  _rtXdot->Hw1_CSTATE[0] += -43982.2971502571 * BIO_csi_X.Hw1_CSTATE[1];
-  _rtXdot->Hw1_CSTATE[1] += 43982.297150257094 * BIO_csi_X.Hw1_CSTATE[0];
-  _rtXdot->Hw1_CSTATE[0] += 43982.2971502571 * BIO_csi_B.TransferFcn;
-
   /* Derivatives for TransferFcn: '<S1>/Transfer Fcn' */
   _rtXdot->TransferFcn_CSTATE = 0.0;
   _rtXdot->TransferFcn_CSTATE += -1.0E+6 * BIO_csi_X.TransferFcn_CSTATE;
@@ -2884,10 +2886,9 @@ void BIO_csi_initialize(void)
   BIO_csi_M->intgData.f[0] = BIO_csi_M->odeF[0];
   BIO_csi_M->intgData.f[1] = BIO_csi_M->odeF[1];
   BIO_csi_M->intgData.f[2] = BIO_csi_M->odeF[2];
-  BIO_csi_M->intgData.f[3] = BIO_csi_M->odeF[3];
   BIO_csi_M->contStates = ((X_BIO_csi_T *) &BIO_csi_X);
   rtsiSetSolverData(&BIO_csi_M->solverInfo, (void *)&BIO_csi_M->intgData);
-  rtsiSetSolverName(&BIO_csi_M->solverInfo,"ode4");
+  rtsiSetSolverName(&BIO_csi_M->solverInfo,"ode3");
   BIO_csi_M->solverInfoPtr = (&BIO_csi_M->solverInfo);
 
   /* Initialize timing info */
@@ -2951,7 +2952,7 @@ void BIO_csi_initialize(void)
   (void)memset((void *)&BIO_csi_U, 0, sizeof(ExtU_BIO_csi_T));
 
   /* external outputs */
-  BIO_csi_Y.Out1 = 0.0;
+  BIO_csi_Y.I_bio = 0.0;
 
   /* child S-Function registration */
   {
@@ -3444,10 +3445,6 @@ void BIO_csi_initialize(void)
       idxOutSw[8] = ((int_T)0.0) - 1;
     }
   }
-
-  /* InitializeConditions for StateSpace: '<Root>/Hw1' */
-  BIO_csi_X.Hw1_CSTATE[0] = 0.0;
-  BIO_csi_X.Hw1_CSTATE[1] = 0.0;
 
   /* InitializeConditions for TransferFcn: '<S1>/Transfer Fcn' */
   BIO_csi_X.TransferFcn_CSTATE = 0.0;

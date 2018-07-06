@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'BIO_csi'.
  *
- * Model version                  : 1.7
+ * Model version                  : 1.14
  * Simulink Coder version         : 8.12 (R2017a) 16-Feb-2017
- * C/C++ source code generated on : Thu Jul 05 17:36:37 2018
+ * C/C++ source code generated on : Fri Jul 06 10:22:49 2018
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)

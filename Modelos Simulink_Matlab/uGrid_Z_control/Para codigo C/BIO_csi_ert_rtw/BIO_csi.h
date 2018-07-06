@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'BIO_csi'.
  *
- * Model version                  : 1.7
+ * Model version                  : 1.14
  * Simulink Coder version         : 8.12 (R2017a) 16-Feb-2017
- * C/C++ source code generated on : Thu Jul 05 17:36:37 2018
+ * C/C++ source code generated on : Fri Jul 06 10:22:49 2018
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -91,7 +91,6 @@ typedef struct {
   int32_T f_data[40000];
   real_T StateSpace_o1[11];            /* '<S53>/State-Space' */
   real_T StateSpace_o2[9];             /* '<S53>/State-Space' */
-  real_T TransferFcn;                  /* '<S1>/Transfer Fcn' */
   real_T Delay90zV;                    /* '<S2>/Delay90(z)V' */
   real_T rt[2];                        /* '<S4>/rt' */
   real_T rt1[2];                       /* '<S4>/rt1' */
@@ -171,7 +170,6 @@ typedef struct {
 
 /* Continuous states (auto storage) */
 typedef struct {
-  real_T Hw1_CSTATE[2];                /* '<Root>/Hw1' */
   real_T TransferFcn_CSTATE;           /* '<S1>/Transfer Fcn' */
   real_T TransferFcn1_CSTATE;          /* '<S1>/Transfer Fcn1' */
   real_T Hw2_CSTATE[4];                /* '<S2>/Hw2' */
@@ -180,7 +178,6 @@ typedef struct {
 
 /* State derivatives (auto storage) */
 typedef struct {
-  real_T Hw1_CSTATE[2];                /* '<Root>/Hw1' */
   real_T TransferFcn_CSTATE;           /* '<S1>/Transfer Fcn' */
   real_T TransferFcn1_CSTATE;          /* '<S1>/Transfer Fcn1' */
   real_T Hw2_CSTATE[4];                /* '<S2>/Hw2' */
@@ -189,21 +186,20 @@ typedef struct {
 
 /* State disabled  */
 typedef struct {
-  boolean_T Hw1_CSTATE[2];             /* '<Root>/Hw1' */
   boolean_T TransferFcn_CSTATE;        /* '<S1>/Transfer Fcn' */
   boolean_T TransferFcn1_CSTATE;       /* '<S1>/Transfer Fcn1' */
   boolean_T Hw2_CSTATE[4];             /* '<S2>/Hw2' */
   boolean_T Hw6_CSTATE[4];             /* '<S2>/Hw6' */
 } XDis_BIO_csi_T;
 
-#ifndef ODE4_INTG
-#define ODE4_INTG
+#ifndef ODE3_INTG
+#define ODE3_INTG
 
-/* ODE4 Integration Data */
+/* ODE3 Integration Data */
 typedef struct {
   real_T *y;                           /* output */
-  real_T *f[4];                        /* derivatives */
-} ODE4_IntgData;
+  real_T *f[3];                        /* derivatives */
+} ODE3_IntgData;
 
 #endif
 
@@ -269,7 +265,7 @@ typedef struct {
 
 /* External outputs (root outports fed by signals with auto storage) */
 typedef struct {
-  real_T Out1;                         /* '<Root>/Out1' */
+  real_T I_bio;                        /* '<Root>/I_bio' */
 } ExtY_BIO_csi_T;
 
 /* Real-time Model Data Structure */
@@ -323,9 +319,9 @@ struct tag_RTM_BIO_csi_T {
   boolean_T zCCacheNeedsReset;
   boolean_T derivCacheNeedsReset;
   boolean_T blkStateChange;
-  real_T odeY[12];
-  real_T odeF[4][12];
-  ODE4_IntgData intgData;
+  real_T odeY[10];
+  real_T odeF[3][10];
+  ODE3_IntgData intgData;
 
   /*
    * Sizes:
