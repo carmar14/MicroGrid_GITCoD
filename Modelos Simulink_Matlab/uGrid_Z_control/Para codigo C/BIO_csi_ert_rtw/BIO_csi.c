@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'BIO_csi'.
  *
- * Model version                  : 1.14
+ * Model version                  : 1.16
  * Simulink Coder version         : 8.12 (R2017a) 16-Feb-2017
- * C/C++ source code generated on : Fri Jul 06 10:22:49 2018
+ * C/C++ source code generated on : Tue Jul 10 15:55:49 2018
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -67,34 +67,22 @@ static void rate_scheduler(void)
 }
 
 /*
- * This function updates continuous states using the ODE3 fixed-step
+ * This function updates continuous states using the ODE4 fixed-step
  * solver algorithm
  */
 static void rt_ertODEUpdateContinuousStates(RTWSolverInfo *si )
 {
-  /* Solver Matrices */
-  static const real_T rt_ODE3_A[3] = {
-    1.0/2.0, 3.0/4.0, 1.0
-  };
-
-  static const real_T rt_ODE3_B[3][3] = {
-    { 1.0/2.0, 0.0, 0.0 },
-
-    { 0.0, 3.0/4.0, 0.0 },
-
-    { 2.0/9.0, 1.0/3.0, 4.0/9.0 }
-  };
-
   time_T t = rtsiGetT(si);
   time_T tnew = rtsiGetSolverStopTime(si);
   time_T h = rtsiGetStepSize(si);
   real_T *x = rtsiGetContStates(si);
-  ODE3_IntgData *id = (ODE3_IntgData *)rtsiGetSolverData(si);
+  ODE4_IntgData *id = (ODE4_IntgData *)rtsiGetSolverData(si);
   real_T *y = id->y;
   real_T *f0 = id->f[0];
   real_T *f1 = id->f[1];
   real_T *f2 = id->f[2];
-  real_T hB[3];
+  real_T *f3 = id->f[3];
+  real_T temp;
   int_T i;
   int_T nXc = 10;
   rtsiSetSimTimeStep(si,MINOR_TIME_STEP);
@@ -108,42 +96,43 @@ static void rt_ertODEUpdateContinuousStates(RTWSolverInfo *si )
   rtsiSetdX(si, f0);
   BIO_csi_derivatives();
 
-  /* f(:,2) = feval(odefile, t + hA(1), y + f*hB(:,1), args(:)(*)); */
-  hB[0] = h * rt_ODE3_B[0][0];
+  /* f1 = f(t + (h/2), y + (h/2)*f0) */
+  temp = 0.5 * h;
   for (i = 0; i < nXc; i++) {
-    x[i] = y[i] + (f0[i]*hB[0]);
+    x[i] = y[i] + (temp*f0[i]);
   }
 
-  rtsiSetT(si, t + h*rt_ODE3_A[0]);
+  rtsiSetT(si, t + temp);
   rtsiSetdX(si, f1);
   BIO_csi_step();
   BIO_csi_derivatives();
 
-  /* f(:,3) = feval(odefile, t + hA(2), y + f*hB(:,2), args(:)(*)); */
-  for (i = 0; i <= 1; i++) {
-    hB[i] = h * rt_ODE3_B[1][i];
-  }
-
+  /* f2 = f(t + (h/2), y + (h/2)*f1) */
   for (i = 0; i < nXc; i++) {
-    x[i] = y[i] + (f0[i]*hB[0] + f1[i]*hB[1]);
+    x[i] = y[i] + (temp*f1[i]);
   }
 
-  rtsiSetT(si, t + h*rt_ODE3_A[1]);
   rtsiSetdX(si, f2);
   BIO_csi_step();
   BIO_csi_derivatives();
 
-  /* tnew = t + hA(3);
-     ynew = y + f*hB(:,3); */
-  for (i = 0; i <= 2; i++) {
-    hB[i] = h * rt_ODE3_B[2][i];
-  }
-
+  /* f3 = f(t + h, y + h*f2) */
   for (i = 0; i < nXc; i++) {
-    x[i] = y[i] + (f0[i]*hB[0] + f1[i]*hB[1] + f2[i]*hB[2]);
+    x[i] = y[i] + (h*f2[i]);
   }
 
   rtsiSetT(si, tnew);
+  rtsiSetdX(si, f3);
+  BIO_csi_step();
+  BIO_csi_derivatives();
+
+  /* tnew = t + h
+     ynew = y + (h/6)*(f0 + 2*f1 + 2*f2 + 2*f3) */
+  temp = h / 6.0;
+  for (i = 0; i < nXc; i++) {
+    x[i] = y[i] + temp*(f0[i] + 2.0*f1[i] + 2.0*f2[i] + f3[i]);
+  }
+
   rtsiSetSimTimeStep(si,MAJOR_TIME_STEP);
 }
 
@@ -2886,9 +2875,10 @@ void BIO_csi_initialize(void)
   BIO_csi_M->intgData.f[0] = BIO_csi_M->odeF[0];
   BIO_csi_M->intgData.f[1] = BIO_csi_M->odeF[1];
   BIO_csi_M->intgData.f[2] = BIO_csi_M->odeF[2];
+  BIO_csi_M->intgData.f[3] = BIO_csi_M->odeF[3];
   BIO_csi_M->contStates = ((X_BIO_csi_T *) &BIO_csi_X);
   rtsiSetSolverData(&BIO_csi_M->solverInfo, (void *)&BIO_csi_M->intgData);
-  rtsiSetSolverName(&BIO_csi_M->solverInfo,"ode3");
+  rtsiSetSolverName(&BIO_csi_M->solverInfo,"ode4");
   BIO_csi_M->solverInfoPtr = (&BIO_csi_M->solverInfo);
 
   /* Initialize timing info */

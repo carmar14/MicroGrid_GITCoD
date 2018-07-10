@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'code_programacion_lineal'.
  *
- * Model version                  : 1.10
+ * Model version                  : 1.11
  * Simulink Coder version         : 8.12 (R2017a) 16-Feb-2017
- * C/C++ source code generated on : Tue Jun 19 10:11:45 2018
+ * C/C++ source code generated on : Tue Jul 10 15:51:51 2018
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -82,39 +82,38 @@
 
 /* Block signals (auto storage) */
 typedef struct {
-  real_T qpOASES_linprog_o1[2];        /* '<S1>/qpOASES_(linprog)' */
-  real_T qpOASES_linprog_o2;           /* '<S1>/qpOASES_(linprog)' */
-  real_T qpOASES_linprog_o3;           /* '<S1>/qpOASES_(linprog)' */
-  real_T qpOASES_linprog_o4;           /* '<S1>/qpOASES_(linprog)' */
-  real_T qpOASES_linprog1_o1[2];       /* '<S1>/qpOASES_(linprog)1' */
-  real_T qpOASES_linprog1_o2;          /* '<S1>/qpOASES_(linprog)1' */
-  real_T qpOASES_linprog1_o3;          /* '<S1>/qpOASES_(linprog)1' */
-  real_T qpOASES_linprog1_o4;          /* '<S1>/qpOASES_(linprog)1' */
-  real_T H[4];                         /* '<S1>/LinProg_BuildMatrices_Reactive_Power' */
-  real_T f[2];                         /* '<S1>/LinProg_BuildMatrices_Reactive_Power' */
-  real_T A[2];                         /* '<S1>/LinProg_BuildMatrices_Reactive_Power' */
-  real_T lb[2];                        /* '<S1>/LinProg_BuildMatrices_Reactive_Power' */
-  real_T ub[2];                        /* '<S1>/LinProg_BuildMatrices_Reactive_Power' */
-  real_T lbA;                          /* '<S1>/LinProg_BuildMatrices_Reactive_Power' */
-  real_T ubA;                          /* '<S1>/LinProg_BuildMatrices_Reactive_Power' */
-  real_T H_e[4];                       /* '<S1>/LinProg_BuildMatrices_ActivePower' */
-  real_T f_c[2];                       /* '<S1>/LinProg_BuildMatrices_ActivePower' */
-  real_T A_c[2];                       /* '<S1>/LinProg_BuildMatrices_ActivePower' */
-  real_T lb_i[2];                      /* '<S1>/LinProg_BuildMatrices_ActivePower' */
-  real_T ub_n[2];                      /* '<S1>/LinProg_BuildMatrices_ActivePower' */
-  real_T lbA_b;                        /* '<S1>/LinProg_BuildMatrices_ActivePower' */
-  real_T ubA_o;                        /* '<S1>/LinProg_BuildMatrices_ActivePower' */
+  real_T qpOASES_linprog_o1[2];        /* '<S2>/qpOASES_(linprog)' */
+  real_T qpOASES_linprog_o2;           /* '<S2>/qpOASES_(linprog)' */
+  real_T qpOASES_linprog_o3;           /* '<S2>/qpOASES_(linprog)' */
+  real_T qpOASES_linprog_o4;           /* '<S2>/qpOASES_(linprog)' */
+  real_T qpOASES_linprog1_o1[2];       /* '<S2>/qpOASES_(linprog)1' */
+  real_T qpOASES_linprog1_o2;          /* '<S2>/qpOASES_(linprog)1' */
+  real_T qpOASES_linprog1_o3;          /* '<S2>/qpOASES_(linprog)1' */
+  real_T qpOASES_linprog1_o4;          /* '<S2>/qpOASES_(linprog)1' */
+  real_T H[4];                         /* '<S2>/LinProg_BuildMatrices_Reactive_Power' */
+  real_T f[2];                         /* '<S2>/LinProg_BuildMatrices_Reactive_Power' */
+  real_T A[2];                         /* '<S2>/LinProg_BuildMatrices_Reactive_Power' */
+  real_T lb[2];                        /* '<S2>/LinProg_BuildMatrices_Reactive_Power' */
+  real_T ub[2];                        /* '<S2>/LinProg_BuildMatrices_Reactive_Power' */
+  real_T lbA;                          /* '<S2>/LinProg_BuildMatrices_Reactive_Power' */
+  real_T ubA;                          /* '<S2>/LinProg_BuildMatrices_Reactive_Power' */
+  real_T H_e[4];                       /* '<S2>/LinProg_BuildMatrices_ActivePower' */
+  real_T f_c[2];                       /* '<S2>/LinProg_BuildMatrices_ActivePower' */
+  real_T A_c[2];                       /* '<S2>/LinProg_BuildMatrices_ActivePower' */
+  real_T lb_i[2];                      /* '<S2>/LinProg_BuildMatrices_ActivePower' */
+  real_T ub_n[2];                      /* '<S2>/LinProg_BuildMatrices_ActivePower' */
+  real_T lbA_b;                        /* '<S2>/LinProg_BuildMatrices_ActivePower' */
+  real_T ubA_o;                        /* '<S2>/LinProg_BuildMatrices_ActivePower' */
 } B_code_programacion_lineal_T;
 
 /* Block states (auto storage) for system '<Root>' */
 typedef struct {
-  void *qpOASES_linprog_PWORK[8];      /* '<S1>/qpOASES_(linprog)' */
-  void *qpOASES_linprog1_PWORK[8];     /* '<S1>/qpOASES_(linprog)1' */
+  void *qpOASES_linprog_PWORK[8];      /* '<S2>/qpOASES_(linprog)' */
+  void *qpOASES_linprog1_PWORK[8];     /* '<S2>/qpOASES_(linprog)1' */
 } DW_code_programacion_lineal_T;
 
 /* External inputs (root inport signals with auto storage) */
 typedef struct {
-  real_T Max_P_Ren;                    /* '<Root>/Max_P_Ren' */
   real_T P_Load;                       /* '<Root>/P_Load' */
   real_T KP1;                          /* '<Root>/KP1' */
   real_T KP2;                          /* '<Root>/KP2' */
@@ -124,8 +123,8 @@ typedef struct {
   real_T KQ2;                          /* '<Root>/KQ2' */
   real_T Q1_CSI;                       /* '<Root>/Q1_CSI' */
   real_T Q2_CSI;                       /* '<Root>/Q2_CSI' */
-  real_T Max_Q_Ren;                    /* '<Root>/Max_Q_Ren' */
   real_T Q_Load;                       /* '<Root>/Q_Load' */
+  real_T SOC;                          /* '<Root>/SOC' */
 } ExtU_code_programacion_lineal_T;
 
 /* External outputs (root outports fed by signals with auto storage) */
@@ -288,9 +287,10 @@ extern RT_MODEL_code_programacion_lineal_T *const code_programacion_lineal_M;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'code_programacion_lineal'
- * '<S1>'   : 'code_programacion_lineal/Optimizador  - Control de tercer nivel'
- * '<S2>'   : 'code_programacion_lineal/Optimizador  - Control de tercer nivel/LinProg_BuildMatrices_ActivePower'
- * '<S3>'   : 'code_programacion_lineal/Optimizador  - Control de tercer nivel/LinProg_BuildMatrices_Reactive_Power'
+ * '<S1>'   : 'code_programacion_lineal/MATLAB Function'
+ * '<S2>'   : 'code_programacion_lineal/Optimizador  - Control de tercer nivel'
+ * '<S3>'   : 'code_programacion_lineal/Optimizador  - Control de tercer nivel/LinProg_BuildMatrices_ActivePower'
+ * '<S4>'   : 'code_programacion_lineal/Optimizador  - Control de tercer nivel/LinProg_BuildMatrices_Reactive_Power'
  */
 #endif                                 /* RTW_HEADER_code_programacion_lineal_h_ */
 

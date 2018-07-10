@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'code_programacion_lineal'.
  *
- * Model version                  : 1.10
+ * Model version                  : 1.11
  * Simulink Coder version         : 8.12 (R2017a) 16-Feb-2017
- * C/C++ source code generated on : Tue Jun 19 10:11:45 2018
+ * C/C++ source code generated on : Tue Jul 10 15:51:51 2018
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)

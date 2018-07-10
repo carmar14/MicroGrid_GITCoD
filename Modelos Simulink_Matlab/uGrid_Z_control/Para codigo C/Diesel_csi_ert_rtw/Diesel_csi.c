@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Diesel_csi'.
  *
- * Model version                  : 1.7
+ * Model version                  : 1.8
  * Simulink Coder version         : 8.12 (R2017a) 16-Feb-2017
- * C/C++ source code generated on : Fri Jul 06 10:37:42 2018
+ * C/C++ source code generated on : Tue Jul 10 15:58:53 2018
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -3082,7 +3082,7 @@ void Diesel_csi_derivatives(void)
   /* Derivatives for TransferFcn: '<Root>/Transfer Fcn' */
   _rtXdot->TransferFcn_CSTATE = 0.0;
   _rtXdot->TransferFcn_CSTATE += -10000.0 * Diesel_csi_X.TransferFcn_CSTATE;
-  _rtXdot->TransferFcn_CSTATE += Diesel_csi_B.StateSpace_o1[11];
+  _rtXdot->TransferFcn_CSTATE += Diesel_csi_B.StateSpace_o1[10];
 
   /* Derivatives for StateSpace: '<Root>/Hw7' */
   _rtXdot->Hw7_CSTATE[0] = 0.0;
@@ -3095,7 +3095,7 @@ void Diesel_csi_derivatives(void)
   /* Derivatives for TransferFcn: '<S1>/Transfer Fcn' */
   _rtXdot->TransferFcn_CSTATE_o = 0.0;
   _rtXdot->TransferFcn_CSTATE_o += -1.0E+6 * Diesel_csi_X.TransferFcn_CSTATE_o;
-  _rtXdot->TransferFcn_CSTATE_o += Diesel_csi_B.StateSpace_o1[10];
+  _rtXdot->TransferFcn_CSTATE_o += Diesel_csi_B.StateSpace_o1[11];
 
   /* Derivatives for TransferFcn: '<S1>/Transfer Fcn1' */
   _rtXdot->TransferFcn1_CSTATE = 0.0;

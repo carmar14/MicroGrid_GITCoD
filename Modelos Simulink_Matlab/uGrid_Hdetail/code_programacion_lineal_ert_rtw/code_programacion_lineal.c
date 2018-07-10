@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'code_programacion_lineal'.
  *
- * Model version                  : 1.10
+ * Model version                  : 1.11
  * Simulink Coder version         : 8.12 (R2017a) 16-Feb-2017
- * C/C++ source code generated on : Tue Jun 19 10:11:45 2018
+ * C/C++ source code generated on : Tue Jul 10 15:51:51 2018
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -35,8 +35,8 @@ RT_MODEL_code_programacion_lineal_T *const code_programacion_lineal_M =
 
 /*
  * Output and update for atomic system:
- *    '<S1>/LinProg_BuildMatrices_ActivePower'
- *    '<S1>/LinProg_BuildMatrices_Reactive_Power'
+ *    '<S2>/LinProg_BuildMatrices_ActivePower'
+ *    '<S2>/LinProg_BuildMatrices_Reactive_Power'
  */
 void LinProg_BuildMatrices_ActivePow(real_T rtu_Pren_max, real_T rtu_P_load,
   real_T rtu_K, real_T rtu_K_j, real_T rtu_Pcsis_max, real_T rtu_Pcsis_max_f,
@@ -46,10 +46,10 @@ void LinProg_BuildMatrices_ActivePow(real_T rtu_Pren_max, real_T rtu_P_load,
   real_T Pm;
   real_T D;
 
-  /* SignalConversion: '<S2>/TmpSignal ConversionAt SFunction Inport4' */
+  /* SignalConversion: '<S3>/TmpSignal ConversionAt SFunction Inport4' */
   /*  Pr_max es la potencia maxima que puede suministrar el nodo de energias */
   /*  renovables. */
-  /* MATLAB Function 'Optimizador  - Control de tercer nivel/LinProg_BuildMatrices_ActivePower': '<S2>:1' */
+  /* MATLAB Function 'Optimizador  - Control de tercer nivel/LinProg_BuildMatrices_ActivePower': '<S3>:1' */
   /*  P_load es la potencia que consume la carga. ambas potencias son un vector */
   /*  de 2 componentes donde la primera componenete es la potencia activa y la */
   /*  segunda componenete es la potencia reactiva. */
@@ -71,11 +71,11 @@ void LinProg_BuildMatrices_ActivePow(real_T rtu_Pren_max, real_T rtu_P_load,
   /*  La presente matlab function tiene como tarea formar las matrices f */
   /*  y A de restricciones apropiadas para que el bloque de qp oases realice la */
   /*  funcione de programacion lineal. */
-  /* '<S2>:1:33' Pm = sum(Pcsis_max); */
+  /* '<S3>:1:33' Pm = sum(Pcsis_max); */
   Pm = rtu_Pcsis_max + rtu_Pcsis_max_f;
 
   /*  potencia activa maxima que pueden entregar todas las fuentes (en este caso bio y diesel) */
-  /* '<S2>:1:36' D = P_load - Pren_max; */
+  /* '<S3>:1:36' D = P_load - Pren_max; */
   D = rtu_P_load - rtu_Pren_max;
 
   /*  diferencia entre la potencia que puede generar */
@@ -85,15 +85,15 @@ void LinProg_BuildMatrices_ActivePow(real_T rtu_Pren_max, real_T rtu_P_load,
   /*  % % % % % % % % % % % % % % % % % % % % % % % % % % % %   */
   /*  parte cuadratica de la funcion de coste que se pone en zeros para */
   /*  transformarlo en un problema de programacion lineal. */
-  /* '<S2>:1:46' H = zeros(1, length(K)^2); */
+  /* '<S3>:1:46' H = zeros(1, length(K)^2); */
   rty_H[0] = 0.0;
   rty_H[1] = 0.0;
   rty_H[2] = 0.0;
   rty_H[3] = 0.0;
 
-  /* SignalConversion: '<S2>/TmpSignal ConversionAt SFunction Inport3' */
+  /* SignalConversion: '<S3>/TmpSignal ConversionAt SFunction Inport3' */
   /*  funcion de coste lineal. */
-  /* '<S2>:1:49' f = K; */
+  /* '<S3>:1:49' f = K; */
   rty_f[0] = rtu_K;
   rty_f[1] = rtu_K_j;
 
@@ -101,23 +101,23 @@ void LinProg_BuildMatrices_ActivePow(real_T rtu_Pren_max, real_T rtu_P_load,
   /*  esta formada con la idea de definir que la suma de todas las potencias */
   /*  deben almenos cubrir la cantidad de energia activa y reactiva que no */
   /*  puede suministrar renovables. */
-  /* '<S2>:1:55' A = ones(1, length(K)); */
-  /* '<S2>:1:57' lb = zeros(1, length(K)); */
+  /* '<S3>:1:55' A = ones(1, length(K)); */
+  /* '<S3>:1:57' lb = zeros(1, length(K)); */
   /*  potencia minima que puede generar cada uno de los generadores. */
-  /* '<S2>:1:58' ub = [Pcsis_max]; */
+  /* '<S3>:1:58' ub = [Pcsis_max]; */
   rty_A[0] = 1.0;
   rty_lb[0] = 0.0;
 
-  /* SignalConversion: '<S2>/TmpSignal ConversionAt SFunction Inport4' */
+  /* SignalConversion: '<S3>/TmpSignal ConversionAt SFunction Inport4' */
   rty_ub[0] = rtu_Pcsis_max;
   rty_A[1] = 1.0;
   rty_lb[1] = 0.0;
 
-  /* SignalConversion: '<S2>/TmpSignal ConversionAt SFunction Inport4' */
+  /* SignalConversion: '<S3>/TmpSignal ConversionAt SFunction Inport4' */
   rty_ub[1] = rtu_Pcsis_max_f;
 
   /*  potencia maxima que pueden generar cada uno de los generadores. */
-  /* '<S2>:1:60' ubA = [Pm]; */
+  /* '<S3>:1:60' ubA = [Pm]; */
   *rty_ubA = Pm;
 
   /*  tambien esta relacionado con la potencia min, es un */
@@ -127,40 +127,98 @@ void LinProg_BuildMatrices_ActivePow(real_T rtu_Pren_max, real_T rtu_P_load,
   /*  manera conveniente para que el problema de programacion lineal tenga */
   /*  solucion. */
   /*  restriccion limite inferior para la potencia activa */
-  /* '<S2>:1:69' if(D > 0) */
+  /* '<S3>:1:69' if(D > 0) */
   if (D > 0.0) {
     /*  en caso de que renovables no baste para alimentar la carga... */
-    /* '<S2>:1:70' if(D >= Pm) */
+    /* '<S3>:1:70' if(D >= Pm) */
     if (D >= Pm) {
-      /* '<S2>:1:71' vp = Pm; */
+      /* '<S3>:1:71' vp = Pm; */
       D = Pm;
     } else {
-      /* '<S2>:1:72' else */
-      /* '<S2>:1:73' vp = D(1); */
+      /* '<S3>:1:72' else */
+      /* '<S3>:1:73' vp = D(1); */
     }
   } else {
-    /* '<S2>:1:75' else */
+    /* '<S3>:1:75' else */
     /*  si renovables basta para alimentar la carga. es decir D = 0 ó negativo */
-    /* '<S2>:1:76' vp = 0; */
+    /* '<S3>:1:76' vp = 0; */
     D = 0.0;
   }
 
-  /* '<S2>:1:79' lbA = vp; */
+  /* '<S3>:1:79' lbA = vp; */
   *rty_lbA = D;
 }
 
 /* Model step function */
 void code_programacion_lineal_step(void)
 {
-  /* MATLAB Function: '<S1>/LinProg_BuildMatrices_ActivePower' incorporates:
+  int32_T rtb_MaxP;
+  int32_T rtb_MaxQ;
+
+  /* MATLAB Function: '<Root>/MATLAB Function' incorporates:
+   *  Inport: '<Root>/SOC'
+   */
+  /*   funcion que calcula la potencia maxima que puede suministrar las fuentes */
+  /*   renovables deacuerdo a la cantidad de carga que hay almancenada en la */
+  /*   bateria. esta va de 0 a 100% */
+  /* MATLAB Function 'MATLAB Function': '<S1>:1' */
+  /*  estoc valores que aparecen a continuacion se pusieron de manera */
+  /*  arbitraria. corresponde a una persona con especialidad en la parte de */
+  /*  potencia electrica determinar el verdadero algoritmo para hallar la */
+  /*  potencia que deberia suministrar el nodo de energia renovable deacuerdo a */
+  /*  la carga de la bateria. */
+  /* '<S1>:1:15' MaxP = 0; */
+  rtb_MaxP = 0;
+
+  /* '<S1>:1:16' MaxQ = 0; */
+  rtb_MaxQ = 0;
+
+  /* '<S1>:1:18' if( SOC >= 90 ) */
+  if (code_programacion_lineal_U.SOC >= 90.0) {
+    /* '<S1>:1:19' MaxP = 500; */
+    rtb_MaxP = 500;
+
+    /* '<S1>:1:20' MaxQ = 5000; */
+    rtb_MaxQ = 5000;
+  }
+
+  /* '<S1>:1:23' if( SOC <= 90 ) */
+  if (code_programacion_lineal_U.SOC <= 90.0) {
+    /* '<S1>:1:24' MaxP = 200; */
+    rtb_MaxP = 200;
+
+    /* '<S1>:1:25' MaxQ = 4000; */
+    rtb_MaxQ = 4000;
+  }
+
+  /* '<S1>:1:28' if( SOC <= 70 ) */
+  if (code_programacion_lineal_U.SOC <= 70.0) {
+    /* '<S1>:1:29' MaxP = 100; */
+    rtb_MaxP = 100;
+
+    /* '<S1>:1:30' MaxQ = 1000; */
+    rtb_MaxQ = 1000;
+  }
+
+  /* '<S1>:1:33' if( SOC <= 60 ) */
+  if (code_programacion_lineal_U.SOC <= 60.0) {
+    /* '<S1>:1:34' MaxP = 50; */
+    rtb_MaxP = 50;
+
+    /* '<S1>:1:35' MaxQ = 500; */
+    rtb_MaxQ = 500;
+  }
+
+  /* End of MATLAB Function: '<Root>/MATLAB Function' */
+
+  /* MATLAB Function: '<S2>/LinProg_BuildMatrices_ActivePower' incorporates:
    *  Inport: '<Root>/KP1'
    *  Inport: '<Root>/KP2'
-   *  Inport: '<Root>/Max_P_Ren'
    *  Inport: '<Root>/P1_CSI'
    *  Inport: '<Root>/P2_CSI'
    *  Inport: '<Root>/P_Load'
    */
-  LinProg_BuildMatrices_ActivePow(code_programacion_lineal_U.Max_P_Ren,
+  LinProg_BuildMatrices_ActivePow((real_T)rtb_MaxP,
     code_programacion_lineal_U.P_Load, code_programacion_lineal_U.KP1,
     code_programacion_lineal_U.KP2, code_programacion_lineal_U.P1_CSI,
     code_programacion_lineal_U.P2_CSI, code_programacion_lineal_B.H_e,
@@ -168,9 +226,9 @@ void code_programacion_lineal_step(void)
     code_programacion_lineal_B.lb_i, code_programacion_lineal_B.ub_n,
     &code_programacion_lineal_B.lbA_b, &code_programacion_lineal_B.ubA_o);
 
-  /* S-Function (qp_linprog): '<S1>/qpOASES_(linprog)' */
+  /* S-Function (qp_linprog): '<S2>/qpOASES_(linprog)' */
 
-  /* Level2 S-Function Block: '<S1>/qpOASES_(linprog)' (qp_linprog) */
+  /* Level2 S-Function Block: '<S2>/qpOASES_(linprog)' (qp_linprog) */
   {
     SimStruct *rts = code_programacion_lineal_M->childSfunctions[0];
     sfcnOutputs(rts,0);
@@ -180,15 +238,14 @@ void code_programacion_lineal_step(void)
   code_programacion_lineal_Y.P1 = code_programacion_lineal_B.qpOASES_linprog_o1
     [0];
 
-  /* MATLAB Function: '<S1>/LinProg_BuildMatrices_Reactive_Power' incorporates:
+  /* MATLAB Function: '<S2>/LinProg_BuildMatrices_Reactive_Power' incorporates:
    *  Inport: '<Root>/KQ1'
    *  Inport: '<Root>/KQ2'
-   *  Inport: '<Root>/Max_Q_Ren'
    *  Inport: '<Root>/Q1_CSI'
    *  Inport: '<Root>/Q2_CSI'
    *  Inport: '<Root>/Q_Load'
    */
-  LinProg_BuildMatrices_ActivePow(code_programacion_lineal_U.Max_Q_Ren,
+  LinProg_BuildMatrices_ActivePow((real_T)rtb_MaxQ,
     code_programacion_lineal_U.Q_Load, code_programacion_lineal_U.KQ1,
     code_programacion_lineal_U.KQ2, code_programacion_lineal_U.Q1_CSI,
     code_programacion_lineal_U.Q2_CSI, code_programacion_lineal_B.H,
@@ -196,9 +253,9 @@ void code_programacion_lineal_step(void)
     code_programacion_lineal_B.lb, code_programacion_lineal_B.ub,
     &code_programacion_lineal_B.lbA, &code_programacion_lineal_B.ubA);
 
-  /* S-Function (qp_linprog): '<S1>/qpOASES_(linprog)1' */
+  /* S-Function (qp_linprog): '<S2>/qpOASES_(linprog)1' */
 
-  /* Level2 S-Function Block: '<S1>/qpOASES_(linprog)1' (qp_linprog) */
+  /* Level2 S-Function Block: '<S2>/qpOASES_(linprog)1' (qp_linprog) */
   {
     SimStruct *rts = code_programacion_lineal_M->childSfunctions[1];
     sfcnOutputs(rts,0);
@@ -342,7 +399,7 @@ void code_programacion_lineal_initialize(void)
     code_programacion_lineal_M->childSfunctions[1] =
       (&code_programacion_lineal_M->NonInlinedSFcns.childSFunctions[1]);
 
-    /* Level2 S-Function Block: code_programacion_lineal/<S1>/qpOASES_(linprog) (qp_linprog) */
+    /* Level2 S-Function Block: code_programacion_lineal/<S2>/qpOASES_(linprog) (qp_linprog) */
     {
       SimStruct *rts = code_programacion_lineal_M->childSfunctions[0];
 
@@ -619,7 +676,7 @@ void code_programacion_lineal_initialize(void)
       ssSetInputPortBufferDstPort(rts, 6, -1);
     }
 
-    /* Level2 S-Function Block: code_programacion_lineal/<S1>/qpOASES_(linprog)1 (qp_linprog) */
+    /* Level2 S-Function Block: code_programacion_lineal/<S2>/qpOASES_(linprog)1 (qp_linprog) */
     {
       SimStruct *rts = code_programacion_lineal_M->childSfunctions[1];
 
@@ -897,8 +954,8 @@ void code_programacion_lineal_initialize(void)
     }
   }
 
-  /* Start for S-Function (qp_linprog): '<S1>/qpOASES_(linprog)' */
-  /* Level2 S-Function Block: '<S1>/qpOASES_(linprog)' (qp_linprog) */
+  /* Start for S-Function (qp_linprog): '<S2>/qpOASES_(linprog)' */
+  /* Level2 S-Function Block: '<S2>/qpOASES_(linprog)' (qp_linprog) */
   {
     SimStruct *rts = code_programacion_lineal_M->childSfunctions[0];
     sfcnStart(rts);
@@ -906,8 +963,8 @@ void code_programacion_lineal_initialize(void)
       return;
   }
 
-  /* Start for S-Function (qp_linprog): '<S1>/qpOASES_(linprog)1' */
-  /* Level2 S-Function Block: '<S1>/qpOASES_(linprog)1' (qp_linprog) */
+  /* Start for S-Function (qp_linprog): '<S2>/qpOASES_(linprog)1' */
+  /* Level2 S-Function Block: '<S2>/qpOASES_(linprog)1' (qp_linprog) */
   {
     SimStruct *rts = code_programacion_lineal_M->childSfunctions[1];
     sfcnStart(rts);
@@ -919,15 +976,15 @@ void code_programacion_lineal_initialize(void)
 /* Model terminate function */
 void code_programacion_lineal_terminate(void)
 {
-  /* Terminate for S-Function (qp_linprog): '<S1>/qpOASES_(linprog)' */
-  /* Level2 S-Function Block: '<S1>/qpOASES_(linprog)' (qp_linprog) */
+  /* Terminate for S-Function (qp_linprog): '<S2>/qpOASES_(linprog)' */
+  /* Level2 S-Function Block: '<S2>/qpOASES_(linprog)' (qp_linprog) */
   {
     SimStruct *rts = code_programacion_lineal_M->childSfunctions[0];
     sfcnTerminate(rts);
   }
 
-  /* Terminate for S-Function (qp_linprog): '<S1>/qpOASES_(linprog)1' */
-  /* Level2 S-Function Block: '<S1>/qpOASES_(linprog)1' (qp_linprog) */
+  /* Terminate for S-Function (qp_linprog): '<S2>/qpOASES_(linprog)1' */
+  /* Level2 S-Function Block: '<S2>/qpOASES_(linprog)1' (qp_linprog) */
   {
     SimStruct *rts = code_programacion_lineal_M->childSfunctions[1];
     sfcnTerminate(rts);

@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'BIO_csi'.
  *
- * Model version                  : 1.14
+ * Model version                  : 1.16
  * Simulink Coder version         : 8.12 (R2017a) 16-Feb-2017
- * C/C++ source code generated on : Fri Jul 06 10:22:49 2018
+ * C/C++ source code generated on : Tue Jul 10 15:55:49 2018
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -192,14 +192,14 @@ typedef struct {
   boolean_T Hw6_CSTATE[4];             /* '<S2>/Hw6' */
 } XDis_BIO_csi_T;
 
-#ifndef ODE3_INTG
-#define ODE3_INTG
+#ifndef ODE4_INTG
+#define ODE4_INTG
 
-/* ODE3 Integration Data */
+/* ODE4 Integration Data */
 typedef struct {
   real_T *y;                           /* output */
-  real_T *f[3];                        /* derivatives */
-} ODE3_IntgData;
+  real_T *f[4];                        /* derivatives */
+} ODE4_IntgData;
 
 #endif
 
@@ -320,8 +320,8 @@ struct tag_RTM_BIO_csi_T {
   boolean_T derivCacheNeedsReset;
   boolean_T blkStateChange;
   real_T odeY[10];
-  real_T odeF[3][10];
-  ODE3_IntgData intgData;
+  real_T odeF[4][10];
+  ODE4_IntgData intgData;
 
   /*
    * Sizes:
