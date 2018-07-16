@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'BIO_csi'.
  *
- * Model version                  : 1.16
+ * Model version                  : 1.17
  * Simulink Coder version         : 8.12 (R2017a) 16-Feb-2017
- * C/C++ source code generated on : Tue Jul 10 15:55:49 2018
+ * C/C++ source code generated on : Mon Jul 16 17:23:26 2018
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -198,7 +198,7 @@ static real_T BIO_csi_HiBound(real_T X, real_T b_max, real_T Dmax)
   real_T y;
 
   /*  el control mpc implementado halla mediante programacion cuadratica */
-  /*  los delta de u optimos deacuerdo a la funcion de coste. por este motivo */
+  /*  los delta de u optimos de acuerdo a la funcion de coste. por este motivo */
   /*  es necesario implementar una logica adicional que permita limitar */
   /*  los valores de u (la salida) ya que estos no se manupilan directamente */
   /*  en el problema de programacion cuadratica. */

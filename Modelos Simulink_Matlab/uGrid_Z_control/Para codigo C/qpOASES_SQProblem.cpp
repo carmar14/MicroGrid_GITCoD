@@ -45,7 +45,7 @@ extern "C" {
 #endif
 
 
-#define S_FUNCTION_NAME   qp_linprog	/**< Name of the S function. */
+#define S_FUNCTION_NAME   qpOASES_SQProblem	/**< Name of the S function. */
 #define S_FUNCTION_LEVEL  2						/**< S function level. */
 
 #define MDL_START								/**< Activate call to mdlStart. */
