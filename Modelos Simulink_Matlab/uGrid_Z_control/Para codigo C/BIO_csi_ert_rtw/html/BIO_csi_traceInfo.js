@@ -76,8 +76,6 @@ function RTW_Sid2UrlHash() {
 	this.urlHashMap["BIO_csi:144"] = "BIO_csi.c:2236,2267&BIO_csi.h:95";
 	/* <S4>/rt1 */
 	this.urlHashMap["BIO_csi:145"] = "BIO_csi.c:2239&BIO_csi.h:96";
-	/* <S5>/EquivalentModel1 */
-	this.urlHashMap["BIO_csi:155:248"] = "msg=&block=BIO_csi:155:248";
 	/* <S6>/Breaker */
 	this.urlHashMap["BIO_csi:3:2"] = "msg=rtwMsg_CodeGenerationReducedBlock&block=BIO_csi:3:2";
 	/* <S6>/1 */
@@ -495,104 +493,10 @@ Function */
 	this.urlHashMap["BIO_csi:138:1:12"] = "BIO_csi.c:3475";
 	/* <S52>:1:16 */
 	this.urlHashMap["BIO_csi:138:1:16"] = "BIO_csi.c:3479";
-	/* <S53>/Gates */
-	this.urlHashMap["BIO_csi:155:249"] = "msg=&block=BIO_csi:155:249";
-	/* <S53>/Sources */
-	this.urlHashMap["BIO_csi:155:252"] = "msg=&block=BIO_csi:155:252";
 	/* <S53>/State-Space */
-	this.urlHashMap["BIO_csi:155:257"] = "BIO_csi.c:1963,1972,2602,2611,3292,3301,3332,3487,3496&BIO_csi.h:92,93,125,165,168,214,219,224,229,234&BIO_csi_data.c:27,43,67,89,124";
-	/* <S53>/Status */
-	this.urlHashMap["BIO_csi:155:258"] = "msg=&block=BIO_csi:155:258";
-	/* <S53>/Yout */
-	this.urlHashMap["BIO_csi:155:261"] = "msg=&block=BIO_csi:155:261";
-	/* <S54>/From1 */
-	this.urlHashMap["BIO_csi:155:273"] = "msg=&block=BIO_csi:155:273";
-	/* <S54>/From2 */
-	this.urlHashMap["BIO_csi:155:274"] = "msg=&block=BIO_csi:155:274";
-	/* <S54>/From3 */
-	this.urlHashMap["BIO_csi:155:275"] = "msg=&block=BIO_csi:155:275";
-	/* <S54>/From4 */
-	this.urlHashMap["BIO_csi:155:276"] = "msg=&block=BIO_csi:155:276";
-	/* <S54>/From5 */
-	this.urlHashMap["BIO_csi:155:277"] = "msg=&block=BIO_csi:155:277";
-	/* <S54>/From6 */
-	this.urlHashMap["BIO_csi:155:278"] = "msg=&block=BIO_csi:155:278";
-	/* <S54>/From7 */
-	this.urlHashMap["BIO_csi:155:279"] = "msg=&block=BIO_csi:155:279";
-	/* <S54>/From8 */
-	this.urlHashMap["BIO_csi:155:280"] = "msg=&block=BIO_csi:155:280";
-	/* <S54>/From9 */
-	this.urlHashMap["BIO_csi:155:281"] = "msg=&block=BIO_csi:155:281";
-	/* <S54>/Mux */
-	this.urlHashMap["BIO_csi:155:250"] = "msg=&block=BIO_csi:155:250";
-	/* <S54>/gates */
-	this.urlHashMap["BIO_csi:155:251"] = "msg=&block=BIO_csi:155:251";
-	/* <S55>/From1 */
-	this.urlHashMap["BIO_csi:155:293"] = "msg=&block=BIO_csi:155:293";
-	/* <S55>/From2 */
-	this.urlHashMap["BIO_csi:155:294"] = "msg=&block=BIO_csi:155:294";
-	/* <S55>/From3 */
-	this.urlHashMap["BIO_csi:155:295"] = "msg=&block=BIO_csi:155:295";
-	/* <S55>/From4 */
-	this.urlHashMap["BIO_csi:155:296"] = "msg=&block=BIO_csi:155:296";
-	/* <S55>/From5 */
-	this.urlHashMap["BIO_csi:155:297"] = "msg=&block=BIO_csi:155:297";
-	/* <S55>/Mux */
-	this.urlHashMap["BIO_csi:155:253"] = "msg=&block=BIO_csi:155:253";
-	/* <S55>/Mux_u */
-	this.urlHashMap["BIO_csi:155:254"] = "msg=&block=BIO_csi:155:254";
+	this.urlHashMap["BIO_csi:155:207"] = "BIO_csi.c:1963,1972,2602,2611,3292,3301,3332,3487,3496&BIO_csi.h:92,93,125,165,168,214,219,224,229,234&BIO_csi_data.c:27,43,67,89,124";
 	/* <S55>/SwitchCurrents */
-	this.urlHashMap["BIO_csi:155:255"] = "BIO_csi.c:1969,2608,3298,3338,3493&BIO_csi.h:209&BIO_csi_data.c:22";
-	/* <S55>/u */
-	this.urlHashMap["BIO_csi:155:256"] = "msg=&block=BIO_csi:155:256";
-	/* <S56>/status */
-	this.urlHashMap["BIO_csi:155:259"] = "msg=&block=BIO_csi:155:259";
-	/* <S56>/Demux */
-	this.urlHashMap["BIO_csi:155:260"] = "msg=&block=BIO_csi:155:260";
-	/* <S56>/Goto1 */
-	this.urlHashMap["BIO_csi:155:264"] = "msg=&block=BIO_csi:155:264";
-	/* <S56>/Goto2 */
-	this.urlHashMap["BIO_csi:155:265"] = "msg=&block=BIO_csi:155:265";
-	/* <S56>/Goto3 */
-	this.urlHashMap["BIO_csi:155:266"] = "msg=&block=BIO_csi:155:266";
-	/* <S56>/Goto4 */
-	this.urlHashMap["BIO_csi:155:267"] = "msg=&block=BIO_csi:155:267";
-	/* <S56>/Goto5 */
-	this.urlHashMap["BIO_csi:155:268"] = "msg=&block=BIO_csi:155:268";
-	/* <S56>/Goto6 */
-	this.urlHashMap["BIO_csi:155:269"] = "msg=&block=BIO_csi:155:269";
-	/* <S56>/Goto7 */
-	this.urlHashMap["BIO_csi:155:270"] = "msg=&block=BIO_csi:155:270";
-	/* <S56>/Goto8 */
-	this.urlHashMap["BIO_csi:155:271"] = "msg=&block=BIO_csi:155:271";
-	/* <S56>/Goto9 */
-	this.urlHashMap["BIO_csi:155:272"] = "msg=&block=BIO_csi:155:272";
-	/* <S57>/v,i */
-	this.urlHashMap["BIO_csi:155:262"] = "msg=&block=BIO_csi:155:262";
-	/* <S57>/Demux */
-	this.urlHashMap["BIO_csi:155:263"] = "msg=&block=BIO_csi:155:263";
-	/* <S57>/Goto1 */
-	this.urlHashMap["BIO_csi:155:282"] = "msg=&block=BIO_csi:155:282";
-	/* <S57>/Goto10 */
-	this.urlHashMap["BIO_csi:155:291"] = "msg=&block=BIO_csi:155:291";
-	/* <S57>/Goto11 */
-	this.urlHashMap["BIO_csi:155:292"] = "msg=&block=BIO_csi:155:292";
-	/* <S57>/Goto2 */
-	this.urlHashMap["BIO_csi:155:283"] = "msg=&block=BIO_csi:155:283";
-	/* <S57>/Goto3 */
-	this.urlHashMap["BIO_csi:155:284"] = "msg=&block=BIO_csi:155:284";
-	/* <S57>/Goto4 */
-	this.urlHashMap["BIO_csi:155:285"] = "msg=&block=BIO_csi:155:285";
-	/* <S57>/Goto5 */
-	this.urlHashMap["BIO_csi:155:286"] = "msg=&block=BIO_csi:155:286";
-	/* <S57>/Goto6 */
-	this.urlHashMap["BIO_csi:155:287"] = "msg=&block=BIO_csi:155:287";
-	/* <S57>/Goto7 */
-	this.urlHashMap["BIO_csi:155:288"] = "msg=&block=BIO_csi:155:288";
-	/* <S57>/Goto8 */
-	this.urlHashMap["BIO_csi:155:289"] = "msg=&block=BIO_csi:155:289";
-	/* <S57>/Goto9 */
-	this.urlHashMap["BIO_csi:155:290"] = "msg=&block=BIO_csi:155:290";
+	this.urlHashMap["BIO_csi:155:205"] = "BIO_csi.c:1969,2608,3298,3338,3493&BIO_csi.h:209&BIO_csi_data.c:22";
 	this.getUrlHash = function(sid) { return this.urlHashMap[sid];}
 }
 RTW_Sid2UrlHash.instance = new RTW_Sid2UrlHash();
@@ -705,16 +609,16 @@ function RTW_rtwnameSIDMap() {
 	this.sidHashMap["BIO_csi:137"] = {rtwname: "<S51>"};
 	this.rtwnameHashMap["<S52>"] = {sid: "BIO_csi:138"};
 	this.sidHashMap["BIO_csi:138"] = {rtwname: "<S52>"};
-	this.rtwnameHashMap["<S53>"] = {sid: "BIO_csi:155:248"};
-	this.sidHashMap["BIO_csi:155:248"] = {rtwname: "<S53>"};
-	this.rtwnameHashMap["<S54>"] = {sid: "BIO_csi:155:249"};
-	this.sidHashMap["BIO_csi:155:249"] = {rtwname: "<S54>"};
-	this.rtwnameHashMap["<S55>"] = {sid: "BIO_csi:155:252"};
-	this.sidHashMap["BIO_csi:155:252"] = {rtwname: "<S55>"};
-	this.rtwnameHashMap["<S56>"] = {sid: "BIO_csi:155:258"};
-	this.sidHashMap["BIO_csi:155:258"] = {rtwname: "<S56>"};
-	this.rtwnameHashMap["<S57>"] = {sid: "BIO_csi:155:261"};
-	this.sidHashMap["BIO_csi:155:261"] = {rtwname: "<S57>"};
+	this.rtwnameHashMap["<S53>"] = {sid: "BIO_csi:155:198"};
+	this.sidHashMap["BIO_csi:155:198"] = {rtwname: "<S53>"};
+	this.rtwnameHashMap["<S54>"] = {sid: "BIO_csi:155:199"};
+	this.sidHashMap["BIO_csi:155:199"] = {rtwname: "<S54>"};
+	this.rtwnameHashMap["<S55>"] = {sid: "BIO_csi:155:202"};
+	this.sidHashMap["BIO_csi:155:202"] = {rtwname: "<S55>"};
+	this.rtwnameHashMap["<S56>"] = {sid: "BIO_csi:155:208"};
+	this.sidHashMap["BIO_csi:155:208"] = {rtwname: "<S56>"};
+	this.rtwnameHashMap["<S57>"] = {sid: "BIO_csi:155:211"};
+	this.sidHashMap["BIO_csi:155:211"] = {rtwname: "<S57>"};
 	this.rtwnameHashMap["<Root>/Pbio"] = {sid: "BIO_csi:150"};
 	this.sidHashMap["BIO_csi:150"] = {rtwname: "<Root>/Pbio"};
 	this.rtwnameHashMap["<Root>/Qbio"] = {sid: "BIO_csi:151"};
@@ -921,8 +825,8 @@ function RTW_rtwnameSIDMap() {
 	this.sidHashMap["BIO_csi:146"] = {rtwname: "<S4>/Pref"};
 	this.rtwnameHashMap["<S4>/Qref"] = {sid: "BIO_csi:147"};
 	this.sidHashMap["BIO_csi:147"] = {rtwname: "<S4>/Qref"};
-	this.rtwnameHashMap["<S5>/EquivalentModel1"] = {sid: "BIO_csi:155:248"};
-	this.sidHashMap["BIO_csi:155:248"] = {rtwname: "<S5>/EquivalentModel1"};
+	this.rtwnameHashMap["<S5>/EquivalentModel1"] = {sid: "BIO_csi:155:198"};
+	this.sidHashMap["BIO_csi:155:198"] = {rtwname: "<S5>/EquivalentModel1"};
 	this.rtwnameHashMap["<S5>/Ground"] = {sid: "BIO_csi:155:55"};
 	this.sidHashMap["BIO_csi:155:55"] = {rtwname: "<S5>/Ground"};
 	this.rtwnameHashMap["<S5>/Terminator"] = {sid: "BIO_csi:155:56"};
@@ -1743,104 +1647,104 @@ function RTW_rtwnameSIDMap() {
 	this.sidHashMap["BIO_csi:138:1:12"] = {rtwname: "<S52>:1:12"};
 	this.rtwnameHashMap["<S52>:1:16"] = {sid: "BIO_csi:138:1:16"};
 	this.sidHashMap["BIO_csi:138:1:16"] = {rtwname: "<S52>:1:16"};
-	this.rtwnameHashMap["<S53>/Gates"] = {sid: "BIO_csi:155:249"};
-	this.sidHashMap["BIO_csi:155:249"] = {rtwname: "<S53>/Gates"};
-	this.rtwnameHashMap["<S53>/Sources"] = {sid: "BIO_csi:155:252"};
-	this.sidHashMap["BIO_csi:155:252"] = {rtwname: "<S53>/Sources"};
-	this.rtwnameHashMap["<S53>/State-Space"] = {sid: "BIO_csi:155:257"};
-	this.sidHashMap["BIO_csi:155:257"] = {rtwname: "<S53>/State-Space"};
-	this.rtwnameHashMap["<S53>/Status"] = {sid: "BIO_csi:155:258"};
-	this.sidHashMap["BIO_csi:155:258"] = {rtwname: "<S53>/Status"};
-	this.rtwnameHashMap["<S53>/Yout"] = {sid: "BIO_csi:155:261"};
-	this.sidHashMap["BIO_csi:155:261"] = {rtwname: "<S53>/Yout"};
-	this.rtwnameHashMap["<S54>/From1"] = {sid: "BIO_csi:155:273"};
-	this.sidHashMap["BIO_csi:155:273"] = {rtwname: "<S54>/From1"};
-	this.rtwnameHashMap["<S54>/From2"] = {sid: "BIO_csi:155:274"};
-	this.sidHashMap["BIO_csi:155:274"] = {rtwname: "<S54>/From2"};
-	this.rtwnameHashMap["<S54>/From3"] = {sid: "BIO_csi:155:275"};
-	this.sidHashMap["BIO_csi:155:275"] = {rtwname: "<S54>/From3"};
-	this.rtwnameHashMap["<S54>/From4"] = {sid: "BIO_csi:155:276"};
-	this.sidHashMap["BIO_csi:155:276"] = {rtwname: "<S54>/From4"};
-	this.rtwnameHashMap["<S54>/From5"] = {sid: "BIO_csi:155:277"};
-	this.sidHashMap["BIO_csi:155:277"] = {rtwname: "<S54>/From5"};
-	this.rtwnameHashMap["<S54>/From6"] = {sid: "BIO_csi:155:278"};
-	this.sidHashMap["BIO_csi:155:278"] = {rtwname: "<S54>/From6"};
-	this.rtwnameHashMap["<S54>/From7"] = {sid: "BIO_csi:155:279"};
-	this.sidHashMap["BIO_csi:155:279"] = {rtwname: "<S54>/From7"};
-	this.rtwnameHashMap["<S54>/From8"] = {sid: "BIO_csi:155:280"};
-	this.sidHashMap["BIO_csi:155:280"] = {rtwname: "<S54>/From8"};
-	this.rtwnameHashMap["<S54>/From9"] = {sid: "BIO_csi:155:281"};
-	this.sidHashMap["BIO_csi:155:281"] = {rtwname: "<S54>/From9"};
-	this.rtwnameHashMap["<S54>/Mux"] = {sid: "BIO_csi:155:250"};
-	this.sidHashMap["BIO_csi:155:250"] = {rtwname: "<S54>/Mux"};
-	this.rtwnameHashMap["<S54>/gates"] = {sid: "BIO_csi:155:251"};
-	this.sidHashMap["BIO_csi:155:251"] = {rtwname: "<S54>/gates"};
-	this.rtwnameHashMap["<S55>/From1"] = {sid: "BIO_csi:155:293"};
-	this.sidHashMap["BIO_csi:155:293"] = {rtwname: "<S55>/From1"};
-	this.rtwnameHashMap["<S55>/From2"] = {sid: "BIO_csi:155:294"};
-	this.sidHashMap["BIO_csi:155:294"] = {rtwname: "<S55>/From2"};
-	this.rtwnameHashMap["<S55>/From3"] = {sid: "BIO_csi:155:295"};
-	this.sidHashMap["BIO_csi:155:295"] = {rtwname: "<S55>/From3"};
-	this.rtwnameHashMap["<S55>/From4"] = {sid: "BIO_csi:155:296"};
-	this.sidHashMap["BIO_csi:155:296"] = {rtwname: "<S55>/From4"};
-	this.rtwnameHashMap["<S55>/From5"] = {sid: "BIO_csi:155:297"};
-	this.sidHashMap["BIO_csi:155:297"] = {rtwname: "<S55>/From5"};
-	this.rtwnameHashMap["<S55>/Mux"] = {sid: "BIO_csi:155:253"};
-	this.sidHashMap["BIO_csi:155:253"] = {rtwname: "<S55>/Mux"};
-	this.rtwnameHashMap["<S55>/Mux_u"] = {sid: "BIO_csi:155:254"};
-	this.sidHashMap["BIO_csi:155:254"] = {rtwname: "<S55>/Mux_u"};
-	this.rtwnameHashMap["<S55>/SwitchCurrents"] = {sid: "BIO_csi:155:255"};
-	this.sidHashMap["BIO_csi:155:255"] = {rtwname: "<S55>/SwitchCurrents"};
-	this.rtwnameHashMap["<S55>/u"] = {sid: "BIO_csi:155:256"};
-	this.sidHashMap["BIO_csi:155:256"] = {rtwname: "<S55>/u"};
-	this.rtwnameHashMap["<S56>/status"] = {sid: "BIO_csi:155:259"};
-	this.sidHashMap["BIO_csi:155:259"] = {rtwname: "<S56>/status"};
-	this.rtwnameHashMap["<S56>/Demux"] = {sid: "BIO_csi:155:260"};
-	this.sidHashMap["BIO_csi:155:260"] = {rtwname: "<S56>/Demux"};
-	this.rtwnameHashMap["<S56>/Goto1"] = {sid: "BIO_csi:155:264"};
-	this.sidHashMap["BIO_csi:155:264"] = {rtwname: "<S56>/Goto1"};
-	this.rtwnameHashMap["<S56>/Goto2"] = {sid: "BIO_csi:155:265"};
-	this.sidHashMap["BIO_csi:155:265"] = {rtwname: "<S56>/Goto2"};
-	this.rtwnameHashMap["<S56>/Goto3"] = {sid: "BIO_csi:155:266"};
-	this.sidHashMap["BIO_csi:155:266"] = {rtwname: "<S56>/Goto3"};
-	this.rtwnameHashMap["<S56>/Goto4"] = {sid: "BIO_csi:155:267"};
-	this.sidHashMap["BIO_csi:155:267"] = {rtwname: "<S56>/Goto4"};
-	this.rtwnameHashMap["<S56>/Goto5"] = {sid: "BIO_csi:155:268"};
-	this.sidHashMap["BIO_csi:155:268"] = {rtwname: "<S56>/Goto5"};
-	this.rtwnameHashMap["<S56>/Goto6"] = {sid: "BIO_csi:155:269"};
-	this.sidHashMap["BIO_csi:155:269"] = {rtwname: "<S56>/Goto6"};
-	this.rtwnameHashMap["<S56>/Goto7"] = {sid: "BIO_csi:155:270"};
-	this.sidHashMap["BIO_csi:155:270"] = {rtwname: "<S56>/Goto7"};
-	this.rtwnameHashMap["<S56>/Goto8"] = {sid: "BIO_csi:155:271"};
-	this.sidHashMap["BIO_csi:155:271"] = {rtwname: "<S56>/Goto8"};
-	this.rtwnameHashMap["<S56>/Goto9"] = {sid: "BIO_csi:155:272"};
-	this.sidHashMap["BIO_csi:155:272"] = {rtwname: "<S56>/Goto9"};
-	this.rtwnameHashMap["<S57>/v,i"] = {sid: "BIO_csi:155:262"};
-	this.sidHashMap["BIO_csi:155:262"] = {rtwname: "<S57>/v,i"};
-	this.rtwnameHashMap["<S57>/Demux"] = {sid: "BIO_csi:155:263"};
-	this.sidHashMap["BIO_csi:155:263"] = {rtwname: "<S57>/Demux"};
-	this.rtwnameHashMap["<S57>/Goto1"] = {sid: "BIO_csi:155:282"};
-	this.sidHashMap["BIO_csi:155:282"] = {rtwname: "<S57>/Goto1"};
-	this.rtwnameHashMap["<S57>/Goto10"] = {sid: "BIO_csi:155:291"};
-	this.sidHashMap["BIO_csi:155:291"] = {rtwname: "<S57>/Goto10"};
-	this.rtwnameHashMap["<S57>/Goto11"] = {sid: "BIO_csi:155:292"};
-	this.sidHashMap["BIO_csi:155:292"] = {rtwname: "<S57>/Goto11"};
-	this.rtwnameHashMap["<S57>/Goto2"] = {sid: "BIO_csi:155:283"};
-	this.sidHashMap["BIO_csi:155:283"] = {rtwname: "<S57>/Goto2"};
-	this.rtwnameHashMap["<S57>/Goto3"] = {sid: "BIO_csi:155:284"};
-	this.sidHashMap["BIO_csi:155:284"] = {rtwname: "<S57>/Goto3"};
-	this.rtwnameHashMap["<S57>/Goto4"] = {sid: "BIO_csi:155:285"};
-	this.sidHashMap["BIO_csi:155:285"] = {rtwname: "<S57>/Goto4"};
-	this.rtwnameHashMap["<S57>/Goto5"] = {sid: "BIO_csi:155:286"};
-	this.sidHashMap["BIO_csi:155:286"] = {rtwname: "<S57>/Goto5"};
-	this.rtwnameHashMap["<S57>/Goto6"] = {sid: "BIO_csi:155:287"};
-	this.sidHashMap["BIO_csi:155:287"] = {rtwname: "<S57>/Goto6"};
-	this.rtwnameHashMap["<S57>/Goto7"] = {sid: "BIO_csi:155:288"};
-	this.sidHashMap["BIO_csi:155:288"] = {rtwname: "<S57>/Goto7"};
-	this.rtwnameHashMap["<S57>/Goto8"] = {sid: "BIO_csi:155:289"};
-	this.sidHashMap["BIO_csi:155:289"] = {rtwname: "<S57>/Goto8"};
-	this.rtwnameHashMap["<S57>/Goto9"] = {sid: "BIO_csi:155:290"};
-	this.sidHashMap["BIO_csi:155:290"] = {rtwname: "<S57>/Goto9"};
+	this.rtwnameHashMap["<S53>/Gates"] = {sid: "BIO_csi:155:199"};
+	this.sidHashMap["BIO_csi:155:199"] = {rtwname: "<S53>/Gates"};
+	this.rtwnameHashMap["<S53>/Sources"] = {sid: "BIO_csi:155:202"};
+	this.sidHashMap["BIO_csi:155:202"] = {rtwname: "<S53>/Sources"};
+	this.rtwnameHashMap["<S53>/State-Space"] = {sid: "BIO_csi:155:207"};
+	this.sidHashMap["BIO_csi:155:207"] = {rtwname: "<S53>/State-Space"};
+	this.rtwnameHashMap["<S53>/Status"] = {sid: "BIO_csi:155:208"};
+	this.sidHashMap["BIO_csi:155:208"] = {rtwname: "<S53>/Status"};
+	this.rtwnameHashMap["<S53>/Yout"] = {sid: "BIO_csi:155:211"};
+	this.sidHashMap["BIO_csi:155:211"] = {rtwname: "<S53>/Yout"};
+	this.rtwnameHashMap["<S54>/From1"] = {sid: "BIO_csi:155:223"};
+	this.sidHashMap["BIO_csi:155:223"] = {rtwname: "<S54>/From1"};
+	this.rtwnameHashMap["<S54>/From2"] = {sid: "BIO_csi:155:224"};
+	this.sidHashMap["BIO_csi:155:224"] = {rtwname: "<S54>/From2"};
+	this.rtwnameHashMap["<S54>/From3"] = {sid: "BIO_csi:155:225"};
+	this.sidHashMap["BIO_csi:155:225"] = {rtwname: "<S54>/From3"};
+	this.rtwnameHashMap["<S54>/From4"] = {sid: "BIO_csi:155:226"};
+	this.sidHashMap["BIO_csi:155:226"] = {rtwname: "<S54>/From4"};
+	this.rtwnameHashMap["<S54>/From5"] = {sid: "BIO_csi:155:227"};
+	this.sidHashMap["BIO_csi:155:227"] = {rtwname: "<S54>/From5"};
+	this.rtwnameHashMap["<S54>/From6"] = {sid: "BIO_csi:155:228"};
+	this.sidHashMap["BIO_csi:155:228"] = {rtwname: "<S54>/From6"};
+	this.rtwnameHashMap["<S54>/From7"] = {sid: "BIO_csi:155:229"};
+	this.sidHashMap["BIO_csi:155:229"] = {rtwname: "<S54>/From7"};
+	this.rtwnameHashMap["<S54>/From8"] = {sid: "BIO_csi:155:230"};
+	this.sidHashMap["BIO_csi:155:230"] = {rtwname: "<S54>/From8"};
+	this.rtwnameHashMap["<S54>/From9"] = {sid: "BIO_csi:155:231"};
+	this.sidHashMap["BIO_csi:155:231"] = {rtwname: "<S54>/From9"};
+	this.rtwnameHashMap["<S54>/Mux"] = {sid: "BIO_csi:155:200"};
+	this.sidHashMap["BIO_csi:155:200"] = {rtwname: "<S54>/Mux"};
+	this.rtwnameHashMap["<S54>/gates"] = {sid: "BIO_csi:155:201"};
+	this.sidHashMap["BIO_csi:155:201"] = {rtwname: "<S54>/gates"};
+	this.rtwnameHashMap["<S55>/From1"] = {sid: "BIO_csi:155:243"};
+	this.sidHashMap["BIO_csi:155:243"] = {rtwname: "<S55>/From1"};
+	this.rtwnameHashMap["<S55>/From2"] = {sid: "BIO_csi:155:244"};
+	this.sidHashMap["BIO_csi:155:244"] = {rtwname: "<S55>/From2"};
+	this.rtwnameHashMap["<S55>/From3"] = {sid: "BIO_csi:155:245"};
+	this.sidHashMap["BIO_csi:155:245"] = {rtwname: "<S55>/From3"};
+	this.rtwnameHashMap["<S55>/From4"] = {sid: "BIO_csi:155:246"};
+	this.sidHashMap["BIO_csi:155:246"] = {rtwname: "<S55>/From4"};
+	this.rtwnameHashMap["<S55>/From5"] = {sid: "BIO_csi:155:247"};
+	this.sidHashMap["BIO_csi:155:247"] = {rtwname: "<S55>/From5"};
+	this.rtwnameHashMap["<S55>/Mux"] = {sid: "BIO_csi:155:203"};
+	this.sidHashMap["BIO_csi:155:203"] = {rtwname: "<S55>/Mux"};
+	this.rtwnameHashMap["<S55>/Mux_u"] = {sid: "BIO_csi:155:204"};
+	this.sidHashMap["BIO_csi:155:204"] = {rtwname: "<S55>/Mux_u"};
+	this.rtwnameHashMap["<S55>/SwitchCurrents"] = {sid: "BIO_csi:155:205"};
+	this.sidHashMap["BIO_csi:155:205"] = {rtwname: "<S55>/SwitchCurrents"};
+	this.rtwnameHashMap["<S55>/u"] = {sid: "BIO_csi:155:206"};
+	this.sidHashMap["BIO_csi:155:206"] = {rtwname: "<S55>/u"};
+	this.rtwnameHashMap["<S56>/status"] = {sid: "BIO_csi:155:209"};
+	this.sidHashMap["BIO_csi:155:209"] = {rtwname: "<S56>/status"};
+	this.rtwnameHashMap["<S56>/Demux"] = {sid: "BIO_csi:155:210"};
+	this.sidHashMap["BIO_csi:155:210"] = {rtwname: "<S56>/Demux"};
+	this.rtwnameHashMap["<S56>/Goto1"] = {sid: "BIO_csi:155:214"};
+	this.sidHashMap["BIO_csi:155:214"] = {rtwname: "<S56>/Goto1"};
+	this.rtwnameHashMap["<S56>/Goto2"] = {sid: "BIO_csi:155:215"};
+	this.sidHashMap["BIO_csi:155:215"] = {rtwname: "<S56>/Goto2"};
+	this.rtwnameHashMap["<S56>/Goto3"] = {sid: "BIO_csi:155:216"};
+	this.sidHashMap["BIO_csi:155:216"] = {rtwname: "<S56>/Goto3"};
+	this.rtwnameHashMap["<S56>/Goto4"] = {sid: "BIO_csi:155:217"};
+	this.sidHashMap["BIO_csi:155:217"] = {rtwname: "<S56>/Goto4"};
+	this.rtwnameHashMap["<S56>/Goto5"] = {sid: "BIO_csi:155:218"};
+	this.sidHashMap["BIO_csi:155:218"] = {rtwname: "<S56>/Goto5"};
+	this.rtwnameHashMap["<S56>/Goto6"] = {sid: "BIO_csi:155:219"};
+	this.sidHashMap["BIO_csi:155:219"] = {rtwname: "<S56>/Goto6"};
+	this.rtwnameHashMap["<S56>/Goto7"] = {sid: "BIO_csi:155:220"};
+	this.sidHashMap["BIO_csi:155:220"] = {rtwname: "<S56>/Goto7"};
+	this.rtwnameHashMap["<S56>/Goto8"] = {sid: "BIO_csi:155:221"};
+	this.sidHashMap["BIO_csi:155:221"] = {rtwname: "<S56>/Goto8"};
+	this.rtwnameHashMap["<S56>/Goto9"] = {sid: "BIO_csi:155:222"};
+	this.sidHashMap["BIO_csi:155:222"] = {rtwname: "<S56>/Goto9"};
+	this.rtwnameHashMap["<S57>/v,i"] = {sid: "BIO_csi:155:212"};
+	this.sidHashMap["BIO_csi:155:212"] = {rtwname: "<S57>/v,i"};
+	this.rtwnameHashMap["<S57>/Demux"] = {sid: "BIO_csi:155:213"};
+	this.sidHashMap["BIO_csi:155:213"] = {rtwname: "<S57>/Demux"};
+	this.rtwnameHashMap["<S57>/Goto1"] = {sid: "BIO_csi:155:232"};
+	this.sidHashMap["BIO_csi:155:232"] = {rtwname: "<S57>/Goto1"};
+	this.rtwnameHashMap["<S57>/Goto10"] = {sid: "BIO_csi:155:241"};
+	this.sidHashMap["BIO_csi:155:241"] = {rtwname: "<S57>/Goto10"};
+	this.rtwnameHashMap["<S57>/Goto11"] = {sid: "BIO_csi:155:242"};
+	this.sidHashMap["BIO_csi:155:242"] = {rtwname: "<S57>/Goto11"};
+	this.rtwnameHashMap["<S57>/Goto2"] = {sid: "BIO_csi:155:233"};
+	this.sidHashMap["BIO_csi:155:233"] = {rtwname: "<S57>/Goto2"};
+	this.rtwnameHashMap["<S57>/Goto3"] = {sid: "BIO_csi:155:234"};
+	this.sidHashMap["BIO_csi:155:234"] = {rtwname: "<S57>/Goto3"};
+	this.rtwnameHashMap["<S57>/Goto4"] = {sid: "BIO_csi:155:235"};
+	this.sidHashMap["BIO_csi:155:235"] = {rtwname: "<S57>/Goto4"};
+	this.rtwnameHashMap["<S57>/Goto5"] = {sid: "BIO_csi:155:236"};
+	this.sidHashMap["BIO_csi:155:236"] = {rtwname: "<S57>/Goto5"};
+	this.rtwnameHashMap["<S57>/Goto6"] = {sid: "BIO_csi:155:237"};
+	this.sidHashMap["BIO_csi:155:237"] = {rtwname: "<S57>/Goto6"};
+	this.rtwnameHashMap["<S57>/Goto7"] = {sid: "BIO_csi:155:238"};
+	this.sidHashMap["BIO_csi:155:238"] = {rtwname: "<S57>/Goto7"};
+	this.rtwnameHashMap["<S57>/Goto8"] = {sid: "BIO_csi:155:239"};
+	this.sidHashMap["BIO_csi:155:239"] = {rtwname: "<S57>/Goto8"};
+	this.rtwnameHashMap["<S57>/Goto9"] = {sid: "BIO_csi:155:240"};
+	this.sidHashMap["BIO_csi:155:240"] = {rtwname: "<S57>/Goto9"};
 	this.getSID = function(rtwname) { return this.rtwnameHashMap[rtwname];}
 	this.getRtwname = function(sid) { return this.sidHashMap[sid];}
 }

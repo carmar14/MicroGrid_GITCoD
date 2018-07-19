@@ -74,12 +74,12 @@ MAKEFILE_FILESEP = /
 MODEL              = uGrid_1PH_hd
 MODULES            = rtGetInf.c rtGetNaN.c rt_look.c rt_look1d.c rt_nonfinite.c rt_zcfcn.c uGrid_1PH_hd_acc_data.c
 MAKEFILE           = uGrid_1PH_hd.mk
-MATLAB_ROOT        = C:/Program Files/MATLAB/R2017a
-ALT_MATLAB_ROOT    = C:/PROGRA~1/MATLAB/R2017a
+MATLAB_ROOT        = D:/Program Files/MATLAB/R2017a
+ALT_MATLAB_ROOT    = D:/PROGRA~2/MATLAB/R2017a
 MASTER_ANCHOR_DIR  = 
-START_DIR          = D:/Users/carlos_mar.paredes/Desktop/MicroGrid_GITCoD-master (1)/MicroGrid_GITCoD-master/Modelos Simulink_Matlab/uGrid_Hdetail
-MATLAB_BIN         = C:/Program Files/MATLAB/R2017a/bin
-ALT_MATLAB_BIN     = C:/PROGRA~1/MATLAB/R2017a/bin
+START_DIR          = D:/GitHub/MICROG~1/MODELO~1/UGRID_~2
+MATLAB_BIN         = D:/Program Files/MATLAB/R2017a/bin
+ALT_MATLAB_BIN     = D:/PROGRA~2/MATLAB/R2017a/bin
 S_FUNCTIONS        =  qpOASES_SQProblem.c qp_linprog.c sf_sfun.c sfun_spid_contc.c ttkernelMATLAB.cpp ttnetwork.cpp ttreceive.cpp ttsend.cpp
 S_FUNCTIONS_LIB    = 
 SOLVER             = 
@@ -96,7 +96,7 @@ SHARED_SRC_DIR     =
 SHARED_BIN_DIR     = 
 SHARED_LIB         = 
 SHARED_LIB_LINK      = $(subst /,\,$(SHARED_LIB))
-MEX_OPT_FILE       = -f C:/PROGRA~1/MATLAB/R2017a/rtw/c/tools/LCC-WI~1.XML
+MEX_OPT_FILE       = -f D:/PROGRA~2/MATLAB/R2017a/rtw/c/tools/LCC-WI~1.XML
 OPTIMIZATION_FLAGS = -DNDEBUG
 ADDITIONAL_LDFLAGS = 
 DEFINES_CUSTOM     = 
@@ -129,6 +129,7 @@ MEX = $(MATLAB_BIN)\mex.bat
 
 ADD_INCLUDES = \
 	-I$(START_DIR) \
+	-I$(MATLAB_ROOT)/simulink/include/sf_runtime \
 	-I$(START_DIR)/slprj/accel/uGrid_1PH_hd \
 	-I$(START_DIR)/truetime-2.0/kernel \
 	-I$(MATLAB_ROOT)/toolbox/physmod/powersys/facts/facts \
