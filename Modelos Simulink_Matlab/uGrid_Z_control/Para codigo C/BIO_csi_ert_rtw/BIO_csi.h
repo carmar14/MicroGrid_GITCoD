@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'BIO_csi'.
  *
- * Model version                  : 1.18
+ * Model version                  : 1.19
  * Simulink Coder version         : 8.12 (R2017a) 16-Feb-2017
- * C/C++ source code generated on : Fri Jul 27 10:56:30 2018
+ * C/C++ source code generated on : Tue Jul 31 11:51:47 2018
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -15,15 +15,14 @@
 
 #ifndef RTW_HEADER_BIO_csi_h_
 #define RTW_HEADER_BIO_csi_h_
-#include <stddef.h>
-#include <string.h>
 #include <float.h>
 #include <math.h>
+#include <string.h>
 #ifndef BIO_csi_COMMON_INCLUDES_
 # define BIO_csi_COMMON_INCLUDES_
 #include "rtwtypes.h"
-#include "simstruc.h"
-#include "fixedpoint.h"
+#include "rtw_continuous.h"
+#include "rtw_solver.h"
 #endif                                 /* BIO_csi_COMMON_INCLUDES_ */
 
 #include "BIO_csi_types.h"
@@ -33,22 +32,6 @@
 #include "rt_look1d.h"
 
 /* Macros for accessing real-time model data structure */
-#ifndef rtmGetFinalTime
-# define rtmGetFinalTime(rtm)          ((rtm)->Timing.tFinal)
-#endif
-
-#ifndef rtmGetSampleHitArray
-# define rtmGetSampleHitArray(rtm)     ((rtm)->Timing.sampleHitArray)
-#endif
-
-#ifndef rtmGetStepSize
-# define rtmGetStepSize(rtm)           ((rtm)->Timing.stepSize)
-#endif
-
-#ifndef rtmGet_TimeOfLastOutput
-# define rtmGet_TimeOfLastOutput(rtm)  ((rtm)->Timing.timeOfLastOutput)
-#endif
-
 #ifndef rtmGetErrorStatus
 # define rtmGetErrorStatus(rtm)        ((rtm)->errorStatus)
 #endif
@@ -73,33 +56,13 @@
 # define rtmGetT(rtm)                  (rtmGetTPtr((rtm))[0])
 #endif
 
-#ifndef rtmGetTFinal
-# define rtmGetTFinal(rtm)             ((rtm)->Timing.tFinal)
-#endif
-
-#ifndef rtmGetTStart
-# define rtmGetTStart(rtm)             ((rtm)->Timing.tStart)
-#endif
-
-#ifndef rtmGetTimeOfLastOutput
-# define rtmGetTimeOfLastOutput(rtm)   ((rtm)->Timing.timeOfLastOutput)
-#endif
-
 /* Block signals (auto storage) */
 typedef struct {
   real_T dv0[40000];
-  int32_T f_data[40000];
-  real_T StateSpace_o1[11];            /* '<S53>/State-Space' */
-  real_T StateSpace_o2[9];             /* '<S53>/State-Space' */
+  real_T dv1[20200];
+  real_T StateSpace_o1[11];            /* '<S67>/State-Space' */
+  real_T StateSpace_o2[9];             /* '<S67>/State-Space' */
   real_T Delay90zV;                    /* '<S2>/Delay90(z)V' */
-  real_T rt[2];                        /* '<S4>/rt' */
-  real_T rt1[2];                       /* '<S4>/rt1' */
-  real_T Memory1[200];                 /* '<S4>/Memory1' */
-  real_T Memory2[2];                   /* '<S4>/Memory2' */
-  real_T qpOASES_o1[200];              /* '<S4>/qpOASES' */
-  real_T qpOASES_o2;                   /* '<S4>/qpOASES' */
-  real_T qpOASES_o3;                   /* '<S4>/qpOASES' */
-  real_T qpOASES_o4;                   /* '<S4>/qpOASES' */
   real_T Step;                         /* '<S45>/Step' */
   real_T Sum2;                         /* '<S1>/Sum2' */
   real_T Product_m;                    /* '<S10>/Product' */
@@ -107,36 +70,28 @@ typedef struct {
   real_T LookUpTable;                  /* '<S15>/Look-Up Table' */
   real_T Step_a;                       /* '<S1>/Step' */
   real_T Delay90zI;                    /* '<S2>/Delay90(z)I' */
-  real_T MPCout[2];                    /* '<S4>/MPC_OutLogic' */
-  real_T Duv[200];                     /* '<S4>/MPC_OutLogic' */
-  real_T Hv[40000];                    /* '<S4>/MPC_MatCalc' */
-  real_T F[200];                       /* '<S4>/MPC_MatCalc' */
-  real_T A[40000];                     /* '<S4>/MPC_MatCalc' */
-  real_T lb[200];                      /* '<S4>/MPC_MatCalc' */
-  real_T ub[200];                      /* '<S4>/MPC_MatCalc' */
-  real_T lbA[200];                     /* '<S4>/MPC_MatCalc' */
-  real_T ubA[200];                     /* '<S4>/MPC_MatCalc' */
+  real_T xk1[14];                      /* '<S51>/optimizer' */
+  real_T u[2];                         /* '<S51>/optimizer' */
   real_T p;                            /* '<S2>/PQ_singlePhase' */
   real_T q;                            /* '<S2>/PQ_singlePhase' */
+  boolean_T iAout;                     /* '<S51>/optimizer' */
 } B_BIO_csi_T;
 
 /* Block states (auto storage) for system '<Root>' */
 typedef struct {
-  real_T StateSpace_DSTATE[6];         /* '<S53>/State-Space' */
+  real_T StateSpace_DSTATE[6];         /* '<S67>/State-Space' */
   real_T Delay90zV_states;             /* '<S2>/Delay90(z)V' */
+  real_T last_mv_DSTATE[2];            /* '<S51>/last_mv' */
   real_T PRz_states[2];                /* '<S2>/PR(z)' */
   real_T Delay90zI_states;             /* '<S2>/Delay90(z)I' */
   real_T Delay90zV_tmp;                /* '<S2>/Delay90(z)V' */
-  real_T Memory1_PreviousInput[200];   /* '<S4>/Memory1' */
-  real_T Memory2_PreviousInput[2];     /* '<S4>/Memory2' */
+  real_T last_x_PreviousInput[14];     /* '<S51>/last_x' */
   real_T PRz_tmp;                      /* '<S2>/PR(z)' */
   real_T TimeStampA;                   /* '<S15>/Derivative' */
   real_T LastUAtTimeA;                 /* '<S15>/Derivative' */
   real_T TimeStampB;                   /* '<S15>/Derivative' */
   real_T LastUAtTimeB;                 /* '<S15>/Derivative' */
   real_T Delay90zI_tmp;                /* '<S2>/Delay90(z)I' */
-  real_T Du[200];                      /* '<S4>/MPC_OutLogic' */
-  real_T out[2];                       /* '<S4>/MPC_OutLogic' */
   struct {
     void *AS;
     void *BS;
@@ -162,10 +117,10 @@ typedef struct {
     void *IDX_OUT_SW;
     void *SWITCH_TOPO_SAVED_IDX;
     void *SWITCH_MAP;
-  } StateSpace_PWORK;                  /* '<S53>/State-Space' */
+  } StateSpace_PWORK;                  /* '<S67>/State-Space' */
 
-  void *qpOASES_PWORK[8];              /* '<S4>/qpOASES' */
-  int_T StateSpace_IWORK[11];          /* '<S53>/State-Space' */
+  int_T StateSpace_IWORK[11];          /* '<S67>/State-Space' */
+  boolean_T Memory_PreviousInput;      /* '<S51>/Memory' */
 } DW_BIO_csi_T;
 
 /* Continuous states (auto storage) */
@@ -206,44 +161,34 @@ typedef struct {
 /* Constant parameters (auto storage) */
 typedef struct {
   /* Expression: zeros(9,1)
-   * Referenced by: '<S55>/SwitchCurrents'
+   * Referenced by: '<S69>/SwitchCurrents'
    */
   real_T SwitchCurrents_Value[9];
 
   /* Expression: S.A
-   * Referenced by: '<S53>/State-Space'
+   * Referenced by: '<S67>/State-Space'
    */
   real_T StateSpace_AS_param[36];
 
   /* Expression: S.B
-   * Referenced by: '<S53>/State-Space'
+   * Referenced by: '<S67>/State-Space'
    */
   real_T StateSpace_BS_param[84];
 
   /* Expression: S.C
-   * Referenced by: '<S53>/State-Space'
+   * Referenced by: '<S67>/State-Space'
    */
   real_T StateSpace_CS_param[66];
 
   /* Expression: S.D
-   * Referenced by: '<S53>/State-Space'
+   * Referenced by: '<S67>/State-Space'
    */
   real_T StateSpace_DS_param[154];
 
   /* Expression: S.x0
-   * Referenced by: '<S53>/State-Space'
+   * Referenced by: '<S67>/State-Space'
    */
   real_T StateSpace_X0_param[6];
-
-  /* Expression: G
-   * Referenced by: '<S4>/DynMat'
-   */
-  real_T DynMat_Value[40000];
-
-  /* Expression: GF
-   * Referenced by: '<S4>/DynMat_RespLibre'
-   */
-  real_T DynMat_RespLibre_Value[40000];
 
   /* Expression: tv
    * Referenced by: '<S15>/Look-Up Table'
@@ -270,47 +215,8 @@ typedef struct {
 
 /* Real-time Model Data Structure */
 struct tag_RTM_BIO_csi_T {
-  struct SimStruct_tag * *childSfunctions;
   const char_T *errorStatus;
-  SS_SimMode simMode;
   RTWSolverInfo solverInfo;
-  RTWSolverInfo *solverInfoPtr;
-  void *sfcnInfo;
-
-  /*
-   * NonInlinedSFcns:
-   * The following substructure contains information regarding
-   * non-inlined s-functions used in the model.
-   */
-  struct {
-    RTWSfcnInfo sfcnInfo;
-    time_T *taskTimePtrs[4];
-    SimStruct childSFunctions[1];
-    SimStruct *childSFunctionPtrs[1];
-    struct _ssBlkInfo2 blkInfo2[1];
-    struct _ssSFcnModelMethods2 methods2[1];
-    struct _ssSFcnModelMethods3 methods3[1];
-    struct _ssSFcnModelMethods4 methods4[1];
-    struct _ssStatesInfo2 statesInfo2[1];
-    ssPeriodicStatesInfo periodicStatesInfo[1];
-    struct {
-      time_T sfcnPeriod[1];
-      time_T sfcnOffset[1];
-      int_T sfcnTsMap[1];
-      struct _ssPortInputs inputPortInfo[7];
-      real_T const *UPtrs0[40000];
-      real_T const *UPtrs1[200];
-      real_T const *UPtrs2[40000];
-      real_T const *UPtrs3[200];
-      real_T const *UPtrs4[200];
-      real_T const *UPtrs5[200];
-      real_T const *UPtrs6[200];
-      struct _ssPortOutputs outputPortInfo[4];
-      struct _ssDWorkRecord dWork[1];
-      struct _ssDWorkAuxRecord dWorkAux[1];
-    } Sfcn0;
-  } NonInlinedSFcns;
-
   X_BIO_csi_T *contStates;
   int_T *periodicContStateIndices;
   real_T *periodicContStateRanges;
@@ -330,23 +236,9 @@ struct tag_RTM_BIO_csi_T {
    * dwork, sample times, etc.
    */
   struct {
-    uint32_T options;
     int_T numContStates;
     int_T numPeriodicContStates;
-    int_T numU;
-    int_T numY;
     int_T numSampTimes;
-    int_T numBlocks;
-    int_T numBlockIO;
-    int_T numBlockPrms;
-    int_T numDwork;
-    int_T numSFcnPrms;
-    int_T numSFcns;
-    int_T numIports;
-    int_T numOports;
-    int_T numNonSampZCs;
-    int_T sysDirFeedThru;
-    int_T rtwGenSfcn;
   } Sizes;
 
   /*
@@ -355,35 +247,19 @@ struct tag_RTM_BIO_csi_T {
    * the timing information for the model.
    */
   struct {
-    time_T stepSize;
     uint32_T clockTick0;
     uint32_T clockTickH0;
     time_T stepSize0;
     uint32_T clockTick1;
     uint32_T clockTickH1;
     uint32_T clockTick2;
-    uint32_T clockTick3;
-    time_T stepSize3;
     struct {
-      uint16_T TID[4];
+      uint32_T TID[4];
     } TaskCounters;
 
-    time_T tStart;
-    time_T tFinal;
-    time_T timeOfLastOutput;
     SimTimeStep simTimeStep;
     boolean_T stopRequestedFlag;
-    time_T *sampleTimes;
-    time_T *offsetTimes;
-    int_T *sampleTimeTaskIDPtr;
-    int_T *sampleHits;
-    int_T *perTaskSampleHits;
     time_T *t;
-    time_T sampleTimesArray[4];
-    time_T offsetTimesArray[4];
-    int_T sampleTimeTaskIDArray[4];
-    int_T sampleHitArray[4];
-    int_T perTaskSampleHitsArray[16];
     time_T tArray[4];
   } Timing;
 };
@@ -451,6 +327,24 @@ extern RT_MODEL_BIO_csi_T *const BIO_csi_M;
  * Block '<S38>/Switch' : Unused code path elimination
  * Block '<S2>/Scope' : Unused code path elimination
  * Block '<S2>/Scope1' : Unused code path elimination
+ * Block '<S52>/Matrix Dimension Check' : Unused code path elimination
+ * Block '<S53>/Matrix Dimension Check' : Unused code path elimination
+ * Block '<S54>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S55>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S56>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S57>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S58>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S59>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S60>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S61>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S62>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S63>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S64>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S65>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S51>/constant' : Unused code path elimination
+ * Block '<S51>/umin_scale2' : Unused code path elimination
+ * Block '<S51>/umin_scale3' : Unused code path elimination
+ * Block '<S51>/ym_zero' : Unused code path elimination
  * Block '<S14>/Data Type  Conversion' : Eliminate redundant data type conversion
  * Block '<S14>/Switch3' : Eliminated due to constant selection input
  * Block '<S24>/Data Type Conversion' : Eliminate redundant data type conversion
@@ -459,6 +353,27 @@ extern RT_MODEL_BIO_csi_T *const BIO_csi_M;
  * Block '<S30>/Data Type Conversion' : Eliminate redundant data type conversion
  * Block '<S8>/do not delete this gain' : Eliminated nontunable gain of 1
  * Block '<S12>/do not delete this gain' : Eliminated nontunable gain of 1
+ * Block '<S51>/Data Type Conversion1' : Eliminate redundant data type conversion
+ * Block '<S51>/Data Type Conversion10' : Eliminate redundant data type conversion
+ * Block '<S51>/Data Type Conversion11' : Eliminate redundant data type conversion
+ * Block '<S51>/Data Type Conversion12' : Eliminate redundant data type conversion
+ * Block '<S51>/Data Type Conversion13' : Eliminate redundant data type conversion
+ * Block '<S51>/Data Type Conversion2' : Eliminate redundant data type conversion
+ * Block '<S51>/Data Type Conversion3' : Eliminate redundant data type conversion
+ * Block '<S51>/Data Type Conversion4' : Eliminate redundant data type conversion
+ * Block '<S51>/Data Type Conversion5' : Eliminate redundant data type conversion
+ * Block '<S51>/Data Type Conversion6' : Eliminate redundant data type conversion
+ * Block '<S51>/Data Type Conversion7' : Eliminate redundant data type conversion
+ * Block '<S51>/Data Type Conversion8' : Eliminate redundant data type conversion
+ * Block '<S51>/Data Type Conversion9' : Eliminate redundant data type conversion
+ * Block '<S51>/ext.mv_scale' : Eliminated nontunable gain of 1
+ * Block '<S51>/ext.mv_scale1' : Eliminated nontunable gain of 1
+ * Block '<S51>/mo or x Conversion' : Eliminate redundant data type conversion
+ * Block '<S51>/umax_scale' : Eliminated nontunable gain of 1
+ * Block '<S51>/umin_scale' : Eliminated nontunable gain of 1
+ * Block '<S51>/umin_scale1' : Eliminated nontunable gain of 1
+ * Block '<S51>/ymax_scale' : Eliminated nontunable gain of 1
+ * Block '<S51>/ymin_scale' : Eliminated nontunable gain of 1
  * Block '<S14>/C4' : Unused code path elimination
  */
 
@@ -480,7 +395,7 @@ extern RT_MODEL_BIO_csi_T *const BIO_csi_M;
  * '<S1>'   : 'BIO_csi/1Ph_Inverter_bio'
  * '<S2>'   : 'BIO_csi/CSI_Control_BIO'
  * '<S3>'   : 'BIO_csi/DC 500V'
- * '<S4>'   : 'BIO_csi/MPC_bio'
+ * '<S4>'   : 'BIO_csi/MPC Controller'
  * '<S5>'   : 'BIO_csi/powergui'
  * '<S6>'   : 'BIO_csi/1Ph_Inverter_bio/Breaker'
  * '<S7>'   : 'BIO_csi/1Ph_Inverter_bio/H bridge'
@@ -527,13 +442,27 @@ extern RT_MODEL_BIO_csi_T *const BIO_csi_M;
  * '<S48>'  : 'BIO_csi/CSI_Control_BIO/PR Controller_0_ref 1'
  * '<S49>'  : 'BIO_csi/CSI_Control_BIO/PR Controller_0_ref 1/Steper6'
  * '<S50>'  : 'BIO_csi/DC 500V/Model'
- * '<S51>'  : 'BIO_csi/MPC_bio/MPC_MatCalc'
- * '<S52>'  : 'BIO_csi/MPC_bio/MPC_OutLogic'
- * '<S53>'  : 'BIO_csi/powergui/EquivalentModel1'
- * '<S54>'  : 'BIO_csi/powergui/EquivalentModel1/Gates'
- * '<S55>'  : 'BIO_csi/powergui/EquivalentModel1/Sources'
- * '<S56>'  : 'BIO_csi/powergui/EquivalentModel1/Status'
- * '<S57>'  : 'BIO_csi/powergui/EquivalentModel1/Yout'
+ * '<S51>'  : 'BIO_csi/MPC Controller/MPC'
+ * '<S52>'  : 'BIO_csi/MPC Controller/MPC/MPC Preview Signal Check'
+ * '<S53>'  : 'BIO_csi/MPC Controller/MPC/MPC Preview Signal Check1'
+ * '<S54>'  : 'BIO_csi/MPC Controller/MPC/MPC Scalar Signal Check'
+ * '<S55>'  : 'BIO_csi/MPC Controller/MPC/MPC Scalar Signal Check1'
+ * '<S56>'  : 'BIO_csi/MPC Controller/MPC/MPC Vector Signal Check'
+ * '<S57>'  : 'BIO_csi/MPC Controller/MPC/MPC Vector Signal Check11'
+ * '<S58>'  : 'BIO_csi/MPC Controller/MPC/MPC Vector Signal Check2'
+ * '<S59>'  : 'BIO_csi/MPC Controller/MPC/MPC Vector Signal Check3'
+ * '<S60>'  : 'BIO_csi/MPC Controller/MPC/MPC Vector Signal Check4'
+ * '<S61>'  : 'BIO_csi/MPC Controller/MPC/MPC Vector Signal Check5'
+ * '<S62>'  : 'BIO_csi/MPC Controller/MPC/MPC Vector Signal Check6'
+ * '<S63>'  : 'BIO_csi/MPC Controller/MPC/MPC Vector Signal Check7'
+ * '<S64>'  : 'BIO_csi/MPC Controller/MPC/MPC Vector Signal Check8'
+ * '<S65>'  : 'BIO_csi/MPC Controller/MPC/MPC Vector Signal Check9'
+ * '<S66>'  : 'BIO_csi/MPC Controller/MPC/optimizer'
+ * '<S67>'  : 'BIO_csi/powergui/EquivalentModel1'
+ * '<S68>'  : 'BIO_csi/powergui/EquivalentModel1/Gates'
+ * '<S69>'  : 'BIO_csi/powergui/EquivalentModel1/Sources'
+ * '<S70>'  : 'BIO_csi/powergui/EquivalentModel1/Status'
+ * '<S71>'  : 'BIO_csi/powergui/EquivalentModel1/Yout'
  */
 #endif                                 /* RTW_HEADER_BIO_csi_h_ */
 

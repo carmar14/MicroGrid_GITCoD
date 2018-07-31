@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'PV_vsi'.
  *
- * Model version                  : 1.15
+ * Model version                  : 1.17
  * Simulink Coder version         : 8.12 (R2017a) 16-Feb-2017
- * C/C++ source code generated on : Fri Jul 06 11:01:25 2018
+ * C/C++ source code generated on : Tue Jul 31 14:14:34 2018
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -731,7 +731,7 @@ void PV_vsi_step(void)
       PV_vsi_DW.itinit1_PreviousInput = 1.0339999999999974;
 
       /* Update for DiscreteTransferFcn: '<S49>/Current filter5' */
-      PV_vsi_DW.Currentfilter5_states = PV_vsi_B.StateSpace_o1[12] -
+      PV_vsi_DW.Currentfilter5_states = PV_vsi_B.StateSpace_o1[10] -
         -0.99970004499550036 * PV_vsi_DW.Currentfilter5_states;
 
       /* Update for Memory: '<S49>/it init' */
@@ -739,7 +739,7 @@ void PV_vsi_step(void)
 
       /* Update for DiscreteIntegrator: '<S49>/int(i)' */
       PV_vsi_DW.inti_IC_LOADING = 0U;
-      PV_vsi_DW.inti_DSTATE += 1.0E-6 * PV_vsi_B.StateSpace_o1[12];
+      PV_vsi_DW.inti_DSTATE += 1.0E-6 * PV_vsi_B.StateSpace_o1[10];
       if (PV_vsi_DW.inti_DSTATE >= 3722.3999999999905) {
         PV_vsi_DW.inti_DSTATE = 3722.3999999999905;
       } else {
@@ -918,7 +918,7 @@ void PV_vsi_derivatives(void)
   /* Derivatives for TransferFcn: '<S1>/Transfer Fcn' */
   _rtXdot->TransferFcn_CSTATE = 0.0;
   _rtXdot->TransferFcn_CSTATE += -1.0E+6 * PV_vsi_X.TransferFcn_CSTATE;
-  _rtXdot->TransferFcn_CSTATE += PV_vsi_B.StateSpace_o1[10];
+  _rtXdot->TransferFcn_CSTATE += PV_vsi_B.StateSpace_o1[11];
 
   /* Derivatives for TransferFcn: '<S1>/Transfer Fcn1' */
   _rtXdot->TransferFcn1_CSTATE = 0.0;
@@ -928,7 +928,7 @@ void PV_vsi_derivatives(void)
   /* Derivatives for TransferFcn: '<S1>/Transfer Fcn2' */
   _rtXdot->TransferFcn2_CSTATE = 0.0;
   _rtXdot->TransferFcn2_CSTATE += -1.0E+6 * PV_vsi_X.TransferFcn2_CSTATE;
-  _rtXdot->TransferFcn2_CSTATE += PV_vsi_B.StateSpace_o1[11];
+  _rtXdot->TransferFcn2_CSTATE += PV_vsi_B.StateSpace_o1[12];
 
   /* Derivatives for StateSpace: '<Root>/Hw2' */
   _rtXdot->Hw2_CSTATE[0] = 0.0;

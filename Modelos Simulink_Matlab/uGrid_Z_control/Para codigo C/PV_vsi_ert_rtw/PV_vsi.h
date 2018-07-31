@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'PV_vsi'.
  *
- * Model version                  : 1.15
+ * Model version                  : 1.17
  * Simulink Coder version         : 8.12 (R2017a) 16-Feb-2017
- * C/C++ source code generated on : Fri Jul 06 11:01:25 2018
+ * C/C++ source code generated on : Tue Jul 31 14:14:34 2018
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -338,7 +338,6 @@ extern RT_MODEL_PV_vsi_T *const PV_vsi_M;
  * Block '<S59>/Data Type Propagation' : Unused code path elimination
  * Block '<S60>/Data Type Duplicate' : Unused code path elimination
  * Block '<S60>/Data Type Propagation' : Unused code path elimination
- * Block '<Root>/Scope6' : Unused code path elimination
  * Block '<S4>/Scope7' : Unused code path elimination
  * Block '<S4>/Scope8' : Unused code path elimination
  * Block '<S15>/Data Type  Conversion' : Eliminate redundant data type conversion

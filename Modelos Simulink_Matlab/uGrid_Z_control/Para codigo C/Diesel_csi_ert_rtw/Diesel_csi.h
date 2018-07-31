@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Diesel_csi'.
  *
- * Model version                  : 1.8
+ * Model version                  : 1.10
  * Simulink Coder version         : 8.12 (R2017a) 16-Feb-2017
- * C/C++ source code generated on : Tue Jul 10 15:58:53 2018
+ * C/C++ source code generated on : Tue Jul 31 14:08:51 2018
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -15,15 +15,14 @@
 
 #ifndef RTW_HEADER_Diesel_csi_h_
 #define RTW_HEADER_Diesel_csi_h_
-#include <stddef.h>
 #include <float.h>
 #include <math.h>
 #include <string.h>
 #ifndef Diesel_csi_COMMON_INCLUDES_
 # define Diesel_csi_COMMON_INCLUDES_
 #include "rtwtypes.h"
-#include "simstruc.h"
-#include "fixedpoint.h"
+#include "rtw_continuous.h"
+#include "rtw_solver.h"
 #endif                                 /* Diesel_csi_COMMON_INCLUDES_ */
 
 #include "Diesel_csi_types.h"
@@ -33,22 +32,6 @@
 #include "rt_look1d.h"
 
 /* Macros for accessing real-time model data structure */
-#ifndef rtmGetFinalTime
-# define rtmGetFinalTime(rtm)          ((rtm)->Timing.tFinal)
-#endif
-
-#ifndef rtmGetSampleHitArray
-# define rtmGetSampleHitArray(rtm)     ((rtm)->Timing.sampleHitArray)
-#endif
-
-#ifndef rtmGetStepSize
-# define rtmGetStepSize(rtm)           ((rtm)->Timing.stepSize)
-#endif
-
-#ifndef rtmGet_TimeOfLastOutput
-# define rtmGet_TimeOfLastOutput(rtm)  ((rtm)->Timing.timeOfLastOutput)
-#endif
-
 #ifndef rtmGetErrorStatus
 # define rtmGetErrorStatus(rtm)        ((rtm)->errorStatus)
 #endif
@@ -73,35 +56,15 @@
 # define rtmGetT(rtm)                  (rtmGetTPtr((rtm))[0])
 #endif
 
-#ifndef rtmGetTFinal
-# define rtmGetTFinal(rtm)             ((rtm)->Timing.tFinal)
-#endif
-
-#ifndef rtmGetTStart
-# define rtmGetTStart(rtm)             ((rtm)->Timing.tStart)
-#endif
-
-#ifndef rtmGetTimeOfLastOutput
-# define rtmGetTimeOfLastOutput(rtm)   ((rtm)->Timing.timeOfLastOutput)
-#endif
-
 /* Block signals (auto storage) */
 typedef struct {
   real_T dv0[40000];
-  int32_T f_data[40000];
+  real_T dv1[20200];
   real_T OutputDCVoltage;              /* '<Root>/Sum1' */
-  real_T StateSpace_o1[12];            /* '<S56>/State-Space' */
-  real_T StateSpace_o2[9];             /* '<S56>/State-Space' */
+  real_T StateSpace_o1[12];            /* '<S70>/State-Space' */
+  real_T StateSpace_o2[9];             /* '<S70>/State-Space' */
   real_T TransferFcn;                  /* '<S1>/Transfer Fcn' */
   real_T Delay90zV;                    /* '<S2>/Delay90(z)V' */
-  real_T rt[2];                        /* '<S5>/rt' */
-  real_T rt1[2];                       /* '<S5>/rt1' */
-  real_T Memory1[200];                 /* '<S5>/Memory1' */
-  real_T Memory2[2];                   /* '<S5>/Memory2' */
-  real_T qpOASES_o1[200];              /* '<S5>/qpOASES' */
-  real_T qpOASES_o2;                   /* '<S5>/qpOASES' */
-  real_T qpOASES_o3;                   /* '<S5>/qpOASES' */
-  real_T qpOASES_o4;                   /* '<S5>/qpOASES' */
   real_T Step;                         /* '<S48>/Step' */
   real_T Sum2;                         /* '<S1>/Sum2' */
   real_T Product_m;                    /* '<S13>/Product' */
@@ -113,36 +76,28 @@ typedef struct {
   real_T FilterCoefficient;            /* '<S6>/Filter Coefficient' */
   real_T IntegralGain;                 /* '<S6>/Integral Gain' */
   real_T Sum;                          /* '<S6>/Sum' */
-  real_T MPCout[2];                    /* '<S5>/MPC_OutLogic' */
-  real_T Duv[200];                     /* '<S5>/MPC_OutLogic' */
-  real_T Hv[40000];                    /* '<S5>/MPC_MatCalc' */
-  real_T F[200];                       /* '<S5>/MPC_MatCalc' */
-  real_T A[40000];                     /* '<S5>/MPC_MatCalc' */
-  real_T lb[200];                      /* '<S5>/MPC_MatCalc' */
-  real_T ub[200];                      /* '<S5>/MPC_MatCalc' */
-  real_T lbA[200];                     /* '<S5>/MPC_MatCalc' */
-  real_T ubA[200];                     /* '<S5>/MPC_MatCalc' */
+  real_T xk1[14];                      /* '<S54>/optimizer' */
+  real_T u[2];                         /* '<S54>/optimizer' */
   real_T p;                            /* '<S2>/PQ_singlePhase' */
   real_T q;                            /* '<S2>/PQ_singlePhase' */
+  boolean_T iAout;                     /* '<S54>/optimizer' */
 } B_Diesel_csi_T;
 
 /* Block states (auto storage) for system '<Root>' */
 typedef struct {
-  real_T StateSpace_DSTATE[6];         /* '<S56>/State-Space' */
+  real_T StateSpace_DSTATE[6];         /* '<S70>/State-Space' */
   real_T Delay90zV_states;             /* '<S2>/Delay90(z)V' */
+  real_T last_mv_DSTATE[2];            /* '<S54>/last_mv' */
   real_T PRz_states[2];                /* '<S2>/PR(z)' */
   real_T Delay90zI_states;             /* '<S2>/Delay90(z)I' */
   real_T Delay90zV_tmp;                /* '<S2>/Delay90(z)V' */
-  real_T Memory1_PreviousInput[200];   /* '<S5>/Memory1' */
-  real_T Memory2_PreviousInput[2];     /* '<S5>/Memory2' */
+  real_T last_x_PreviousInput[14];     /* '<S54>/last_x' */
   real_T PRz_tmp;                      /* '<S2>/PR(z)' */
   real_T TimeStampA;                   /* '<S18>/Derivative' */
   real_T LastUAtTimeA;                 /* '<S18>/Derivative' */
   real_T TimeStampB;                   /* '<S18>/Derivative' */
   real_T LastUAtTimeB;                 /* '<S18>/Derivative' */
   real_T Delay90zI_tmp;                /* '<S2>/Delay90(z)I' */
-  real_T Du[200];                      /* '<S5>/MPC_OutLogic' */
-  real_T out[2];                       /* '<S5>/MPC_OutLogic' */
   struct {
     real_T modelTStart;
     real_T TUbufferArea[2048];
@@ -173,20 +128,21 @@ typedef struct {
     void *IDX_OUT_SW;
     void *SWITCH_TOPO_SAVED_IDX;
     void *SWITCH_MAP;
-  } StateSpace_PWORK;                  /* '<S56>/State-Space' */
+  } StateSpace_PWORK;                  /* '<S70>/State-Space' */
 
-  void *qpOASES_PWORK[8];              /* '<S5>/qpOASES' */
   struct {
     void *TUbufferPtrs[2];
   } MotordeCombustin1_PWORK;           /* '<S3>/Motor de Combustión1' */
 
-  int_T StateSpace_IWORK[11];          /* '<S56>/State-Space' */
+  int_T StateSpace_IWORK[11];          /* '<S70>/State-Space' */
   struct {
     int_T Tail;
     int_T Head;
     int_T Last;
     int_T CircularBufSize;
   } MotordeCombustin1_IWORK;           /* '<S3>/Motor de Combustión1' */
+
+  boolean_T Memory_PreviousInput;      /* '<S54>/Memory' */
 } DW_Diesel_csi_T;
 
 /* Continuous states (auto storage) */
@@ -245,44 +201,34 @@ typedef struct {
 /* Constant parameters (auto storage) */
 typedef struct {
   /* Expression: zeros(9,1)
-   * Referenced by: '<S58>/SwitchCurrents'
+   * Referenced by: '<S72>/SwitchCurrents'
    */
   real_T SwitchCurrents_Value[9];
 
   /* Expression: S.A
-   * Referenced by: '<S56>/State-Space'
+   * Referenced by: '<S70>/State-Space'
    */
   real_T StateSpace_AS_param[36];
 
   /* Expression: S.B
-   * Referenced by: '<S56>/State-Space'
+   * Referenced by: '<S70>/State-Space'
    */
   real_T StateSpace_BS_param[84];
 
   /* Expression: S.C
-   * Referenced by: '<S56>/State-Space'
+   * Referenced by: '<S70>/State-Space'
    */
   real_T StateSpace_CS_param[72];
 
   /* Expression: S.D
-   * Referenced by: '<S56>/State-Space'
+   * Referenced by: '<S70>/State-Space'
    */
   real_T StateSpace_DS_param[168];
 
   /* Expression: S.x0
-   * Referenced by: '<S56>/State-Space'
+   * Referenced by: '<S70>/State-Space'
    */
   real_T StateSpace_X0_param[6];
-
-  /* Expression: G
-   * Referenced by: '<S5>/DynMat'
-   */
-  real_T DynMat_Value[40000];
-
-  /* Expression: GF
-   * Referenced by: '<S5>/DynMat_RespLibre'
-   */
-  real_T DynMat_RespLibre_Value[40000];
 
   /* Expression: tv
    * Referenced by: '<S18>/Look-Up Table'
@@ -297,10 +243,10 @@ typedef struct {
 
 /* External inputs (root inport signals with auto storage) */
 typedef struct {
-  real_T Pdie;                         /* '<Root>/Pdie' */
-  real_T Qdie;                         /* '<Root>/Qdie' */
   real_T V_die;                        /* '<Root>/V_die' */
   real_T flujo;                        /* '<Root>/flujo' */
+  real_T Pdie;                         /* '<Root>/Pdie' */
+  real_T Qdie;                         /* '<Root>/Qdie' */
 } ExtU_Diesel_csi_T;
 
 /* External outputs (root outports fed by signals with auto storage) */
@@ -310,47 +256,8 @@ typedef struct {
 
 /* Real-time Model Data Structure */
 struct tag_RTM_Diesel_csi_T {
-  struct SimStruct_tag * *childSfunctions;
   const char_T *errorStatus;
-  SS_SimMode simMode;
   RTWSolverInfo solverInfo;
-  RTWSolverInfo *solverInfoPtr;
-  void *sfcnInfo;
-
-  /*
-   * NonInlinedSFcns:
-   * The following substructure contains information regarding
-   * non-inlined s-functions used in the model.
-   */
-  struct {
-    RTWSfcnInfo sfcnInfo;
-    time_T *taskTimePtrs[4];
-    SimStruct childSFunctions[1];
-    SimStruct *childSFunctionPtrs[1];
-    struct _ssBlkInfo2 blkInfo2[1];
-    struct _ssSFcnModelMethods2 methods2[1];
-    struct _ssSFcnModelMethods3 methods3[1];
-    struct _ssSFcnModelMethods4 methods4[1];
-    struct _ssStatesInfo2 statesInfo2[1];
-    ssPeriodicStatesInfo periodicStatesInfo[1];
-    struct {
-      time_T sfcnPeriod[1];
-      time_T sfcnOffset[1];
-      int_T sfcnTsMap[1];
-      struct _ssPortInputs inputPortInfo[7];
-      real_T const *UPtrs0[40000];
-      real_T const *UPtrs1[200];
-      real_T const *UPtrs2[40000];
-      real_T const *UPtrs3[200];
-      real_T const *UPtrs4[200];
-      real_T const *UPtrs5[200];
-      real_T const *UPtrs6[200];
-      struct _ssPortOutputs outputPortInfo[4];
-      struct _ssDWorkRecord dWork[1];
-      struct _ssDWorkAuxRecord dWorkAux[1];
-    } Sfcn0;
-  } NonInlinedSFcns;
-
   X_Diesel_csi_T *contStates;
   int_T *periodicContStateIndices;
   real_T *periodicContStateRanges;
@@ -370,23 +277,9 @@ struct tag_RTM_Diesel_csi_T {
    * dwork, sample times, etc.
    */
   struct {
-    uint32_T options;
     int_T numContStates;
     int_T numPeriodicContStates;
-    int_T numU;
-    int_T numY;
     int_T numSampTimes;
-    int_T numBlocks;
-    int_T numBlockIO;
-    int_T numBlockPrms;
-    int_T numDwork;
-    int_T numSFcnPrms;
-    int_T numSFcns;
-    int_T numIports;
-    int_T numOports;
-    int_T numNonSampZCs;
-    int_T sysDirFeedThru;
-    int_T rtwGenSfcn;
   } Sizes;
 
   /*
@@ -395,35 +288,19 @@ struct tag_RTM_Diesel_csi_T {
    * the timing information for the model.
    */
   struct {
-    time_T stepSize;
     uint32_T clockTick0;
     uint32_T clockTickH0;
     time_T stepSize0;
     uint32_T clockTick1;
     uint32_T clockTickH1;
     uint32_T clockTick2;
-    uint32_T clockTick3;
-    time_T stepSize3;
     struct {
-      uint16_T TID[4];
+      uint32_T TID[4];
     } TaskCounters;
 
-    time_T tStart;
-    time_T tFinal;
-    time_T timeOfLastOutput;
     SimTimeStep simTimeStep;
     boolean_T stopRequestedFlag;
-    time_T *sampleTimes;
-    time_T *offsetTimes;
-    int_T *sampleTimeTaskIDPtr;
-    int_T *sampleHits;
-    int_T *perTaskSampleHits;
     time_T *t;
-    time_T sampleTimesArray[4];
-    time_T offsetTimesArray[4];
-    int_T sampleTimeTaskIDArray[4];
-    int_T sampleHitArray[4];
-    int_T perTaskSampleHitsArray[16];
     time_T tArray[4];
   } Timing;
 };
@@ -489,6 +366,24 @@ extern RT_MODEL_Diesel_csi_T *const Diesel_csi_M;
  * Block '<S41>/Saturation' : Unused code path elimination
  * Block '<S41>/Sum' : Unused code path elimination
  * Block '<S41>/Switch' : Unused code path elimination
+ * Block '<S55>/Matrix Dimension Check' : Unused code path elimination
+ * Block '<S56>/Matrix Dimension Check' : Unused code path elimination
+ * Block '<S57>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S58>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S59>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S60>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S61>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S62>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S63>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S64>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S65>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S66>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S67>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S68>/Vector Dimension Check' : Unused code path elimination
+ * Block '<S54>/constant' : Unused code path elimination
+ * Block '<S54>/umin_scale2' : Unused code path elimination
+ * Block '<S54>/umin_scale3' : Unused code path elimination
+ * Block '<S54>/ym_zero' : Unused code path elimination
  * Block '<Root>/Scope14' : Unused code path elimination
  * Block '<S17>/Data Type  Conversion' : Eliminate redundant data type conversion
  * Block '<S17>/Switch3' : Eliminated due to constant selection input
@@ -499,6 +394,27 @@ extern RT_MODEL_Diesel_csi_T *const Diesel_csi_M;
  * Block '<S11>/do not delete this gain' : Eliminated nontunable gain of 1
  * Block '<S15>/do not delete this gain' : Eliminated nontunable gain of 1
  * Block '<S4>/do not delete this gain' : Eliminated nontunable gain of 1
+ * Block '<S54>/Data Type Conversion1' : Eliminate redundant data type conversion
+ * Block '<S54>/Data Type Conversion10' : Eliminate redundant data type conversion
+ * Block '<S54>/Data Type Conversion11' : Eliminate redundant data type conversion
+ * Block '<S54>/Data Type Conversion12' : Eliminate redundant data type conversion
+ * Block '<S54>/Data Type Conversion13' : Eliminate redundant data type conversion
+ * Block '<S54>/Data Type Conversion2' : Eliminate redundant data type conversion
+ * Block '<S54>/Data Type Conversion3' : Eliminate redundant data type conversion
+ * Block '<S54>/Data Type Conversion4' : Eliminate redundant data type conversion
+ * Block '<S54>/Data Type Conversion5' : Eliminate redundant data type conversion
+ * Block '<S54>/Data Type Conversion6' : Eliminate redundant data type conversion
+ * Block '<S54>/Data Type Conversion7' : Eliminate redundant data type conversion
+ * Block '<S54>/Data Type Conversion8' : Eliminate redundant data type conversion
+ * Block '<S54>/Data Type Conversion9' : Eliminate redundant data type conversion
+ * Block '<S54>/ext.mv_scale' : Eliminated nontunable gain of 1
+ * Block '<S54>/ext.mv_scale1' : Eliminated nontunable gain of 1
+ * Block '<S54>/mo or x Conversion' : Eliminate redundant data type conversion
+ * Block '<S54>/umax_scale' : Eliminated nontunable gain of 1
+ * Block '<S54>/umin_scale' : Eliminated nontunable gain of 1
+ * Block '<S54>/umin_scale1' : Eliminated nontunable gain of 1
+ * Block '<S54>/ymax_scale' : Eliminated nontunable gain of 1
+ * Block '<S54>/ymin_scale' : Eliminated nontunable gain of 1
  * Block '<S17>/C4' : Unused code path elimination
  */
 
@@ -521,7 +437,7 @@ extern RT_MODEL_Diesel_csi_T *const Diesel_csi_M;
  * '<S2>'   : 'Diesel_csi/CSI_Control_DIESEL'
  * '<S3>'   : 'Diesel_csi/Diesel Generator'
  * '<S4>'   : 'Diesel_csi/I_sens'
- * '<S5>'   : 'Diesel_csi/MPC_bio1'
+ * '<S5>'   : 'Diesel_csi/MPC Controller1'
  * '<S6>'   : 'Diesel_csi/PID Controller'
  * '<S7>'   : 'Diesel_csi/V_diesel'
  * '<S8>'   : 'Diesel_csi/powergui'
@@ -570,13 +486,27 @@ extern RT_MODEL_Diesel_csi_T *const Diesel_csi_M;
  * '<S51>'  : 'Diesel_csi/CSI_Control_DIESEL/PR Controller_0_ref 1'
  * '<S52>'  : 'Diesel_csi/CSI_Control_DIESEL/PR Controller_0_ref 1/Steper6'
  * '<S53>'  : 'Diesel_csi/I_sens/Model'
- * '<S54>'  : 'Diesel_csi/MPC_bio1/MPC_MatCalc'
- * '<S55>'  : 'Diesel_csi/MPC_bio1/MPC_OutLogic'
- * '<S56>'  : 'Diesel_csi/powergui/EquivalentModel1'
- * '<S57>'  : 'Diesel_csi/powergui/EquivalentModel1/Gates'
- * '<S58>'  : 'Diesel_csi/powergui/EquivalentModel1/Sources'
- * '<S59>'  : 'Diesel_csi/powergui/EquivalentModel1/Status'
- * '<S60>'  : 'Diesel_csi/powergui/EquivalentModel1/Yout'
+ * '<S54>'  : 'Diesel_csi/MPC Controller1/MPC'
+ * '<S55>'  : 'Diesel_csi/MPC Controller1/MPC/MPC Preview Signal Check'
+ * '<S56>'  : 'Diesel_csi/MPC Controller1/MPC/MPC Preview Signal Check1'
+ * '<S57>'  : 'Diesel_csi/MPC Controller1/MPC/MPC Scalar Signal Check'
+ * '<S58>'  : 'Diesel_csi/MPC Controller1/MPC/MPC Scalar Signal Check1'
+ * '<S59>'  : 'Diesel_csi/MPC Controller1/MPC/MPC Vector Signal Check'
+ * '<S60>'  : 'Diesel_csi/MPC Controller1/MPC/MPC Vector Signal Check11'
+ * '<S61>'  : 'Diesel_csi/MPC Controller1/MPC/MPC Vector Signal Check2'
+ * '<S62>'  : 'Diesel_csi/MPC Controller1/MPC/MPC Vector Signal Check3'
+ * '<S63>'  : 'Diesel_csi/MPC Controller1/MPC/MPC Vector Signal Check4'
+ * '<S64>'  : 'Diesel_csi/MPC Controller1/MPC/MPC Vector Signal Check5'
+ * '<S65>'  : 'Diesel_csi/MPC Controller1/MPC/MPC Vector Signal Check6'
+ * '<S66>'  : 'Diesel_csi/MPC Controller1/MPC/MPC Vector Signal Check7'
+ * '<S67>'  : 'Diesel_csi/MPC Controller1/MPC/MPC Vector Signal Check8'
+ * '<S68>'  : 'Diesel_csi/MPC Controller1/MPC/MPC Vector Signal Check9'
+ * '<S69>'  : 'Diesel_csi/MPC Controller1/MPC/optimizer'
+ * '<S70>'  : 'Diesel_csi/powergui/EquivalentModel1'
+ * '<S71>'  : 'Diesel_csi/powergui/EquivalentModel1/Gates'
+ * '<S72>'  : 'Diesel_csi/powergui/EquivalentModel1/Sources'
+ * '<S73>'  : 'Diesel_csi/powergui/EquivalentModel1/Status'
+ * '<S74>'  : 'Diesel_csi/powergui/EquivalentModel1/Yout'
  */
 #endif                                 /* RTW_HEADER_Diesel_csi_h_ */
 
