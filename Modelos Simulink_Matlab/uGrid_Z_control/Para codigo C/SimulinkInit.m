@@ -110,7 +110,7 @@ CSTR
 
 % Create the controller object with sampling period, prediction and control horizons:
 plant=CSTR;
-Ts = 1e-2;
+Ts = 1e-1;
 p = 3;
 m = 1;
 mpcobj = mpc(plant, Ts, p, m);
