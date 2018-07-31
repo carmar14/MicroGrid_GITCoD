@@ -2,7 +2,7 @@
 ## Makefile generated for Simulink model 'BIO_csi'. 
 ## 
 ## Makefile     : BIO_csi.mk
-## Generated on : Fri Jul 06 10:23:11 2018
+## Generated on : Tue Jul 31 11:52:55 2018
 ## MATLAB Coder version: 3.3 (R2017a)
 ## 
 ## Build Info:
@@ -29,11 +29,11 @@
 PRODUCT_NAME              = BIO_csi
 MAKEFILE                  = BIO_csi.mk
 COMPUTER                  = PCWIN64
-MATLAB_ROOT               = D:/PROGRA~2/MATLAB/R2017a
-MATLAB_BIN                = D:/PROGRA~2/MATLAB/R2017a/bin
-MATLAB_ARCH_BIN           = D:/PROGRA~2/MATLAB/R2017a/bin/win64
+MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2017a
+MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2017a/bin
+MATLAB_ARCH_BIN           = C:/PROGRA~1/MATLAB/R2017a/bin/win64
 MASTER_ANCHOR_DIR         = 
-START_DIR                 = D:/GitHub/MICROG~1/MODELO~1/UGRID_~3/PARACO~2
+START_DIR                 = C:/Users/carma/Desktop/MICROG~2/MODELO~2/UGRID_~3/PARACO~1
 ARCH                      = win64
 SOLVER                    = 
 SOLVER_OBJ                = 
@@ -174,7 +174,7 @@ INCLUDES = $(INCLUDES_BUILDINFO)
 ###########################################################################
 
 DEFINES_BUILD_ARGS = -DTERMFCN=1 -DONESTEPFCN=1 -DMAT_FILE=0 -DMULTI_INSTANCE_CODE=0 -DINTEGER_CODE=0 -DMT=0 -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0
-DEFINES_OPTS = -DRT -DUSE_RTMODEL -DERT -DTID01EQ=1
+DEFINES_OPTS = -DTID01EQ=1
 DEFINES_STANDARD = -DMODEL=BIO_csi -DNUMST=4 -DNCSTATES=10 -DHAVESTDIO
 
 DEFINES = $(DEFINES_BUILD_ARGS) $(DEFINES_OPTS) $(DEFINES_STANDARD)
@@ -183,7 +183,7 @@ DEFINES = $(DEFINES_BUILD_ARGS) $(DEFINES_OPTS) $(DEFINES_STANDARD)
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(MATLAB_ROOT)/rtw/c/src/rt_matrx.c $(MATLAB_ROOT)/rtw/c/src/rt_printf.c $(START_DIR)/BIO_csi_ert_rtw/BIO_csi.c $(START_DIR)/BIO_csi_ert_rtw/BIO_csi_data.c $(START_DIR)/BIO_csi_ert_rtw/rtGetInf.c $(START_DIR)/BIO_csi_ert_rtw/rtGetNaN.c $(START_DIR)/BIO_csi_ert_rtw/rt_look.c $(START_DIR)/BIO_csi_ert_rtw/rt_look1d.c $(START_DIR)/BIO_csi_ert_rtw/rt_nonfinite.c
+SRCS = $(START_DIR)/BIO_csi_ert_rtw/BIO_csi.c $(START_DIR)/BIO_csi_ert_rtw/BIO_csi_data.c $(START_DIR)/BIO_csi_ert_rtw/rtGetInf.c $(START_DIR)/BIO_csi_ert_rtw/rtGetNaN.c $(START_DIR)/BIO_csi_ert_rtw/rt_look.c $(START_DIR)/BIO_csi_ert_rtw/rt_look1d.c $(START_DIR)/BIO_csi_ert_rtw/rt_nonfinite.c
 
 MAIN_SRC = $(START_DIR)/BIO_csi_ert_rtw/ert_main.c
 
@@ -193,7 +193,7 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = rt_matrx.obj rt_printf.obj BIO_csi.obj BIO_csi_data.obj rtGetInf.obj rtGetNaN.obj rt_look.obj rt_look1d.obj rt_nonfinite.obj
+OBJS = BIO_csi.obj BIO_csi_data.obj rtGetInf.obj rtGetNaN.obj rt_look.obj rt_look1d.obj rt_nonfinite.obj
 
 MAIN_OBJ = ert_main.obj
 

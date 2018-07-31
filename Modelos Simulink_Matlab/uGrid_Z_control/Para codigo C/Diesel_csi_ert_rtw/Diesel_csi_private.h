@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'Diesel_csi'.
  *
- * Model version                  : 1.8
+ * Model version                  : 1.10
  * Simulink Coder version         : 8.12 (R2017a) 16-Feb-2017
- * C/C++ source code generated on : Tue Jul 10 15:58:53 2018
+ * C/C++ source code generated on : Tue Jul 31 14:08:51 2018
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -26,10 +26,6 @@
 
 #ifndef rtmIsMinorTimeStep
 # define rtmIsMinorTimeStep(rtm)       (((rtm)->Timing.simTimeStep) == MINOR_TIME_STEP)
-#endif
-
-#ifndef rtmSetTFinal
-# define rtmSetTFinal(rtm, val)        ((rtm)->Timing.tFinal = (val))
 #endif
 
 #ifndef rtmGetTPtr
@@ -94,7 +90,6 @@ real_T rt_TDelayInterpolate(
   boolean_T discrete,
   boolean_T minorStepAndTAtLastMajorOutput)
   ;
-extern void qpOASES_SQProblem(SimStruct *rts);
 
 /* private model entry point functions */
 extern void Diesel_csi_derivatives(void);

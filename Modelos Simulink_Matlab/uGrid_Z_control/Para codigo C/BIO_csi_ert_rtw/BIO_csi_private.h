@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'BIO_csi'.
  *
- * Model version                  : 1.18
+ * Model version                  : 1.19
  * Simulink Coder version         : 8.12 (R2017a) 16-Feb-2017
- * C/C++ source code generated on : Fri Jul 27 10:56:30 2018
+ * C/C++ source code generated on : Tue Jul 31 11:51:47 2018
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -26,10 +26,6 @@
 
 #ifndef rtmIsMinorTimeStep
 # define rtmIsMinorTimeStep(rtm)       (((rtm)->Timing.simTimeStep) == MINOR_TIME_STEP)
-#endif
-
-#ifndef rtmSetTFinal
-# define rtmSetTFinal(rtm, val)        ((rtm)->Timing.tFinal = (val))
 #endif
 
 #ifndef rtmGetTPtr
@@ -81,7 +77,6 @@
 #endif
 
 extern real_T rt_remd_snf(real_T u0, real_T u1);
-extern void qpOASES_SQProblem(SimStruct *rts);
 
 /* private model entry point functions */
 extern void BIO_csi_derivatives(void);

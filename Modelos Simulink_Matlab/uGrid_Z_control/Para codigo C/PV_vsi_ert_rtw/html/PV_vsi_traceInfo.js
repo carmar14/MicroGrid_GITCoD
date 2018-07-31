@@ -12,8 +12,6 @@ function RTW_Sid2UrlHash() {
 	this.urlHashMap["PV_vsi:253"] = "PV_vsi.c:971,1218,1227&PV_vsi.h:133,145,157";
 	/* <Root>/Rin2 */
 	this.urlHashMap["PV_vsi:393"] = "msg=rtwMsg_CodeGenerationReducedBlock&block=PV_vsi:393";
-	/* <Root>/Scope6 */
-	this.urlHashMap["PV_vsi:396"] = "msg=rtwMsg_reducedBlock&block=PV_vsi:396";
 	/* <Root>/Sine Wave */
 	this.urlHashMap["PV_vsi:398"] = "PV_vsi.c:591&PV_vsi.h:68";
 	/* <Root>/I_vsi */
@@ -175,7 +173,7 @@ Crossing */
 	this.urlHashMap["PV_vsi:179:435:258:3"] = "msg=rtwMsg_CodeGenerationReducedBlock&block=PV_vsi:179:435:258:3";
 	/* <S16>/Look-Up
 Table */
-	this.urlHashMap["PV_vsi:179:435:258:4"] = "PV_vsi.c:715&PV_vsi.h:73,204,209&PV_vsi_data.c:160,165";
+	this.urlHashMap["PV_vsi:179:435:258:4"] = "PV_vsi.c:715&PV_vsi.h:73,204,209&PV_vsi_data.c:159,164";
 	/* <S17>/IdealSwitch */
 	this.urlHashMap["PV_vsi:193:3"] = "msg=rtwMsg_CodeGenerationReducedBlock&block=PV_vsi:193:3";
 	/* <S17>/1 */
@@ -599,7 +597,7 @@ State Space */
 	/* <S68>/Sum */
 	this.urlHashMap["PV_vsi:235:72"] = "msg=rtwMsg_notTraceable&block=PV_vsi:235:72";
 	/* <S70>/State-Space */
-	this.urlHashMap["PV_vsi:170:207"] = "PV_vsi.c:316,324,763,771,1045,1053,1082,1234,1242&PV_vsi.h:63,64,81,117,119,179,184,189,194,199&PV_vsi_data.c:27,48,78,109,155";
+	this.urlHashMap["PV_vsi:170:207"] = "PV_vsi.c:316,324,763,771,1045,1053,1082,1234,1242&PV_vsi.h:63,64,81,117,119,179,184,189,194,199&PV_vsi_data.c:27,48,78,108,154";
 	/* <S72>/SwitchCurrents */
 	this.urlHashMap["PV_vsi:170:205"] = "PV_vsi.c:321,768,1050,1087,1239&PV_vsi.h:174&PV_vsi_data.c:22";
 	this.getUrlHash = function(sid) { return this.urlHashMap[sid];}
@@ -792,8 +790,6 @@ function RTW_rtwnameSIDMap() {
 	this.sidHashMap["PV_vsi:253"] = {rtwname: "<Root>/Hw6"};
 	this.rtwnameHashMap["<Root>/Rin2"] = {sid: "PV_vsi:393"};
 	this.sidHashMap["PV_vsi:393"] = {rtwname: "<Root>/Rin2"};
-	this.rtwnameHashMap["<Root>/Scope6"] = {sid: "PV_vsi:396"};
-	this.sidHashMap["PV_vsi:396"] = {rtwname: "<Root>/Scope6"};
 	this.rtwnameHashMap["<Root>/Sine Wave"] = {sid: "PV_vsi:398"};
 	this.sidHashMap["PV_vsi:398"] = {rtwname: "<Root>/Sine Wave"};
 	this.rtwnameHashMap["<Root>/VSI_Controller"] = {sid: "PV_vsi:414"};
