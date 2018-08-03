@@ -2,7 +2,7 @@
 ## Makefile generated for Simulink model 'BIO_csi'. 
 ## 
 ## Makefile     : BIO_csi.mk
-## Generated on : Tue Jul 31 11:52:55 2018
+## Generated on : Wed Aug 01 11:32:23 2018
 ## MATLAB Coder version: 3.3 (R2017a)
 ## 
 ## Build Info:
@@ -29,11 +29,11 @@
 PRODUCT_NAME              = BIO_csi
 MAKEFILE                  = BIO_csi.mk
 COMPUTER                  = PCWIN64
-MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2017a
-MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2017a/bin
-MATLAB_ARCH_BIN           = C:/PROGRA~1/MATLAB/R2017a/bin/win64
+MATLAB_ROOT               = D:/PROGRA~2/MATLAB/R2017a
+MATLAB_BIN                = D:/PROGRA~2/MATLAB/R2017a/bin
+MATLAB_ARCH_BIN           = D:/PROGRA~2/MATLAB/R2017a/bin/win64
 MASTER_ANCHOR_DIR         = 
-START_DIR                 = C:/Users/carma/Desktop/MICROG~2/MODELO~2/UGRID_~3/PARACO~1
+START_DIR                 = D:/GitHub/MICROG~1/MODELO~1/UGRID_~3/PARACO~2
 ARCH                      = win64
 SOLVER                    = 
 SOLVER_OBJ                = 

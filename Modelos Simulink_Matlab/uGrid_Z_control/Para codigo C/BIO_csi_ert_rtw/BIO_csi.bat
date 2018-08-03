@@ -1,8 +1,8 @@
-set MATLAB=C:\Program Files\MATLAB\R2017a
+set MATLAB=D:\Program Files\MATLAB\R2017a
 
 cd .
 
-if "%1"=="" ("C:\PROGRA~1\MATLAB\R2017a\bin\win64\gmake"  -f BIO_csi.mk all) else ("C:\PROGRA~1\MATLAB\R2017a\bin\win64\gmake"  -f BIO_csi.mk %1)
+if "%1"=="" ("D:\PROGRA~2\MATLAB\R2017a\bin\win64\gmake"  -f BIO_csi.mk all) else ("D:\PROGRA~2\MATLAB\R2017a\bin\win64\gmake"  -f BIO_csi.mk %1)
 @if errorlevel 1 goto error_exit
 
 exit /B 0
