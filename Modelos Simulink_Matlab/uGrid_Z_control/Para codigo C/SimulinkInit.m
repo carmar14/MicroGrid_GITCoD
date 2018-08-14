@@ -161,3 +161,11 @@ L3=30e-3;
 L4=5.2;
 R4=10;
 R5=10;
+
+
+%Tabla 1
+cvsi=200/sqrt(2);
+carga=cvsi*20;
+q=0:0.001:carga*1.2;
+soc=100-100*q/carga;
+
