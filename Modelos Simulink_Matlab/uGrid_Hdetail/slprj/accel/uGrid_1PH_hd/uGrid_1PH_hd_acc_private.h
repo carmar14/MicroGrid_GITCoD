@@ -37,11 +37,6 @@
 #if ( ULONG_MAX != (0xFFFFFFFFU) ) || ( LONG_MAX != (0x7FFFFFFF) )
 #error Code was generated for compiler with different sized ulong/long. \Consider adjusting Test hardware word size settings on the \Hardware Implementation pane to match your compiler word sizes as \defined in limits.h of the compiler. Alternatively, you can \select the Test hardware is the same as production hardware option and \select the Enable portable word sizes option on the Code Generation > \Verification pane for ERT based targets, which will disable the \preprocessor word size checks.
 #endif
-#if 0
-#if ( ULLONG_MAX != (0xFFFFFFFFFFFFFFFFULL) ) || ( LLONG_MAX != (0x7FFFFFFFFFFFFFFFLL) )
-#error Code was generated for compiler with different sized ulong_long/long_long. \Consider adjusting Test hardware word size settings on the \Hardware Implementation pane to match your compiler word sizes as \defined in limits.h of the compiler. Alternatively, you can \select the Test hardware is the same as production hardware option and \select the Enable portable word sizes option on the Code Generation > \Verification pane for ERT based targets, which will disable the \preprocessor word size checks.
-#endif
-#endif
 #ifndef __RTW_UTFREE__
 extern void * utMalloc ( size_t ) ; extern void utFree ( void * ) ;
 #endif
@@ -53,6 +48,6 @@ uGrid_1PH_hd_acc_rt_TDelayInterpolate ( real_T tMinusDelay , real_T tStart ,
 real_T * tBuf , real_T * uBuf , int_T bufSz , int_T * lastIdx , int_T
 oldestIdx , int_T newIdx , real_T initOutput , boolean_T discrete , boolean_T
 minorStepAndTAtLastMajorOutput ) ; void
-uGrid_1PH_hd_Synthesized_Atomic_Subsystem_For_Alg_Loop_1 ( SimStruct * const
-S ) ;
+uGrid_1PH_hd_Synthesized_Atomic_Subsystem_For_Alg_Loop_1 ( SimStruct * S ,
+DW_Synthesized_Atomic_Subsystem_For_Alg_Loop_1_uGrid_1PH_hd_T * localDW ) ;
 #endif

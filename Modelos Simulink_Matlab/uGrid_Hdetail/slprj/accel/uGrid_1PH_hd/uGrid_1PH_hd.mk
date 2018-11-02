@@ -1,4 +1,4 @@
-# Copyright 1994-2015 The MathWorks, Inc.
+# Copyright 1994-2017 The MathWorks, Inc.
 #
 # File    : accel_lcc64.tmf   
 #
@@ -48,6 +48,9 @@ BUILD           = yes
 SYS_TARGET_FILE = accel.tlc
 COMPILER_TOOL_CHAIN = lcc
 
+# Opt in to simplified format by specifying compatible Toolchain
+TOOLCHAIN_NAME = "LCC-win64 v2.4.1 | gmake (64-bit Windows)"
+
 MAKEFILE_FILESEP = /
 
 #---------------------- Tokens expanded by make_rtw ----------------------------
@@ -60,7 +63,6 @@ MAKEFILE_FILESEP = /
 #  MAKEFILE_NAME   - Name of makefile created from template makefile <model>.mk
 #  MATLAB_ROOT     - Path to where MATLAB is installed.
 #  MATLAB_BIN      - Path to MATLAB executable.
-#  S_FUNCTIONS     - List of S-functions.
 #  S_FUNCTIONS_LIB - List of S-functions libraries to link.
 #  SOLVER          - Solver source file name
 #  NUMST           - Number of sample times
@@ -72,22 +74,21 @@ MAKEFILE_FILESEP = /
 #                    command
 
 MODEL              = uGrid_1PH_hd
-MODULES            = rtGetInf.c rtGetNaN.c rt_look.c rt_look1d.c rt_nonfinite.c rt_zcfcn.c uGrid_1PH_hd_acc_data.c
+MODULES            = rtGetInf.c rtGetNaN.c rt_look.c rt_look1d.c rt_nonfinite.c uGrid_1PH_hd_acc.c uGrid_1PH_hd_acc_data.c
 MAKEFILE           = uGrid_1PH_hd.mk
-MATLAB_ROOT        = D:/Program Files/MATLAB/R2017a
-ALT_MATLAB_ROOT    = D:/PROGRA~2/MATLAB/R2017a
+MATLAB_ROOT        = C:/Program Files/MATLAB/R2018a
+ALT_MATLAB_ROOT    = C:/PROGRA~1/MATLAB/R2018a
 MASTER_ANCHOR_DIR  = 
-START_DIR          = D:/GitHub/MICROG~1/MODELO~1/UGRID_~2
-MATLAB_BIN         = D:/Program Files/MATLAB/R2017a/bin
-ALT_MATLAB_BIN     = D:/PROGRA~2/MATLAB/R2017a/bin
-S_FUNCTIONS        =  qpOASES_SQProblem.c qp_linprog.c sf_sfun.c sfun_spid_contc.c ttkernelMATLAB.cpp ttnetwork.cpp ttreceive.cpp ttsend.cpp
+START_DIR          = C:/RAULES~1/MICROG~1/MODELO~2/UGRID_~2
+MATLAB_BIN         = C:/Program Files/MATLAB/R2018a/bin
+ALT_MATLAB_BIN     = C:/PROGRA~1/MATLAB/R2018a/bin
 S_FUNCTIONS_LIB    = 
 SOLVER             = 
-NUMST              = 12
+NUMST              = 11
 TID01EQ            = 0
-NCSTATES           = 76
+NCSTATES           = 74
 MEM_ALLOC          = RT_STATIC
-BUILDARGS          =  ISPROTECTINGMODEL=NOTPROTECTING
+BUILDARGS          =  COMBINE_OUTPUT_UPDATE_FCNS=0 INCLUDE_MDL_TERMINATE_FCN=1 MULTI_INSTANCE_CODE=0 ISPROTECTINGMODEL=NOTPROTECTING
 MEXEXT             = mexw64
 
 MODELREFS          = 
@@ -96,7 +97,7 @@ SHARED_SRC_DIR     =
 SHARED_BIN_DIR     = 
 SHARED_LIB         = 
 SHARED_LIB_LINK      = $(subst /,\,$(SHARED_LIB))
-MEX_OPT_FILE       = -f D:/PROGRA~2/MATLAB/R2017a/rtw/c/tools/LCC-WI~1.XML
+MEX_OPT_FILE       = -f C:/PROGRA~1/MATLAB/R2018a/rtw/c/tools/LCC-WI~1.XML
 OPTIMIZATION_FLAGS = -DNDEBUG
 ADDITIONAL_LDFLAGS = 
 DEFINES_CUSTOM     = 
@@ -120,8 +121,7 @@ endif
 
 LCC = $(MATLAB_ROOT)\sys\lcc64\lcc64
 include $(MATLAB_ROOT)\rtw\c\tools\lcc64tools.mak
-
-MEX = $(MATLAB_BIN)\mex.bat
+CMD_FILE = $(MODEL).rsp
 
 #------------------------------ Include Path -----------------------------------
 
@@ -129,7 +129,6 @@ MEX = $(MATLAB_BIN)\mex.bat
 
 ADD_INCLUDES = \
 	-I$(START_DIR) \
-	-I$(MATLAB_ROOT)/simulink/include/sf_runtime \
 	-I$(START_DIR)/slprj/accel/uGrid_1PH_hd \
 	-I$(START_DIR)/truetime-2.0/kernel \
 	-I$(MATLAB_ROOT)/toolbox/physmod/powersys/facts/facts \
@@ -167,7 +166,7 @@ MEX_OPT_OPTS =
 endif
 
 #-------------------------------- Mex Options  ---------------------------------
-MEX_FLAGS = -dll -noregistrylookup  -c -Zp8 -DLCC_WIN64 -DMATLAB_MEX_FILE -DMX_COMPAT_32 -nodeclspec $(DEFINES_CUSTOM) $(MEX_OPT_OPTS) $(MEX_LDFLAGS) $(MEX_OPTS)
+MEX_FLAGS = -dll -noregistrylookup  -c -Zp8 -DLCC_WIN64 -DMATLAB_MEX_FILE -nodeclspec $(DEFINES_CUSTOM) $(MEX_OPT_OPTS) $(MEX_LDFLAGS) $(MEX_OPTS)
 
 DEF_FILE = $(MODEL)_acc.def
 
@@ -177,9 +176,8 @@ USER_SRCS =
 USER_OBJS       = $(USER_SRCS:.c=.obj)
 LOCAL_USER_OBJS = $(notdir $(USER_OBJS))
 
-SRCS      = lccstub.c $(MODEL)_acc.c $(MODULES)
+SRCS      = lccstub.c c_mexapi_version.c $(MODULES)
 OBJS      = $(SRCS:.c=.obj) $(USER_OBJS)
-LINK_OBJS = $(SRCS:.c=.obj) $(LOCAL_USER_OBJS)
 
 SHARED_OBJS := $(addsuffix .obj, $(basename $(wildcard $(SHARED_SRC))))
 FMT_SHARED_OBJS = $(subst /,\,$(SHARED_OBJS))
@@ -195,13 +193,11 @@ LIBMWMATHUTIL = $(MATLAB_ROOT)\extern\lib\win64\microsoft\libmwmathutil.lib
 LIBMWIPP = 
 LIBMX = $(MATLAB_ROOT)\extern\lib\win64\microsoft\libmx.lib
 LIBMEX = $(MATLAB_ROOT)\extern\lib\win64\microsoft\libmex.lib
-LIBMWSL_SERVICES = $(MATLAB_ROOT)\extern\lib\win64\microsoft\sl_services.lib
+LIBMWSL_SERVICES = $(MATLAB_ROOT)\extern\lib\win64\microsoft\libmwsl_services.lib
 LIBS += $(LIBUT) $(LIBMWMATHUTIL) $(LIBMWIPP) $(LIBMX) $(LIBMEX) $(LIBMWSL_SERVICES)
 
 
 LIBS +=  $(MATLAB_ROOT)\extern\lib\win64\microsoft\libmwsl_fileio.lib
-
-LIBS +=  $(MATLAB_ROOT)\extern\lib\win64\microsoft\libmwsl_iofile.lib
 
 LIBS +=  $(MATLAB_ROOT)\extern\lib\win64\microsoft\libmwsigstream.lib
 
@@ -215,6 +211,10 @@ LIBS +=  $(MATLAB_ROOT)\extern\lib\win64\microsoft\libmwsl_simtarget_core.lib
 
 LIBS +=  $(MATLAB_ROOT)\extern\lib\win64\microsoft\libmwsl_simtarget_instrumentation.lib
 
+LIBS +=  $(MATLAB_ROOT)\extern\lib\win64\microsoft\libmwslio_core.lib
+
+LIBS +=  $(MATLAB_ROOT)\extern\lib\win64\microsoft\libmwslio_clients.lib
+
 
 PROGRAM = ../$(MODEL)_acc.$(MEXEXT)
 
@@ -222,7 +222,10 @@ PROGRAM = ../$(MODEL)_acc.$(MEXEXT)
 
 $(PROGRAM) : $(OBJS) $(LIBS) $(SHARED_LIB) $(DEF_FILE)
 	@echo ### Linking ...
-	$(LD) -s -dll -o $(RELATIVE_PATH_TO_ANCHOR)/$(MODEL)_acc.$(MEXEXT) -L"$(MATLAB)/sys/lcc64/lcc64/lib64" -entry LibMain $(DEF_FILE) $(LINK_OBJS) $(S_FUNCTIONS_LIB) $(SHARED_LIB_LINK) $(LIBS)  -map sfun.map 
+	$(LD) -s -dll -o $(RELATIVE_PATH_TO_ANCHOR)/$(MODEL)_acc.$(MEXEXT)\
+        -L"$(MATLAB)/sys/lcc64/lcc64/lib64" -entry LibMain $(DEF_FILE)\
+        @$(CMD_FILE) lccstub.obj c_mexapi_version.obj $(LOCAL_USER_OBJS) $(S_FUNCTIONS_LIB)\
+        $(SHARED_LIB_LINK) $(LIBS)  -map sfun.map 
 	@echo ### Created mex file: $(MODEL)_acc.$(MEXEXT)
 
 %.obj : %.c
@@ -251,6 +254,9 @@ $(PROGRAM) : $(OBJS) $(LIBS) $(SHARED_LIB) $(DEF_FILE)
 lccstub.obj : $(LCC)/mex/lccstub.c
 	$(CC) $(MEX_FLAGS) $(INCLUDES) $(LCC)/mex/lccstub.c -o ./lccstub.obj
 
+c_mexapi_version.obj : $(MATLAB_ROOT)/extern/version/c_mexapi_version.c
+	$(CC) $(MEX_FLAGS) $(INCLUDES) $(MATLAB_ROOT)/extern/version/c_mexapi_version.c -o ./c_mexapi_version.obj
+
 # Libraries:
 
 
@@ -264,7 +270,7 @@ clean :
 #----------------------------- Dependencies -------------------------------
 
 $(DEF_FILE) : $(OBJS)
-	@echo LIBRARY $(RELATIVE_PATH_TO_ANCHOR)/$(MODEL)_acc.$(MEXEXT) EXPORTS mexFunction > $(DEF_FILE)
+	@echo LIBRARY $(RELATIVE_PATH_TO_ANCHOR)/$(MODEL)_acc.$(MEXEXT) EXPORTS mexFunction mexfilerequiredapiversion> $(DEF_FILE)
 
 $(OBJS) : $(MAKEFILE) rtw_proj.tmw
 
