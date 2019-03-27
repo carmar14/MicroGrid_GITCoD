@@ -264,7 +264,7 @@ ssGetT ( S ) - rtb_B_35_26_0 ) ; } _rtB -> B_35_226_0 = _rtP -> P_348 * _rtB
 -> B_35_124_0 [ 7 ] ; _rtB -> B_35_230_0 = 0.0 ; _rtB -> B_35_230_0 += _rtP
 -> P_350 * _rtX -> TransferFcn_CSTATE_g ; _rtB -> B_35_231_0 = 0.0 ; _rtB ->
 B_35_231_0 += _rtP -> P_352 * _rtX -> TransferFcn1_CSTATE_p ; _rtB ->
-B_35_232_0 = _rtP -> P_353 * _rtB -> B_35_124_0 [ 2 ] ; isHit = ssIsSampleHit
+B_35_232_0 = _rtP -> P_353 * _rtB -> B_35_124_0 [ 3 ] ; isHit = ssIsSampleHit
 ( S , 1 , 0 ) ; if ( isHit != 0 ) { ssCallAccelRunBlock ( S , 35 , 269 ,
 SS_CALL_MDL_OUTPUTS ) ; _rtB -> B_35_270_0 = _rtB -> B_35_269_0 [ 0 ] + _rtB
 -> B_35_268_0 ; } isHit = ssIsSampleHit ( S , 2 , 0 ) ; if ( isHit != 0 ) {
@@ -514,7 +514,7 @@ B_35_425_0 = _rtP -> P_478 * _rtB -> B_35_124_0 [ 8 ] ; _rtB -> B_35_429_0 =
 0.0 ; _rtB -> B_35_429_0 += _rtP -> P_480 * _rtX -> TransferFcn_CSTATE_m ;
 _rtB -> B_35_430_0 = 0.0 ; _rtB -> B_35_430_0 += _rtP -> P_482 * _rtX ->
 TransferFcn1_CSTATE_l ; _rtB -> B_35_431_0 = _rtP -> P_483 * _rtB ->
-B_35_124_0 [ 3 ] ; _rtB -> B_35_435_0 = _rtP -> P_484 * _rtB -> B_35_124_0 [
+B_35_124_0 [ 2 ] ; _rtB -> B_35_435_0 = _rtP -> P_484 * _rtB -> B_35_124_0 [
 9 ] ; _rtB -> B_35_439_0 = 0.0 ; _rtB -> B_35_439_0 += _rtP -> P_486 * _rtX
 -> TransferFcn2_CSTATE ; _rtB -> B_35_473_0 = _rtB -> B_35_400_0 + _rtB ->
 B_35_472_0 ; isHit = ssIsSampleHit ( S , 2 , 0 ) ; if ( isHit != 0 ) { _rtB
@@ -1094,9 +1094,9 @@ P_530 ; _rtZCSV -> Saturation_LwrLim_ZC_l = _rtB -> B_35_531_0 - _rtP ->
 P_531 ; _rtZCSV -> Abs_AbsZc_ZC = _rtB -> B_35_525_0 ; _rtZCSV ->
 Compare_RelopInput_ZC_f = _rtB -> B_35_525_0 - uGrid_1PH_hd_rtC ( S ) ->
 B_35_549_0 ; } static void mdlInitializeSizes ( SimStruct * S ) {
-ssSetChecksumVal ( S , 0 , 3243399357U ) ; ssSetChecksumVal ( S , 1 ,
-3861498887U ) ; ssSetChecksumVal ( S , 2 , 1463208975U ) ; ssSetChecksumVal (
-S , 3 , 4017867450U ) ; { mxArray * slVerStructMat = NULL ; mxArray *
+ssSetChecksumVal ( S , 0 , 3917766960U ) ; ssSetChecksumVal ( S , 1 ,
+3474030865U ) ; ssSetChecksumVal ( S , 2 , 776553248U ) ; ssSetChecksumVal (
+S , 3 , 4178874511U ) ; { mxArray * slVerStructMat = NULL ; mxArray *
 slStrMat = mxCreateString ( "simulink" ) ; char slVerChar [ 10 ] ; int status
 = mexCallMATLAB ( 1 , & slVerStructMat , 1 , & slStrMat , "ver" ) ; if (
 status == 0 ) { mxArray * slVerMat = mxGetField ( slVerStructMat , 0 ,
